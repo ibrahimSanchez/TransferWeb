@@ -60,7 +60,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                 <div className="mb-2">
                     <label className="form-label">Correo</label>
                     <input
-                        type="text"
+                        type="email"
                         className="form-control"
                         {...register("correo", { required: true })}
                     />
