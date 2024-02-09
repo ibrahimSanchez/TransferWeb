@@ -1,0 +1,10 @@
+
+
+.carrusel {
+    display: flex;
+}
+
+.carrusel img {
+    width: 100%;
+    
+}

@@ -1,0 +1,78 @@
+.logo {
+    width: 80px;
+    cursor: default;
+}
+
+.logoWeb {
+    display: flex;
+    justify-content: space-between;
+}
+
+.logoWeb label {
+    font-size: 20px;
+    color: #1d8036;
+}
+
+.linkNavegacion {
+    margin-left: 1.7rem;
+}
+
+.linkNavegacion:hover {
+    color: #309b4b;
+}
+
+.activo {
+    color: #309b4b !important
+}
+
+
+.sideBarCategoria {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.btn-flecha {
+    border: 0;
+    background: transparent;
+}
+
+.btn-flecha img {
+    width: 20px;
+    transition: all .3s;
+}
+
+
+.rotar {
+    transform: rotate(90deg);
+}
+
+/* .btnSideBar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+
+*/
+.usuario {
+    font-size: 1.3rem;
+}
+/* 
+.fotoUsuario {
+    width: 50px;
+} */
+
+.navbar-text {
+    margin-right: 1rem;
+}
+
+.navBarContenedor {
+    width: 100%;
+    padding: .4rem 2rem;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+/* Variables para colores */
+:root {
+    --azul2: #0b3954;
+    --verde2: #087e8b;
+    --azul: #0000fd;
+    --verde: #399a53;
+    --gris: #6a6a6a;   
+}
+
+
+* {
+    font-family: sans-serif;
+}
+
+
+body {
+    /* padding: 60px 20px; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+}
+
+
+.column {
+    flex-direction: column;
+}
+
+input {
+    border-radius: 4px;
+    border: 1px solid #000;
+}
+
+hr {
+    color: #000;
+}
+
+.paginaInicio {
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.logoInicio {
+    width: 150px;
+    margin-bottom: 3rem;
+}
+
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+}
+
+
+#root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav {
+    width: 100%;
+}
+
+.sesion {
+    width: 50% !important;
+    margin-top: 2rem !important;
+}

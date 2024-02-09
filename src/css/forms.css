@@ -1,0 +1,30 @@
+.formContenedor {
+    border-radius: 12px;
+    box-shadow: 0 10px 20px 0 #a7a7a7;
+    padding: 30px;
+    width: 30%;
+    margin: 5rem;
+}
+
+
+.btnCuenta {
+    border: 0;
+    background: transparent;
+    width: auto;
+}
+
+
+@media screen and (max-width: 700px) {
+
+    .formContenedor {
+        box-shadow: 0 0 0 0 ;
+        width: 100% !important;
+        margin: auto 0;
+    }  
+    
+    .sesion {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
+
+}
