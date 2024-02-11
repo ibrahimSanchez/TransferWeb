@@ -5,7 +5,7 @@ import menu from '../assets/iconos/menu.svg';
 
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import { AcordionComponent } from "./Acordion";
+import { AcordionSideBarComponent } from "./AcordionSideBar";
 
 
 
@@ -34,7 +34,7 @@ export function SideBar() {
                 </Offcanvas.Header>
                 <hr />
                 <Offcanvas.Body>
-                    <AcordionComponent />
+                    <AcordionSideBarComponent />
                 </Offcanvas.Body>
             </Offcanvas>
         </>

@@ -35,7 +35,6 @@ input:focus, select:focus {
     border: none;
 }
 
-
 hr {
     color: #000;
 }
@@ -120,4 +119,14 @@ nav {
     }
 
 
+}
+
+
+
+.tarjeta {
+    border: 1px solid var(--verde);
+}
+
+.tarjeta:hover {
+    box-shadow: 0 0 10px 5px var(--verde) 
 }

@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 
 
-export const AcordionComponent = () => {
+export const AcordionSideBarComponent = () => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -20,6 +20,7 @@ export const AcordionComponent = () => {
 
                 </Accordion.Body>
             </Accordion.Item>
+            
             <Accordion.Item eventKey="1">
                 <Accordion.Header>Consultas</Accordion.Header>
                 <Accordion.Body>
@@ -39,6 +40,20 @@ export const AcordionComponent = () => {
                     </NavLink>
 
 
+                </Accordion.Body>
+            </Accordion.Item>
+
+            <Accordion.Item eventKey="2">
+                <Accordion.Header>Tarjetas</Accordion.Header>
+                <Accordion.Body>
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/listatarjetas"
+                    >
+                        Lista de tarjetas
+                    </NavLink>
+                    
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>
