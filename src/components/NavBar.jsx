@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 import { AuthContext } from "../auth/authContext";
@@ -34,21 +33,21 @@ export const NavBar = () => {
             replace: true
         });
     }
-
+ console.log(usuario)
 
     return (
-        <Navbar bg="dark" data-bs-theme="dark" className="bg-body-tertiary navBar">
+        <Navbar data-bs-theme="dark" className="bg-body-tertiary navBar">
             <div className="navBarContenedor d-flex">
-                <Navbar.Brand href="#home">
+                <Navbar.Brand >
                     <SideBar />
                 </Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        <p className="m-0 text-info nombreUsuario">{usuario.correo}</p>
+                        <p className="m-0 text-success nombreUsuario">{usuario.correo}</p>
                     </Navbar.Text>
                     <Navbar.Text>
-                        <button className="btn btn-info" onClick={handleCerrarSesion} > Salir </button>
+                        <button className="btn btn-success" onClick={handleCerrarSesion} > Salir </button>
                     </Navbar.Text>
                 </Navbar.Collapse>
             </div>

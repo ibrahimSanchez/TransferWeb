@@ -10,11 +10,8 @@ export const PaginaInicio = () => {
     return (<div className="paginaInicio d-flex column aling-item-center">
 
         
-
-
         {tieneCuenta ? <IniciarSesion setTieneCuenta={setTieneCuenta} /> : <RegistrarUsuario setTieneCuenta={setTieneCuenta} />}
-
-
 
     </div>)
 }
+

@@ -1,3 +1,23 @@
-.principal {
-    width: 18rem;
+.paginaPrincipal {
+    /* width: 100%; */
+    margin-bottom: 10rem;
+}
+
+.cardDescripciones {
+    border: 0 !important;
+}
+
+
+
+
+
+
+@media screen and (max-width: 700px) {
+
+    .cardDescripciones {
+        width: 100% !important;
+    }
+
+
+
 }

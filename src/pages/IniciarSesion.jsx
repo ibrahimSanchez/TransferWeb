@@ -77,7 +77,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                 </div>
                 <button
                     type="submit"
-                    className="btn btn-primary mt-4"
+                    className="btn btn-success mt-4"
                 >
                     Aceptar
                 </button>

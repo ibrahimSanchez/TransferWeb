@@ -2,11 +2,11 @@ import { Consultar } from "../components/Consultar"
 
 
 
-
 const ConsultarLimite = () => {
-    return (
+    return (<>        
         <Consultar nombreForm='ConsultarLimite' tipoConsulta='Límite' />
+    </>
     )
 }
 
-export default ConsultarLimite
+export default ConsultarLimite;

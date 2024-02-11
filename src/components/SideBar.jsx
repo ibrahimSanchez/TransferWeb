@@ -1,15 +1,13 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import useOpenMenu from "../hooks/useOpenMenu";
-import { OpcionMenu } from "./OpcionMenu";
+import { Link } from "react-router-dom";
 import logo from '../assets/logo.png';
 import menu from '../assets/iconos/menu.svg';
 
-
-
-
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { AcordionComponent } from "./Acordion";
+
+
 
 export function SideBar() {
     const [show, setShow] = useState(false);
@@ -17,16 +15,11 @@ export function SideBar() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [estados, handleClick] = useOpenMenu({});
-    const { sesion, consulta } = estados;
-
-
-
 
 
     return (
         <>
-            <Button variant="info" onClick={handleShow}>
+            <Button variant="" onClick={handleShow}>
                 <img className='' src={menu} alt='' />
             </Button>
 
@@ -41,48 +34,7 @@ export function SideBar() {
                 </Offcanvas.Header>
                 <hr />
                 <Offcanvas.Body>
-
-
-                    <div className='row d-flex column'>
-
-                        <OpcionMenu
-                            estado={sesion}
-                            handleClick={handleClick}
-                            titulo='Sesión'
-                            nombre='sesion'
-                        />
-                        <div className={`sesionLinks ${!sesion && 'd-none'}`} >
-                            <NavLink
-                                className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                                to="/modificarusuario"
-                            >
-                                Modificar Usuario
-                            </NavLink>
-                        </div>
-
-
-                        <OpcionMenu
-                            estado={consulta}
-                            handleClick={handleClick}
-                            titulo='Consultas'
-                            nombre='consulta'
-                        />
-                        <div className={`sesionLinks ${!consulta && 'd-none'}`} >
-                            <NavLink
-                                className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                                to="/consultarsaldo"
-                            >
-                                Consultar Saldo
-                            </NavLink>
-                            <NavLink
-                                className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                                to="/consultarlimite"
-                            >
-                                Consultar Límite
-                            </NavLink>
-                        </div>
-                    </div>
-
+                    <AcordionComponent />
                 </Offcanvas.Body>
             </Offcanvas>
         </>

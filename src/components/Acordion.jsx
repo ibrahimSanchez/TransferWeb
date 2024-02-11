@@ -1,10 +1,10 @@
-import {  NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import Accordion from 'react-bootstrap/Accordion';
 
 
 
-export const Acordion = () => {
+export const AcordionComponent = () => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -23,20 +23,20 @@ export const Acordion = () => {
             <Accordion.Item eventKey="1">
                 <Accordion.Header>Consultas</Accordion.Header>
                 <Accordion.Body>
-                    
-                    
-                <NavLink
-                                className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                                to="/consultarsaldo"
-                            >
-                                Consultar Saldo
-                            </NavLink>
-                            <NavLink
-                                className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                                to="/consultarlimite"
-                            >
-                                Consultar Límite
-                            </NavLink>
+
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultarsaldo"
+                    >
+                        Consultar Saldo
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultarlimite"
+                    >
+                        Consultar Límite
+                    </NavLink>
 
 
                 </Accordion.Body>
