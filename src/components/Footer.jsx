@@ -9,10 +9,11 @@ export const Footer = () => {
         <div className="footer bg-dark">
             <footer className="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
                 <div className="col-md-4 d-flex align-items-center">
-                    <span className="mb-3 mb-md-0 text-light">&copy; 2024 Somos unos tankes</span>
+                    <span className="mb-3 mb-md-0 text-light ">&copy; 2024 Todos los derechos reservados</span>
                 </div>
 
                 <ul className="nav col-md-4 justify-content-end list-unstyled d-flex">
+                    <span className="text-white">Contactanos:</span>
                     <li className="ms-3">
                         <a className="text-muted" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fff" className="bi bi-facebook" viewBox="0 0 16 16">

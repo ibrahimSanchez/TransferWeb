@@ -1,28 +1,22 @@
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
-import { updateTarjeta } from '../api/tarjetas.api';
+import { addTarjeta } from '../api/tarjetas.api';
 
 
 
 
-export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
+export const ModalAddTarjeta = ({ show, setShow }) => {
 
-    const { nombre, tarjeta, telefono } = datosTarjeta;
     
-    const { register, handleSubmit } = useForm({
-        defaultValues: {
-            nombre,
-            tarjeta,
-            telefono,
-        }
-    });
+    
+    const { register, handleSubmit } = useForm();
     
     
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
-        const resp = await updateTarjeta(data)
+        const resp = await addTarjeta(data)
         console.log(resp)
         handleClose();
     })
@@ -33,7 +27,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modificar tarjeta</Modal.Title>
+                    <Modal.Title>Añadir tarjeta</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 

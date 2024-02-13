@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 
 
-export const AcordionSideBarComponent = () => {
+export const AcordionSideBarComponent = ({setShow}) => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -14,6 +14,7 @@ export const AcordionSideBarComponent = () => {
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/modificarusuario"
+                        onClick={() => setShow(false)}
                     >
                         Modificar Usuario
                     </NavLink>
@@ -29,12 +30,14 @@ export const AcordionSideBarComponent = () => {
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarsaldo"
+                        onClick={() => setShow(false)}
                     >
                         Consultar Saldo
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarlimite"
+                        onClick={() => setShow(false)}
                     >
                         Consultar Límite
                     </NavLink>
@@ -48,8 +51,9 @@ export const AcordionSideBarComponent = () => {
                 <Accordion.Body>
 
                     <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-3' + (isActive ? 'activo' : '')}
                         to="/listatarjetas"
+                        onClick={() => setShow(false)}
                     >
                         Lista de tarjetas
                     </NavLink>

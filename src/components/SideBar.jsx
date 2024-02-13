@@ -26,7 +26,7 @@ export function SideBar() {
             <Offcanvas show={show} onHide={handleClose}>
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title>
-                        <Link className="navbar-brand" to="/" >
+                        <Link className="navbar-brand" to="/" onClick={() => setShow(false)}>
                             <img className='logo' src={logo} alt='logo' />
                             {/* <label>Transfermóvil</label> */}
                         </Link>
@@ -34,7 +34,7 @@ export function SideBar() {
                 </Offcanvas.Header>
                 <hr />
                 <Offcanvas.Body>
-                    <AcordionSideBarComponent />
+                    <AcordionSideBarComponent setShow={setShow} />
                 </Offcanvas.Body>
             </Offcanvas>
         </>

@@ -14,7 +14,7 @@ export function UsuarioLista() {
         loadUsuarios();
     }, [])
 
-    
+     
     return (
         <div className="row">
             <div className="col-md-4"></div>
