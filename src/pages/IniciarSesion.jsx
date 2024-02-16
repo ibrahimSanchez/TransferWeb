@@ -72,7 +72,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("contrasena", { required: true })}
+                        {...register("contrasena", { required: true, minLength: 8 })}
                     />
                 </div>
                 <button

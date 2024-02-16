@@ -44,7 +44,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="number"
                         className="form-control"
-                        {...register("telefono", { required: true })}
+                        {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                     />
                 </div>
 
@@ -64,7 +64,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="number"
                         className="form-control"
-                        {...register("ci", { required: true })}
+                        {...register("ci", { required: true,  maxLength: 11, minLength: 11 })}
                     />
                 </div>
 
@@ -73,7 +73,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("contrasena", { required: true })}
+                        {...register("contrasena", { required: true, minLength: 8 })}
                     />
                 </div>
 

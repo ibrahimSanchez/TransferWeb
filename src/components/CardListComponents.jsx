@@ -1,20 +1,16 @@
 import { useState } from 'react';
 import Card from 'react-bootstrap/Card';
-import { tarjetas } from '../data/data';
 import { ModalModificarTarjeta } from './ModalModificarTarjeta';
 import { ModalAddTarjeta } from './ModalAddTarjeta';
 
 
 
-
-
-
-export const CardListComponent = () => {
+export const CardListComponent = ({ tarjetas = [] }) => {
 
 
 
     const [showModificar, setShowModificar] = useState(false);
-    // const [showAdd, setShowAdd] = useState(false)
+    const [showAdd, setShowAdd] = useState(false)
 
 
     const [datosTarjeta, setDatosTarjeta] = useState({
@@ -38,11 +34,11 @@ export const CardListComponent = () => {
         console.log({ tarjeta: target.value })
     }
 
-    // const handleAdd = () => setShowAdd(true);
+    const handleAdd = () => setShowAdd(true);
 
 
     return (
-        <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
+        <div className='d-flex column flex-wrap justify-content-center mb-5 mt-2'>
 
             {showModificar &&
                 <ModalModificarTarjeta
@@ -51,13 +47,13 @@ export const CardListComponent = () => {
                     datosTarjeta={datosTarjeta}
                     setDatosTarjeta={setDatosTarjeta}
                 />}
-{/* 
-            { showAdd &&
+
+            {showAdd &&
                 <ModalAddTarjeta
-                    show={showModificar}
-                    setShow={setShowModificar}
+                    show={showAdd}
+                    setShow={setShowAdd}
                 />
-            } */}
+            }
 
             <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
 
@@ -93,13 +89,14 @@ export const CardListComponent = () => {
                 }
             </div>
 
-
-            <button
-                className='btn btn-success'
-                // onClick={handleAdd}
-            >
-                Añadir tarjeta
-            </button>
+            <div className='d-flex justify-content-center'>   
+                <button
+                    className='btn btn-success'
+                    onClick={handleAdd}
+                >
+                    Añadir tarjeta
+                </button>
+            </div>
 
 
         </div>

@@ -8,7 +8,7 @@ import { updateTarjeta } from '../api/tarjetas.api';
 export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
     const { nombre, tarjeta, telefono } = datosTarjeta;
-    
+
     const { register, handleSubmit } = useForm({
         defaultValues: {
             nombre,
@@ -16,8 +16,8 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
             telefono,
         }
     });
-    
-    
+
+
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
@@ -53,7 +53,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='tarjeta'
-                                {...register("tarjeta", { required: true })}
+                                {...register("tarjeta", { required: true, maxLength: 16, minLength: 16 })}
                             />
                         </div>
 
@@ -63,7 +63,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='telefono'
-                                {...register("telefono", { required: true })}
+                                {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                             />
                         </div>
 
@@ -73,11 +73,6 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
                     </form>
                 </Modal.Body>
-                <Modal.Footer>
-                    {/* <Button variant="secondary" onClick={handleClose}>
-                        Close
-                    </Button> */}
-                </Modal.Footer>
             </Modal>
         </>
     );

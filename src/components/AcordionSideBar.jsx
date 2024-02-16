@@ -46,7 +46,57 @@ export const AcordionSideBarComponent = ({setShow}) => {
                 </Accordion.Body>
             </Accordion.Item>
 
+
             <Accordion.Item eventKey="2">
+                <Accordion.Header>Pagos</Accordion.Header>
+                <Accordion.Body>
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagarelectricidad"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Electricidad
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagarimpuestos"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Impuestos
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagarmultacontravension"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Multa de Contravensión
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagarmultatransito"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Multa de Tránsito
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagartelefono"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Teléfono
+                    </NavLink>
+
+
+                </Accordion.Body>
+            </Accordion.Item>
+
+
+
+
+
+
+            <Accordion.Item eventKey="3">
                 <Accordion.Header>Tarjetas</Accordion.Header>
                 <Accordion.Body>
 

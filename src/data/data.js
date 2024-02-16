@@ -1,10 +1,10 @@
 export const tarjetas = [
-    { nombre: 'tarjeta 1', tarjeta: '1234 5678 9012 3456', moneda: 'MLC', telefono: '123456789' },
-    { nombre: 'tarjeta 2', tarjeta: '2345 6789 0123 4567', moneda: 'CUP', telefono: '234567890' },
-    { nombre: 'tarjeta 3', tarjeta: '3456 7890 1234 5678', moneda: 'MLC', telefono: '345678901' },
-    { nombre: 'tarjeta 4', tarjeta: '4567 8901 2345 6789', moneda: 'CUP', telefono: '456789012' },
-    { nombre: 'tarjeta 5', tarjeta: '5678 9012 3456 7890', moneda: 'MLC', telefono: '567890123' },
-    { nombre: 'tarjeta 6', tarjeta: '6789 0123 4567 8901', moneda: 'CUP', telefono: '678901234' },
+    { nombre: 'tarjeta 1', tarjeta: '1234567890123456', moneda: 'MLC', telefono: '12345665' },
+    { nombre: 'tarjeta 2', tarjeta: '2345678901234567', moneda: 'CUP', telefono: '23456765' },
+    { nombre: 'tarjeta 3', tarjeta: '3456789012345678', moneda: 'MLC', telefono: '34567865' },
+    { nombre: 'tarjeta 4', tarjeta: '4567890123456789', moneda: 'CUP', telefono: '45678965' },
+    { nombre: 'tarjeta 5', tarjeta: '5678901234567890', moneda: 'MLC', telefono: '56789065' },
+    { nombre: 'tarjeta 6', tarjeta: '6789012345678901', moneda: 'CUP', telefono: '67890165' },
    
   ];
 
