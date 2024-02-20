@@ -41,6 +41,34 @@ export const AcordionSideBarComponent = ({setShow}) => {
                     >
                         Consultar Límite
                     </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultarmultacontravension"
+                        onClick={() => setShow(false)}
+                    >
+                        Consultar Multa de Contravensión
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultarmultatransito"
+                        onClick={() => setShow(false)}
+                    >
+                        Consultar Multa de Tránsito
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultaroperaciones"
+                        onClick={() => setShow(false)}
+                    >
+                        Consultar Operaciones
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultarservicios"
+                        onClick={() => setShow(false)}
+                    >
+                        Consultar Servicios
+                    </NavLink>
 
 
                 </Accordion.Body>

@@ -1,10 +1,24 @@
+import { PagoFormComponent } from "../../components/PagoFormComponent"
 
 
 
 
 const PagarTelefono = () => {
+  
+
+  const inputMostrar = {
+    idServicio: true,
+    monto: true,
+  }
+
   return (
-    <div>PagarTelefono</div>
+    <>
+      <PagoFormComponent
+        titulo='Pagar Teléfono'
+        formName='pagarTelefono'
+        inputMostrar={inputMostrar}
+      />
+    </>
   )
 }
 

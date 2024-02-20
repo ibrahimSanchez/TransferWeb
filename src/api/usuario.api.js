@@ -15,7 +15,7 @@ export const iniciarSesion = (usuario) => {
     return axios.post('http://localhost:8000/usuario/login/', usuario)
 }
 
-export const cerrarSesion = () => {
-    return axios.post('http://localhost:8000/usuario/loggout/')
+export const cerrarSesion = (usuario) => {
+    return axios.post('http://localhost:8000/usuario/logout/', usuario)
 }
 

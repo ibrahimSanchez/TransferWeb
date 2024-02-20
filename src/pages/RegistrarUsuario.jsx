@@ -30,11 +30,11 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
 
                 <div className="mb-2">
-                    <label className="form-label">Correo</label>
+                    <label className="form-label">Usuario</label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        {...register("correo", { required: true })}
+                        {...register("usuario", { required: true, minLength: 8 })}
                     />
                 </div>
 
@@ -45,6 +45,15 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                         type="number"
                         className="form-control"
                         {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
+                    />
+                </div>
+
+                <div className="mb-2">
+                    <label className="form-label">Correo</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        {...register("correo", { required: true })}
                     />
                 </div>
 
@@ -64,7 +73,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="number"
                         className="form-control"
-                        {...register("ci", { required: true,  maxLength: 11, minLength: 11 })}
+                        {...register("ci", { required: true, maxLength: 11, minLength: 11 })}
                     />
                 </div>
 
@@ -98,7 +107,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
             <button
                 className="btnCuenta mt-3"
-                onClick={ () => setTieneCuenta(true) }
+                onClick={() => setTieneCuenta(true)}
             >
                 ¿Ya tienes cuenta?
             </button>

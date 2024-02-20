@@ -75,7 +75,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
 
 
                         <button className='btn btn-success' >
-                            Modificar
+                            Aceptar
                         </button>
 
                     </form>

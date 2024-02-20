@@ -30,10 +30,8 @@ export const CardListComponent = ({ tarjetas = [] }) => {
 
 
     const handleDelete = ({ target }) => {
-
         console.log({ tarjeta: target.value })
     }
-
     const handleAdd = () => setShowAdd(true);
 
 

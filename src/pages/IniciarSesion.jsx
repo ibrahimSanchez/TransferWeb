@@ -27,10 +27,9 @@ const IniciarSesion = ({ setTieneCuenta }) => {
         // console.log(resp)
 
 
-
         const accion = {
             type: types.login,
-            payload: { correo: data.correo }
+            payload: { usuario: data.usuario }
         }
 
         dispatch(accion);
@@ -58,11 +57,11 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
 
                 <div className="mb-2">
-                    <label className="form-label">Correo</label>
+                    <label className="form-label">Usuario</label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        {...register("correo", { required: true })}
+                        {...register("usuario", { required: true, minLength: 8})}
                     />
                 </div>
 

@@ -16,7 +16,21 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
 
 
 
-    const { idServicio, tipoCuenta, idMulta, ci, monto } = inputMostrar;
+    const {
+        idServicio,
+        tipoCuenta,
+        idMulta,
+        ci,
+        monto,
+        articulo,
+        inciso,
+        municipio,
+        provincia,
+        fecha,
+        tributo,
+        periodo,
+        nit
+    } = inputMostrar;
 
     return <>
 
@@ -42,6 +56,18 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                     </div>
                 }
 
+
+                {nit &&
+                    <div className="mb-2">
+                        <label className="form-label">NIT</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("nit", { required: true })}
+                        />
+                    </div>
+                }
+
                 {idMulta &&
                     <div className="mb-2">
                         <label className="form-label">Id de multa</label>
@@ -55,7 +81,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
 
                 {ci &&
                     <div className="mb-2">
-                        <label className="form-label">CI</label>
+                        <label className="form-label">Carnet de identidad</label>
                         <input
                             type="number"
                             className="form-control"
@@ -63,6 +89,77 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         />
                     </div>
                 }
+
+
+
+
+                {articulo &&
+                    <div className="mb-2">
+                        <label className="form-label">Artículo</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("articulo", { required: true })}
+                        />
+                    </div>
+                }
+
+                {inciso &&
+                    <div className="mb-2">
+                        <label className="form-label">Inciso</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("inciso", { required: true })}
+                        />
+                    </div>
+                }
+
+                {provincia &&
+                    <div className="mb-2">
+                        <label className="form-label">Provincia</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("provincia", { required: true })}
+                        />
+                    </div>
+                }
+
+                {municipio &&
+                    <div className="mb-2">
+                        <label className="form-label">Municipio</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("municipio", { required: true })}
+                        />
+                    </div>
+                }
+
+
+                {tributo &&
+                    <div className="mb-2">
+                        <label className="form-label">Tributo</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("tributo", { required: true })}
+                        />
+                    </div>
+                }
+
+                {periodo &&
+                    <div className="mb-2">
+                        <label className="form-label">Período</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            {...register("periodo", { required: true })}
+                        />
+                    </div>
+                }
+
 
                 {monto &&
                     <div className="mb-2">
@@ -75,7 +172,16 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                     </div>
                 }
 
-
+                {fecha &&
+                    <div className="mb-2">
+                        <label className="form-label">Fecha</label>
+                        <input
+                            type="date"
+                            className="form-control"
+                            {...register("fecha", { required: true })}
+                        />
+                    </div>
+                }
 
 
 

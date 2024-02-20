@@ -32,11 +32,11 @@ export const ModificarUsuario = () => {
 
 
                 <div className="mb-2">
-                    <label className="form-label">Correo</label>
+                    <label className="form-label">Usuario</label>
                     <input
-                        type="email"
+                        type="text"
                         className="form-control"
-                        {...register("correo", { required: true })}
+                        {...register("usuario", { required: true, minLength: 8 })}
                     />
                 </div>
 
@@ -50,6 +50,15 @@ export const ModificarUsuario = () => {
                     />
                 </div>
 
+
+                <div className="mb-2">
+                    <label className="form-label">Correo</label>
+                    <input
+                        type="email"
+                        className="form-control"
+                        {...register("correo", { required: true })}
+                    />
+                </div>
 
 
                 <div className="mb-2">

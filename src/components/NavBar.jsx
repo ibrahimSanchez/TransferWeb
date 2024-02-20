@@ -25,7 +25,7 @@ export const NavBar = () => {
 
     const handleCerrarSesion = async () => {
 
-        // const resp = await cerrarSesion();
+        // const resp = await cerrarSesion(usuario);
         // console.log(resp);        
 
         dispatch({ type: types.logout })
@@ -34,7 +34,7 @@ export const NavBar = () => {
             replace: true
         });
     }
-    console.log(usuario)
+    // console.log(usuario)
 
     return (
         <Navbar data-bs-theme="dark" className="bg-body-tertiary navBar">
@@ -45,7 +45,7 @@ export const NavBar = () => {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Navbar.Text>
-                        <p className="m-0 text-success nombreUsuario">{usuario.correo}</p>
+                        <p className="m-0 text-success nombreUsuario">{usuario.usuario}</p>
                     </Navbar.Text>
                     <Navbar.Text>
                         <button className="btn " onClick={handleCerrarSesion} >

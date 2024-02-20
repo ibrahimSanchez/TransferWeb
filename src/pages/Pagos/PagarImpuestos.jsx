@@ -6,21 +6,23 @@ import { PagoFormComponent } from "../../components/PagoFormComponent"
 const PagarImpuestos = () => {
  
 
-  // const inputMostrar = {
-  //   idServicio: true,
-  //   tipoCuenta: true
-  // }
+  const inputMostrar = {
+    nit: true,
+    provincia: true,
+    municipio: true,
+    tributo: true,
+    periodo: true, 
+    monto: true,
+    tipoCuenta: true
+  }
 
   return (
     <>
-      {/* <PagoFormComponent
-        titulo='Pagar Impuestos'
-        formName='pagarImpuestos'
+      <PagoFormComponent
+        titulo='Pagar Multa de Tránsito'
+        formName='pagarMultaTransito'
         inputMostrar={inputMostrar}
-      /> */}
-
-      <h1>Duda</h1>
-
+      />
     </>
   )
 }
