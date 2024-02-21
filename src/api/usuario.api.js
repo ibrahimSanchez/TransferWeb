@@ -4,6 +4,7 @@ export const getAllUsers = () => {
     return axios.get('http://localhost:8000/usuario/gestionar/')
 }
 
+
 export const createUsuario = (usuario) => {
     console.log(usuario)
     return axios.post('http://localhost:8000/usuario/gestionar/', usuario)

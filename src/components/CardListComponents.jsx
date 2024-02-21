@@ -57,7 +57,7 @@ export const CardListComponent = ({ tarjetas = [] }) => {
 
                 {
                     tarjetas.map(({ nombre, tarjeta, moneda, telefono }) =>
-                        <Card style={{ width: '18rem' }} key={nombre + tarjeta} className='m-3 tarjeta'>
+                        <Card style={{ width: '18rem' }} key={tarjeta} className='m-3 tarjeta'>
                             <Card.Body>
                                 <Card.Title>{nombre}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">{tarjeta}</Card.Subtitle>
@@ -96,11 +96,7 @@ export const CardListComponent = ({ tarjetas = [] }) => {
                 </button>
             </div>
 
-
         </div>
-
     );
 }
-
-
 

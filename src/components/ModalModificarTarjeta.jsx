@@ -7,12 +7,12 @@ import { updateTarjeta } from '../api/tarjetas.api';
 
 export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
-    const { nombre, tarjeta, telefono } = datosTarjeta;
+    const { nombre, tarjeta: no_cuenta, telefono } = datosTarjeta;
 
     const { register, handleSubmit } = useForm({
         defaultValues: {
             nombre,
-            tarjeta,
+            no_cuenta,
             telefono,
         }
     });
@@ -53,10 +53,28 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='tarjeta'
-                                {...register("tarjeta", { required: true, maxLength: 16, minLength: 16 })}
+                                {...register("no_cuenta", { required: true, maxLength: 16, minLength: 16 })}
                             />
                         </div>
 
+
+                        <div className="mb-3 form-group" >
+                            <label className='form-label'>limite ATM</label>
+                            <input className='form-control'
+                                type="number"
+                                name='limite_ATM'
+                                {...register("limite_ATM", { required: true })}
+                            />
+                        </div>
+
+                        <div className="mb-3 form-group" >
+                            <label className='form-label'>limite POS</label>
+                            <input className='form-control'
+                                type="number"
+                                name='limite_POS'
+                                {...register("limite_POS", { required: true })}
+                            />
+                        </div>
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Telefono</label>

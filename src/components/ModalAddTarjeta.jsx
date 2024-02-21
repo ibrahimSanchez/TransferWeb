@@ -46,16 +46,34 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <label className='form-label'>Tarjeta</label>
                             <input className='form-control'
                                 type="text"
-                                name='tarjeta'
+                                name='no_cuenta'
                                 {...register("tarjeta", { required: true, maxLength: 16, minLength: 16 })}
                             />
                         </div>
 
 
                         <div className="mb-3 form-group" >
+                            <label className='form-label'>limite ATM</label>
+                            <input className='form-control'
+                                type="number"
+                                name='limite_ATM'
+                                {...register("limite_ATM", { required: true })}
+                            />
+                        </div>
+
+                        <div className="mb-3 form-group" >
+                            <label className='form-label'>limite POS</label>
+                            <input className='form-control'
+                                type="number"
+                                name='limite_POS'
+                                {...register("limite_POS", { required: true })}
+                            />
+                        </div>
+
+                        <div className="mb-3 form-group" >
                             <label className='form-label'>Telefono</label>
                             <input className='form-control'
-                                type="text"
+                                type="number"
                                 name='telefono'
                                 {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                             />
@@ -66,7 +84,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <select
                                 className="form-select"
                                 aria-label="Default select example"
-                                {...register("tipocuenta", { required: true })}
+                                {...register("tipo_cuenta", { required: true })}
                             >
                                 <option value="CUP">CUP</option>
                                 <option value="MLC">MLC</option>
