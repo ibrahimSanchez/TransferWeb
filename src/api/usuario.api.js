@@ -7,7 +7,7 @@ export const getAllUsers = () => {
 
 export const createUsuario = (usuario) => {
     console.log(usuario)
-    return axios.post('http://localhost:8000/usuario/gestionar/', usuario)
+    return axios.post('http://localhost:8000/usuario/registrar/', usuario)
 }
 
 
@@ -20,3 +20,13 @@ export const cerrarSesion = (usuario) => {
     return axios.post('http://localhost:8000/usuario/logout/', usuario)
 }
 
+
+export const getCargarUsuario = () => {
+    return axios.get('http://localhost:8000/usuario/modForm/')
+}
+
+
+export const modificarUsuario = (usuario) => {
+    // console.log(usuario)
+    return axios.post('http://localhost:8000/usuario/modificar/', usuario)
+}

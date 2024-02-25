@@ -8,7 +8,6 @@ import { types } from "../types/types";
 import { cerrarSesion } from "../api/usuario.api";
 import { SideBar } from './SideBar';
 
-
 // import fotoUsuario from '../assets/usuario.png';
 import '../css/SideBar.css';
 
@@ -25,8 +24,8 @@ export const NavBar = () => {
 
     const handleCerrarSesion = async () => {
 
-        // const resp = await cerrarSesion(usuario);
-        // console.log(resp);        
+        const resp = await cerrarSesion(usuario);
+        console.log(resp);        
 
         dispatch({ type: types.logout })
 

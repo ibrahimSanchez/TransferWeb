@@ -23,26 +23,28 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
     const onSubmit = handleSubmit(async data => {
 
-        // const resp = await iniciarSesion(data);
+        const resp = await iniciarSesion(data);
         // console.log(resp)
 
+        if (resp.data[0] === true) {
 
-        const accion = {
-            type: types.login,
-            payload: { usuario: data.usuario }
+            const accion = {
+                type: types.login,
+                payload: { usuario: data.username }
+            }
+
+            dispatch(accion);
+
+            navegar('/', {
+                replace: true
+            });
+
         }
-
-        dispatch(accion);
-
-        navegar('/', {
-            replace: true
-        });
-
     })
 
     return (<>
 
-    <img className="logoInicio" src={logo} alt="Logo" />
+        <img className="logoInicio" src={logo} alt="Logo" />
 
         <div className="formContenedor row sesion">
 
@@ -61,7 +63,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("usuario", { required: true, minLength: 8})}
+                        {...register("username", { required: true })}
                     />
                 </div>
 
@@ -71,7 +73,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("contrasena", { required: true, minLength: 8 })}
+                        {...register("password", { required: true, minLength: 8 })}
                     />
                 </div>
                 <button

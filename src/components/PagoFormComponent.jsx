@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { municipios, provincias } from "../data/data";
+import { useState } from "react";
 
 
 
@@ -6,15 +8,13 @@ import { useForm } from "react-hook-form";
 
 export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit, setValue } = useForm();
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
         // const resp = await pagarElectricidad(data);
         // console.log(resp)
     })
-
-
 
     const {
         idServicio,
@@ -31,6 +31,15 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
         periodo,
         nit
     } = inputMostrar;
+
+
+    const [provSelec, setProvSelec] = useState('Pinar del Río');
+
+    const handleInput = (e) => {
+        setProvSelec(e.target.value)
+        setValue("provincia", e.target.value)
+    }
+
 
     return <>
 
@@ -115,27 +124,36 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                     </div>
                 }
 
+
+
                 {provincia &&
-                    <div className="mb-2">
-                        <label className="form-label">Provincia</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            {...register("provincia", { required: true })}
-                        />
+                    <div className="mb-3 form-group" >
+                        <label className='form-label'>Provincia</label>
+                        <select
+                            onInput={handleInput}
+                            className="form-select"
+                            aria-label="Default select example"
+                            required
+                            value={provSelec}
+                        >
+                            {provincias.map(prov => <option key={prov} value={prov}>{prov}</option>)}
+                        </select>
                     </div>
                 }
 
                 {municipio &&
-                    <div className="mb-2">
-                        <label className="form-label">Municipio</label>
-                        <input
-                            type="text"
-                            className="form-control"
+                    <div className="mb-3 form-group" >
+                        <label className='form-label'>Municipio</label>
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
                             {...register("municipio", { required: true })}
-                        />
+                        >
+                            {municipios[provSelec].map(muni => <option key={muni} value={muni}>{muni}</option>)}
+                        </select>
                     </div>
                 }
+
 
 
                 {tributo &&

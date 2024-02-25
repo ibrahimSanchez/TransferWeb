@@ -1,12 +1,16 @@
 import { useForm } from "react-hook-form";
-import { createUsuario } from "../api/usuario.api";
+import { createUsuario, getCargarUsuario } from "../api/usuario.api";
+import { useEffect, useState } from "react";
 
 
 
 export const ModificarUsuario = () => {
 
+    const [updateUser, setUpdateUser ] = useState({})
 
-    const { register, handleSubmit } = useForm();
+    const { register, handleSubmit } = useForm({
+        defaultValues: updateUser
+    });
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
@@ -14,14 +18,29 @@ export const ModificarUsuario = () => {
         console.log(resp)
     })
 
+
+    const cargarUsuario = async () => {
+        // try {
+            const resp = await getCargarUsuario();
+            const {user: username, telefono, direccion, ci, sexo} = resp.data[0];
+            setUpdateUser({username, telefono, direccion, ci, sexo});
+        // } catch (error) {
+        //     // Manejo de errores, por ejemplo, mostrar un mensaje al usuario o registrar el error
+        //     console.error("Error al cargar el usuario:", error);
+        // }
+    }
+    
+    useEffect(() => {
+        cargarUsuario();
+    }, []);
+
+
+
     return <>
 
         <div className="formContenedor">
 
-
             <h2 className="mb-5 col"> Modificar Usuario </h2>
-
-
 
             <form
                 method="POST"
@@ -36,7 +55,7 @@ export const ModificarUsuario = () => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("usuario", { required: true, minLength: 8 })}
+                        {...register("username", { required: true, minLength: 8 })}
                     />
                 </div>
 
@@ -56,7 +75,7 @@ export const ModificarUsuario = () => {
                     <input
                         type="email"
                         className="form-control"
-                        {...register("correo", { required: true })}
+                        {...register("email", { required: true })}
                     />
                 </div>
 
@@ -84,7 +103,7 @@ export const ModificarUsuario = () => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("contrasena", { required: true, minLength: 8 })}
+                        {...register("password", { required: true, minLength: 8 })}
                     />
                 </div>
 

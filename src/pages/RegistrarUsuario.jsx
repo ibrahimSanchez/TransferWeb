@@ -1,17 +1,25 @@
 import { useForm } from "react-hook-form";
 import { createUsuario } from "../api/usuario.api";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 
 
 export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
-
+    const navegar = useNavigate();
     const { register, handleSubmit } = useForm();
 
+
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
         const resp = await createUsuario(data)
         console.log(resp)
+
+        if (resp.status == 201) {
+            navegar('/inicio', {
+                replace: true
+            });
+        }
     })
 
     return <>
@@ -34,7 +42,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="text"
                         className="form-control"
-                        {...register("usuario", { required: true, minLength: 8 })}
+                        {...register("username", { required: true })}
                     />
                 </div>
 
@@ -44,6 +52,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="number"
                         className="form-control"
+                        name="telefono"
                         {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                     />
                 </div>
@@ -53,7 +62,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="email"
                         className="form-control"
-                        {...register("correo", { required: true })}
+                        {...register("email", { required: true })}
                     />
                 </div>
 
@@ -73,6 +82,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="number"
                         className="form-control"
+                        name="ci"
                         {...register("ci", { required: true, maxLength: 11, minLength: 11 })}
                     />
                 </div>
@@ -82,7 +92,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("contrasena", { required: true, minLength: 8 })}
+                        {...register("password", { required: true, minLength: 8 })}
                     />
                 </div>
 
