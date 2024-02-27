@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 import { types } from "../types/types";
 import { iniciarSesion } from "../api/usuario.api";
 
 import logo from '../assets/logo.png';
+import { SpinnerComponent } from "../components/SpinnerComponent";
 
 
 
@@ -14,19 +15,32 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
     const navegar = useNavigate();
 
+
     const { dispatch } = useContext(AuthContext);
 
-
+    const [show, setShow] = useState({
+        modal: false,
+        error: false
+    });
 
     const { register, handleSubmit } = useForm();
 
 
     const onSubmit = handleSubmit(async data => {
+        setShow({
+            ...show,
+            modal: true
+        });
 
         const resp = await iniciarSesion(data);
         // console.log(resp)
 
+
         if (resp.data[0] === true) {
+            setShow({
+                ...show,
+                modal: false
+            });
 
             const accion = {
                 type: types.login,
@@ -40,10 +54,21 @@ const IniciarSesion = ({ setTieneCuenta }) => {
             });
 
         }
+
+        else {
+            setShow({
+                ...show,
+                error: true
+            });
+            // alert('hola')
+        }
     })
 
     return (<>
 
+        <SpinnerComponent show={show} setShow={setShow} />
+
+        
         <img className="logoInicio" src={logo} alt="Logo" />
 
         <div className="formContenedor row sesion">
@@ -63,6 +88,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="text"
                         className="form-control"
+                        required
                         {...register("username", { required: true })}
                     />
                 </div>
@@ -73,7 +99,8 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
-                        {...register("password", { required: true, minLength: 8 })}
+                        required
+                        {...register("password", { required: true })}
                     />
                 </div>
                 <button
@@ -91,6 +118,10 @@ const IniciarSesion = ({ setTieneCuenta }) => {
             >
                 ¿No tienes cuenta?
             </button>
+
+
+
+
 
         </div>
     </>

@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import ModalComponent from "../components/Modal"
 import { useState } from "react";
-import { getLimiteCuenta, getSaldoCuenta, getServicio } from "../api/consultas.api";
+// import { getLimiteCuenta, getSaldoCuenta, getServicio } from "../api/consultas.api";
+
 
 
 
@@ -19,7 +20,10 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
 
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        handleSubmit
+    } = useForm();
 
 
     const onSubmit = handleSubmit(async data => {
@@ -59,6 +63,8 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
         <>
             <ModalComponent show={show} setShow={setShow} titulo={titulo} contenido={contenido} />
 
+
+
             <div className="formContenedor">
 
 
@@ -78,6 +84,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                             <input
                                 type="text"
                                 className="form-control"
+                                required
                                 {...register("idMulta", { required: true })}
                             />
                         </div>
@@ -87,9 +94,10 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                         <div className="mb-2">
                             <label className="form-label">Carnet de identidad</label>
                             <input
-                                type="text"
+                                type="number"
                                 className="form-control"
-                                {...register("ci", { required: true, minLength: 11, maxLength: 11 })}
+                                required
+                                {...register("ci", { required: true, min: 0, minLength: 11, maxLength: 11 })}
                             />
                         </div>
                     }
@@ -100,6 +108,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                             <input
                                 type="text"
                                 className="form-control"
+                                required
                                 {...register("licencia", { required: true })}
                             />
                         </div>
@@ -109,16 +118,15 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
                     {tipoServicio &&
                         <div className="mb-2">
-                            <label className="form-label">Tipo de cuenta</label>
+                            <label className="form-label">Tipo de servicio</label>
                             <select
                                 className="form-select"
                                 aria-label="Default select example"
                                 {...register("tiposervicio", { required: true })}
                             >
-                                <option value="s1">Servicio 1</option>
-                                <option value="s2">Servicio 2</option>
-                                <option value="s3">Servicio 3</option>
-                                <option value="s4">Servicio 4</option>
+                                <option value="todas">Todas las operaciones</option>
+                                <option value="transferencia">Transferencias</option>
+                                <option value="recarga">Recarga móvil</option>
                             </select>
                         </div>
                     }

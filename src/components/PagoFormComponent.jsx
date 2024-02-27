@@ -60,6 +60,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("idServicio", { required: true })}
                         />
                     </div>
@@ -72,6 +73,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("nit", { required: true })}
                         />
                     </div>
@@ -83,6 +85,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("idMulta", { required: true })}
                         />
                     </div>
@@ -94,6 +97,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="number"
                             className="form-control"
+                            required
                             {...register("ci", { required: true, maxLength: 11, minLength: 11 })}
                         />
                     </div>
@@ -108,6 +112,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("articulo", { required: true })}
                         />
                     </div>
@@ -119,6 +124,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("inciso", { required: true })}
                         />
                     </div>
@@ -162,6 +168,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("tributo", { required: true })}
                         />
                     </div>
@@ -173,6 +180,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="text"
                             className="form-control"
+                            required
                             {...register("periodo", { required: true })}
                         />
                     </div>
@@ -185,6 +193,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="number"
                             className="form-control"
+                            required
                             {...register("monto", { required: true })}
                         />
                     </div>
@@ -196,6 +205,7 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <input
                             type="date"
                             className="form-control"
+                            required
                             {...register("fecha", { required: true })}
                         />
                     </div>

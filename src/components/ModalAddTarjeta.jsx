@@ -8,7 +8,6 @@ import { addTarjeta } from '../api/tarjetas.api';
 export const ModalAddTarjeta = ({ show, setShow }) => {
 
 
-
     const { register, handleSubmit } = useForm();
 
 
@@ -38,6 +37,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <input className='form-control'
                                 type="text"
                                 name='nombre'
+                                required
                                 {...register("nombre", { required: true })}
                             />
                         </div>
@@ -47,6 +47,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <input className='form-control'
                                 type="text"
                                 name='no_cuenta'
+                                required
                                 {...register("tarjeta", { required: true, maxLength: 16, minLength: 16 })}
                             />
                         </div>
@@ -57,6 +58,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <input className='form-control'
                                 type="number"
                                 name='limite_ATM'
+                                required
                                 {...register("limite_ATM", { required: true })}
                             />
                         </div>
@@ -66,6 +68,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <input className='form-control'
                                 type="number"
                                 name='limite_POS'
+                                required
                                 {...register("limite_POS", { required: true })}
                             />
                         </div>
@@ -75,6 +78,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                             <input className='form-control'
                                 type="number"
                                 name='telefono'
+                                required
                                 {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                             />
                         </div>

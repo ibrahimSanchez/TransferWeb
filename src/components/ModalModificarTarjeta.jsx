@@ -44,6 +44,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='nombre'
+                                required
                                 {...register("nombre", { required: true })}
                             />
                         </div>
@@ -53,6 +54,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='tarjeta'
+                                required
                                 {...register("no_cuenta", { required: true, maxLength: 16, minLength: 16 })}
                             />
                         </div>
@@ -63,6 +65,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="number"
                                 name='limite_ATM'
+                                required
                                 {...register("limite_ATM", { required: true })}
                             />
                         </div>
@@ -72,6 +75,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="number"
                                 name='limite_POS'
+                                required
                                 {...register("limite_POS", { required: true })}
                             />
                         </div>
@@ -81,6 +85,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <input className='form-control'
                                 type="text"
                                 name='telefono'
+                                required
                                 {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                             />
                         </div>

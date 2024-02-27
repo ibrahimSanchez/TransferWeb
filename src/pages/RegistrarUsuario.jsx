@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import { createUsuario } from "../api/usuario.api";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
 
 
 export const RegistrarUsuario = ({ setTieneCuenta }) => {
@@ -24,8 +22,9 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
     return <>
 
-        <div className="formContenedor row sesion">
 
+
+        <div className="formContenedor row sesion">
 
             <h2 className="mb-5 col"> Registrar Usuario </h2>
 
@@ -42,6 +41,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="text"
                         className="form-control"
+                        required
                         {...register("username", { required: true })}
                     />
                 </div>
@@ -53,6 +53,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                         type="number"
                         className="form-control"
                         name="telefono"
+                        required
                         {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
                     />
                 </div>
@@ -62,6 +63,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="email"
                         className="form-control"
+                        required
                         {...register("email", { required: true })}
                     />
                 </div>
@@ -73,6 +75,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="text"
                         className="form-control"
+                        required
                         {...register("direccion", { required: true })}
                     />
                 </div>
@@ -83,6 +86,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                         type="number"
                         className="form-control"
                         name="ci"
+                        required
                         {...register("ci", { required: true, maxLength: 11, minLength: 11 })}
                     />
                 </div>
@@ -92,6 +96,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className="form-control"
+                        required
                         {...register("password", { required: true, minLength: 8 })}
                     />
                 </div>
