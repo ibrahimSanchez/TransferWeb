@@ -25,7 +25,7 @@ export const ListaTarjetas = () => {
     
         setTarjetasMostrar(res);
 
-    },[buscar])
+    },[buscar]);
 
 
 

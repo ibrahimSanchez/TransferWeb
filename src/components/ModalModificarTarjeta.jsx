@@ -9,7 +9,11 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
     const { nombre, tarjeta: no_cuenta, telefono } = datosTarjeta;
 
-    const { register, handleSubmit } = useForm({
+    const {
+        register,
+        formState: { errors },
+        handleSubmit
+    } = useForm({
         defaultValues: {
             nombre,
             no_cuenta,
@@ -41,57 +45,108 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Nombre</label>
-                            <input className='form-control'
+                            <input
+                                className={"form-control " + (errors.nombre && "errorInput")}
                                 type="text"
                                 name='nombre'
-                                required
                                 {...register("nombre", { required: true })}
+                                aria-invalid={errors.nombre ? "true" : "false"}
                             />
+                            {errors.nombre?.type === "required" && (
+                                <p className="text-danger">El campo es requerido</p>
+                            )}
                         </div>
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Tarjeta</label>
-                            <input className='form-control'
+                            <input
+                                className={"form-control " + (errors.no_cuenta && "errorInput")}
                                 type="text"
-                                name='tarjeta'
-                                required
-                                {...register("no_cuenta", { required: true, maxLength: 16, minLength: 16 })}
+                                name='no_cuenta'
+                                {...register("no_cuenta", { required: true, min: 0, maxLength: 16, minLength: 16 })}
+                                aria-invalid={errors.no_cuenta ? "true" : "false"}
                             />
+                            {errors.no_cuenta?.type === "required" && (
+                                <p className="text-danger">El campo es requerido</p>
+                            )}
+                            {errors.no_cuenta?.type === "min" && (
+                                <p className="text-danger">El campo no puede ser negativo</p>
+                            )}
+                            {(errors.no_cuenta?.type === "minLength" || errors.no_cuenta?.type === "maxLength") && (
+                                <p className="text-danger">El campo debe tener 16 dígitos</p>
+                            )}
                         </div>
 
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>limite ATM</label>
-                            <input className='form-control'
+                            <input
+                                className={"form-control " + (errors.limite_ATM && "errorInput")}
                                 type="number"
                                 name='limite_ATM'
-                                required
-                                {...register("limite_ATM", { required: true })}
+                                {...register("limite_ATM", { required: true, min: 0 })}
+                                aria-invalid={errors.limite_ATM ? "true" : "false"}
                             />
+                            {errors.limite_ATM?.type === "required" && (
+                                <p className="text-danger">El campo es requerido</p>
+                            )}
+                            {errors.limite_ATM?.type === "min" && (
+                                <p className="text-danger">El campo no puede ser negativo</p>
+                            )}
                         </div>
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>limite POS</label>
-                            <input className='form-control'
+                            <input
+                                className={"form-control " + (errors.limite_POS && "errorInput")}
                                 type="number"
                                 name='limite_POS'
-                                required
-                                {...register("limite_POS", { required: true })}
+                                {...register("limite_POS", { required: true, min: 0 })}
+                                aria-invalid={errors.limite_POS ? "true" : "false"}
                             />
+                            {errors.limite_POS?.type === "required" && (
+                                <p className="text-danger">El campo es requerido</p>
+                            )}
+                            {errors.limite_POS?.type === "min" && (
+                                <p className="text-danger">El campo no puede ser negativo</p>
+                            )}
                         </div>
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Telefono</label>
-                            <input className='form-control'
-                                type="text"
+                            <input
+                                className={"form-control " + (errors.username && "errorInput")}
+                                type="number"
                                 name='telefono'
-                                required
-                                {...register("telefono", { required: true, maxLength: 8, minLength: 8 })}
+                                {...register("telefono", { required: true, maxLength: 8, minLength: 8, min: 0 })}
+                                aria-invalid={errors.telefono ? "true" : "false"}
                             />
+                            {errors.telefono?.type === "required" && (
+                                <p className="text-danger">El campo es requerido</p>
+                            )}
+                            {errors.telefono?.type === "min" && (
+                                <p className="text-danger">El campo no puede ser negativo</p>
+                            )}
+                            {(errors.telefono?.type === "minLength" || errors.telefono?.type === "maxLength") && (
+                                <p className="text-danger">El campo debe tener 8 dígitos</p>
+                            )}
                         </div>
 
+                        <div className="mb-3 form-group" >
+                            <label className='form-label'>Tipo de cuenta</label>
+                            <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                {...register("tipo_cuenta", { required: true })}
+                            >
+                                <option value="CUP">CUP</option>
+                                <option value="MLC">MLC</option>
+                            </select>
+                        </div>
+
+
                         <button className='btn btn-success' >
-                            Modificar
+                            Aceptar
                         </button>
 
                     </form>

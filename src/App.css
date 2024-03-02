@@ -5,6 +5,7 @@
     --azul: #0000fd;
     --verde: #399a53;
     --gris: #6a6a6a;
+    --rojo: #cf1e1e;
 }
 
 
@@ -33,6 +34,14 @@ input, select {
 input:focus, select:focus {
     box-shadow: 0 0 5px 2px var(--verde) !important;
     border: none;
+}
+
+.errorInput {
+    border: 1px solid var(--rojo);
+}
+
+.errorInput:focus {
+    box-shadow: 0 0 5px 2px var(--rojo) !important;
 }
 
 hr {

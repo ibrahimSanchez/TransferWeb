@@ -23,7 +23,11 @@ const IniciarSesion = ({ setTieneCuenta }) => {
         error: false
     });
 
-    const { register, handleSubmit } = useForm();
+    const {
+        register,
+        formState: { errors },
+        handleSubmit
+    } = useForm();
 
 
     const onSubmit = handleSubmit(async data => {
@@ -68,7 +72,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
         <SpinnerComponent show={show} setShow={setShow} />
 
-        
+
         <img className="logoInicio" src={logo} alt="Logo" />
 
         <div className="formContenedor row sesion">
@@ -87,10 +91,13 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <label className="form-label">Usuario</label>
                     <input
                         type="text"
-                        className="form-control"
-                        required
+                        className={"form-control " + (errors.username && "errorInput")}
                         {...register("username", { required: true })}
+                        aria-invalid={errors.username ? "true" : "false"}
                     />
+                    {errors.username?.type === "required" && (
+                        <p className="text-danger">El campo es requerido</p>
+                    )}
                 </div>
 
 
@@ -98,10 +105,13 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <label className="form-label">Contraseña</label>
                     <input
                         type="password"
-                        className="form-control"
-                        required
+                        className={"form-control " + (errors.password && "errorInput")}
                         {...register("password", { required: true })}
+                        aria-invalid={errors.password ? "true" : "false"}
                     />
+                    {errors.password?.type === "required" && (
+                        <p className="text-danger">El campo es requerido</p>
+                    )}
                 </div>
                 <button
                     type="submit"

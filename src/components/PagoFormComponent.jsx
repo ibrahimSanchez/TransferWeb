@@ -8,7 +8,12 @@ import { useState } from "react";
 
 export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
 
-    const { register, handleSubmit, setValue } = useForm();
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        setValue
+    } = useForm();
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
@@ -59,10 +64,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Identificador de servidio</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.idMulta && "errorInput")}
                             {...register("idServicio", { required: true })}
+                            aria-invalid={errors.idMulta ? "true" : "false"}
                         />
+                        {errors.idMulta?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -72,10 +80,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">NIT</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.nit && "errorInput")}
                             {...register("nit", { required: true })}
+                            aria-invalid={errors.nit ? "true" : "false"}
                         />
+                        {errors.nit?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -84,10 +95,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Id de multa</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.idMulta && "errorInput")}
                             {...register("idMulta", { required: true })}
+                            aria-invalid={errors.idMulta ? "true" : "false"}
                         />
+                        {errors.idMulta?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -96,10 +110,19 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Carnet de identidad</label>
                         <input
                             type="number"
-                            className="form-control"
-                            required
-                            {...register("ci", { required: true, maxLength: 11, minLength: 11 })}
+                            className={"form-control " + (errors.ci && "errorInput")}
+                            {...register("ci", { required: true, maxLength: 11, minLength: 11, min: 0 })}
+                            aria-invalid={errors.ci ? "true" : "false"}
                         />
+                        {errors.ci?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
+                        {errors.ci?.type === "min" && (
+                            <p className="text-danger">El campo no puede ser negativo</p>
+                        )}
+                        {(errors.ci?.type === "minLength" || errors.ci?.type === "maxLength") && (
+                            <p className="text-danger">El campo debe tener 11 dígitos</p>
+                        )}
                     </div>
                 }
 
@@ -111,10 +134,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Artículo</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.articulo && "errorInput")}
                             {...register("articulo", { required: true })}
+                            aria-invalid={errors.articulo ? "true" : "false"}
                         />
+                        {errors.articulo?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -123,10 +149,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Inciso</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.inciso && "errorInput")}
                             {...register("inciso", { required: true })}
+                            aria-invalid={errors.inciso ? "true" : "false"}
                         />
+                        {errors.inciso?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -167,10 +196,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Tributo</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.tributo && "errorInput")}
                             {...register("tributo", { required: true })}
+                            aria-invalid={errors.tributo ? "true" : "false"}
                         />
+                        {errors.tributo?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -179,10 +211,13 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Período</label>
                         <input
                             type="text"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.periodo && "errorInput")}
                             {...register("periodo", { required: true })}
+                            aria-invalid={errors.periodo ? "true" : "false"}
                         />
+                        {errors.periodo?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
 
@@ -192,10 +227,16 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Monto</label>
                         <input
                             type="number"
-                            className="form-control"
-                            required
-                            {...register("monto", { required: true })}
+                            className={"form-control " + (errors.monto && "errorInput")}
+                            {...register("monto", { required: true, min: 0 })}
+                            aria-invalid={errors.monto ? "true" : "false"}
                         />
+                        {errors.monto?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
+                        {errors.monto?.type === "min" && (
+                            <p className="text-danger">El campo no puede ser negativo</p>
+                        )}
                     </div>
                 }
 
@@ -204,16 +245,15 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
                         <label className="form-label">Fecha</label>
                         <input
                             type="date"
-                            className="form-control"
-                            required
+                            className={"form-control " + (errors.fecha && "errorInput")}
                             {...register("fecha", { required: true })}
+                            aria-invalid={errors.fecha ? "true" : "false"}
                         />
+                        {errors.fecha?.type === "required" && (
+                            <p className="text-danger">El campo es requerido</p>
+                        )}
                     </div>
                 }
-
-
-
-
 
 
                 {tipoCuenta &&
