@@ -4,11 +4,11 @@ import '../css/modals.css';
 import AlertComponent from './AlertComponent';
 
 
-export const SpinnerComponent = ({ show, setShow }) => {
+export const SpinnerComponent = ({ show, setShow, texto = '' }) => {
 
     const { modal, error } = show;
 
-    
+
     return (
         <div className={`modal ${(modal || error) && 'd-flex'}`}>
             {
@@ -20,7 +20,7 @@ export const SpinnerComponent = ({ show, setShow }) => {
 
             {
                 error &&
-                <AlertComponent show={error} setShow={setShow} detallesError='Credenciales incorrectos' />
+                <AlertComponent show={error} setShow={setShow} detallesError={texto} />
             }
 
 

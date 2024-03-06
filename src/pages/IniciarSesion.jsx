@@ -70,7 +70,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
     return (<>
 
-        <SpinnerComponent show={show} setShow={setShow} />
+        <SpinnerComponent show={show} setShow={setShow} texto="Credenciales incorrectos" />
 
 
         <img className="logoInicio" src={logo} alt="Logo" />
@@ -128,9 +128,6 @@ const IniciarSesion = ({ setTieneCuenta }) => {
             >
                 ¿No tienes cuenta?
             </button>
-
-
-
 
 
         </div>

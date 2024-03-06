@@ -140,6 +140,13 @@ nav {
 }
 
 
+.form-group p {
+    font-size: 14px;
+}
+
+
+
+
 /* 
 
 
@@ -159,3 +166,6 @@ nav {
 ::-webkit-scrollbar-thumb:hover {
     background: #f1f4f5;
 } */
+
+
+

@@ -8,7 +8,7 @@ export const AcordionSideBarComponent = ({setShow}) => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
-                <Accordion.Header>Sesión</Accordion.Header>
+                <Accordion.Header>Perfil</Accordion.Header>
                 <Accordion.Body>
 
                     <NavLink
@@ -16,7 +16,7 @@ export const AcordionSideBarComponent = ({setShow}) => {
                         to="/modificarusuario"
                         onClick={() => setShow(false)}
                     >
-                        Modificar Usuario
+                        Modificar Perfil
                     </NavLink>
 
                 </Accordion.Body>

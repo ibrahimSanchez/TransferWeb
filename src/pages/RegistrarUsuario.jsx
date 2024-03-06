@@ -46,7 +46,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
     return <>
 
-        <SpinnerComponent show={show} setShow={setShow} />
+        <SpinnerComponent show={show} setShow={setShow} texto="Registro exitoso" />
 
         <div className="formContenedor row sesion">
 
