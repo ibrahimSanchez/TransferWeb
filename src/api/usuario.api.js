@@ -11,10 +11,17 @@ export const createUsuario = (usuario) => {
 }
 
 
+// export const iniciarSesion = (usuario) => {
+//     console.log(usuario)
+//     return axios.post('http://localhost:8000/usuario/login/', usuario)
+// }
+
+
 export const iniciarSesion = (usuario) => {
-    console.log(usuario)
-    return axios.post('http://localhost:8000/usuario/login/', usuario)
+    // console.log(usuario)
+    return axios.post('http://localhost:8000/sesion/login/', usuario)
 }
+
 
 export const cerrarSesion = (usuario) => {
     return axios.post('http://localhost:8000/usuario/logout/', usuario)

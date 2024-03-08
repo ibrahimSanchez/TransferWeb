@@ -7,6 +7,7 @@ import { iniciarSesion } from "../api/usuario.api";
 
 import logo from '../assets/logo.png';
 import { SpinnerComponent } from "../components/SpinnerComponent";
+import { decodeToken, isExpired } from "react-jwt";
 
 
 
@@ -14,7 +15,6 @@ import { SpinnerComponent } from "../components/SpinnerComponent";
 const IniciarSesion = ({ setTieneCuenta }) => {
 
     const navegar = useNavigate();
-
 
     const { dispatch } = useContext(AuthContext);
 
@@ -36,37 +36,53 @@ const IniciarSesion = ({ setTieneCuenta }) => {
             modal: true
         });
 
-        const resp = await iniciarSesion(data);
-        // console.log(resp)
+
+        try {
+            const resp = await iniciarSesion(data);
+
+            const tokenAccess = resp.data.token.access;
+            const tokenRefresh = resp.data.token.refresh;
+            // console.log(tokenAccess, tokenRefresh, resp)
+            // console.log(isExpired(resp.data.token.access))
+            // console.log(decodeToken(resp.data.token.access))
 
 
-        if (resp.data[0] === true) {
-            setShow({
-                ...show,
-                modal: false
-            });
+            if (!isExpired(tokenAccess)) {
+                setShow({
+                    ...show,
+                    modal: false
+                });
 
-            const accion = {
-                type: types.login,
-                payload: { usuario: data.username }
+                const usuario = decodeToken(tokenAccess).username;
+                
+                const accion = {
+                    type: types.login,
+                    payload: { 
+                        usuario,
+                        tokenAccess,
+                        tokenRefresh
+                    }
+                }
+
+                dispatch(accion);
+
+                navegar('/', {
+                    replace: true
+                });
+
             }
 
-            dispatch(accion);
+        } catch (error) {
+            // console.log(error)
 
-            navegar('/', {
-                replace: true
-            });
-
-        }
-
-        else {
             setShow({
                 ...show,
                 error: true
             });
-            // alert('hola')
         }
     })
+
+
 
     return (<>
 
