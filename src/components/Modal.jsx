@@ -8,8 +8,8 @@ function ModalComponent({ show = false, setShow, titulo, contenido }) {
 
     return (
         <>
-            <Modal show={show} onHide={handleClose} animation={false}>
-                <Modal.Header closeButton>
+            <Modal show={show} onHide={handleClose} animation={true}>
+                <Modal.Header >
                     <Modal.Title className='text-success'>{titulo}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{contenido} </Modal.Body>

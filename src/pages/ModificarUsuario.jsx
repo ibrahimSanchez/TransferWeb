@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { getCargarUsuario } from "../api/usuario.api";
+import { modificarUsuario } from "../api/usuario.api";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 
@@ -10,38 +10,53 @@ export const ModificarUsuario = () => {
     const [updateUser, setUpdateUser] = useState({})
 
     const { usuario } = useContext(AuthContext);
-    const user = usuario.usuario;
+
+    const { tokenAccess } = usuario;
 
     const {
         register,
         formState: { errors },
-        handleSubmit
-    } = useForm({
-        defaultValues: updateUser
-    });
+        handleSubmit,
+        // setValue,
+        // getValues,
+    } = useForm();
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
-        // const resp = await modificarUsuario(data)
-        // console.log(resp)
+        const resp = await modificarUsuario(tokenAccess, false, data)
+        console.log(resp)
     })
 
-    console.log(user)
-
     const cargarUsuario = async () => {
-        // try {
-        const resp = await getCargarUsuario(user);
-        const { user: username, telefono, direccion, ci, sexo } = resp.data[0];
-        setUpdateUser({ username, telefono, direccion, ci, sexo });
-        // } catch (error) {
-        //     // Manejo de errores, por ejemplo, mostrar un mensaje al usuario o registrar el error
-        //     console.error("Error al cargar el usuario:", error);
-        // }
+        try {
+            const resp = await modificarUsuario(tokenAccess, true);
+            const { user: username, telefono, direccion, ci, sexo } = resp.data[0];
+
+            // setUpdateUser({ username, telefono, direccion, ci, sexo });
+            // console.log(resp)
+            console.log({ username, telefono, direccion, ci, sexo })
+
+            // setValue('username', username);
+            // setValue('telefono', telefono);
+            // setValue('direccion', direccion);
+            // setValue('ci', ci);
+            // setValue('sexo', sexo);
+
+
+        } catch (error) {
+            console.error("Error al cargar el usuario:", error);
+        }
     }
 
     useEffect(() => {
         cargarUsuario();
     }, []);
+
+
+    // useEffect( () => {
+    //     setValue('username', updateUser.username)
+    //     console.log([updateUser, getValues(), setValue])
+    // }, [updateUser])
 
 
 

@@ -4,7 +4,7 @@ import Accordion from 'react-bootstrap/Accordion';
 
 
 
-export const AcordionSideBarComponent = ({setShow}) => {
+export const AcordionSideBarComponent = ({ setShow }) => {
     return (
         <Accordion>
             <Accordion.Item eventKey="0">
@@ -21,7 +21,7 @@ export const AcordionSideBarComponent = ({setShow}) => {
 
                 </Accordion.Body>
             </Accordion.Item>
-            
+
             <Accordion.Item eventKey="1">
                 <Accordion.Header>Consultas</Accordion.Header>
                 <Accordion.Body>
@@ -121,21 +121,49 @@ export const AcordionSideBarComponent = ({setShow}) => {
 
 
 
-
-
-
             <Accordion.Item eventKey="3">
+                <Accordion.Header>Operaciones</Accordion.Header>
+                <Accordion.Body>
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/realizartransferencia"
+                        onClick={() => setShow(false)}
+                    >
+                        Realizar Transferencia
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/recargarsaldo"
+                        onClick={() => setShow(false)}
+                    >
+                        Recargar Saldo
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/recargarnauta"
+                        onClick={() => setShow(false)}
+                    >
+                        Recargar Nauta
+                    </NavLink>
+
+                </Accordion.Body>
+            </Accordion.Item>
+
+
+
+            <Accordion.Item eventKey="4">
                 <Accordion.Header>Tarjetas</Accordion.Header>
                 <Accordion.Body>
 
                     <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-3' + (isActive ? 'activo' : '')}
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/listatarjetas"
                         onClick={() => setShow(false)}
                     >
                         Lista de tarjetas
                     </NavLink>
-                    
+
                 </Accordion.Body>
             </Accordion.Item>
         </Accordion>

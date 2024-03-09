@@ -9,7 +9,7 @@ import './css/forms.css';
 
 
 const init = () => {
-  return JSON.parse( localStorage.getItem('usuario') ) || { logged: false };
+  return JSON.parse( localStorage.getItem('usuario') ) || { logged: false, tokenAccess: '' };
 }
 
 
@@ -19,6 +19,7 @@ function App() {
 
   useEffect( () => {
     if( !usuario ) return;
+
 
     localStorage.setItem( 'usuario', JSON.stringify( usuario) );
   }, [usuario]);

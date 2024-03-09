@@ -1,5 +1,4 @@
 import Alert from 'react-bootstrap/Alert';
-import Button from 'react-bootstrap/Button';
 
 function AlertComponent({titulo='Error', detallesError='', show, setShow}) {
   

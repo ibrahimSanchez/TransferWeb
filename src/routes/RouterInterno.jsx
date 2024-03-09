@@ -16,6 +16,9 @@ import { ConsultarMultaContravencion } from '../pages/consultas/ConsultarMultaCo
 import { ConsultarMultaTransito } from '../pages/consultas/ConsultarMultaTransito';
 import { ConsultarOperaciones } from '../pages/consultas/ConsultarOperaciones';
 import { ConsultarServicio } from '../pages/consultas/ConsultarServicio';
+import { RealizarTransferencia } from '../pages/operaciones/RealizarTransferencia';
+import { ReacargarSaldoMovil } from '../pages/operaciones/ReacargarSaldoMovil';
+import { RecargarNauta } from '../pages/operaciones/RecargarNauta';
 
 
 
@@ -44,6 +47,11 @@ export const RouterInterno = () => {
                 <Route path="consultarmultatransito" element={<ConsultarMultaTransito />} />
                 <Route path="consultaroperaciones" element={<ConsultarOperaciones />} />
                 <Route path="consultarservicios" element={<ConsultarServicio />} />
+
+                <Route path="realizartransferencia" element={<RealizarTransferencia />} />
+                <Route path="recargarsaldo" element={<ReacargarSaldoMovil />} />
+                <Route path="recargarnauta" element={<RecargarNauta />} />
+
 
                 <Route path="/" element={<Navigate to="principal" />} />
             </Routes>

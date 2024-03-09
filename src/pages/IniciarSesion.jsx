@@ -23,6 +23,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
         error: false
     });
 
+
     const {
         register,
         formState: { errors },
@@ -54,10 +55,10 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                 });
 
                 const usuario = decodeToken(tokenAccess).username;
-                
+
                 const accion = {
                     type: types.login,
-                    payload: { 
+                    payload: {
                         usuario,
                         tokenAccess,
                         tokenRefresh
@@ -74,7 +75,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
         } catch (error) {
             // console.log(error)
-
+            
             setShow({
                 ...show,
                 error: true

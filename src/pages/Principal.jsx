@@ -1,6 +1,10 @@
-import CardComponent from '../components/Card';
 import CarruselComponent from '../components/Carrusel';
+import SectionComponent from '../components/SectionComponent';
+
+import img1 from '../assets/carrusel1.png'
+
 import '../css/principal.css';
+import { ListDescriptionComponent } from '../components/ListDescriptionComponent';
 
 
 
@@ -14,10 +18,19 @@ const Principal = () => {
             <CarruselComponent />
 
 
-            <div className='m-5'>
-                <CardComponent titulo='La Plataforma TransferWeb' texto={p} />
-            </div>
+            <div className="container">
 
+                <SectionComponent title='La Plataforma TransferWeb' text={p} image={img1} />
+                <hr className='text-success' />
+
+
+                <ListDescriptionComponent
+                    title='Servicios'
+                    descriptionTitle='Aki va una muela de descripciones y tal'
+                    listItem={['hola', 'hola']}
+                />
+
+            </div>
 
         </div>
     )
