@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { municipios, provincias } from "../data/data";
 import { useState } from "react";
+import { validarCI } from "../helpers/validarCI";
 
 
 
@@ -15,11 +16,19 @@ export const PagoFormComponent = ({ titulo, formName, inputMostrar }) => {
         setValue
     } = useForm();
 
+
+    
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
-        // const resp = await pagarElectricidad(data);
-        // console.log(resp)
+        
+        if (validarCI(data.ci)) {
+            console.log(data)
+            // const resp = await pagarElectricidad(data);
+        }
+
     })
+
+
+
 
     const {
         idServicio,
