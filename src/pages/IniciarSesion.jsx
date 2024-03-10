@@ -123,11 +123,14 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                     <input
                         type="password"
                         className={"form-control " + (errors.password && "errorInput")}
-                        {...register("password", { required: true })}
+                        {...register("password", { required: true, minLength: 8 })}
                         aria-invalid={errors.password ? "true" : "false"}
                     />
                     {errors.password?.type === "required" && (
                         <p className="text-danger">El campo es requerido</p>
+                    )}
+                    {errors.password?.type === "minLength" && (
+                        <p className="text-danger">El campo debe tener más de 8 caracteres</p>
                     )}
                 </div>
                 <button
