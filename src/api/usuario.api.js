@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { decodeToken } from 'react-jwt';
 
 export const getAllUsers = () => {
     return axios.get('http://localhost:8000/usuario/gestionar/')
@@ -32,12 +33,14 @@ export const getCargarUsuario = (usuario) => {
     return axios.get('http://localhost:8000/usuario/modForm/', usuario)
 }
 
-
 export const modificarUsuario = (tokenAccess, cargar, usuario = {}) => {
-    // console.log(usuario)
-    return (
-        cargar ?
-            axios.get('http://localhost:8000/usuario/modificar/', tokenAccess) :
-            axios.put('http://localhost:8000/usuario/modificar/', usuario)
-    );
-}
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + tokenAccess
+        }
+    };
+
+    return cargar ?
+        axios.get('http://localhost:8000/usuario/formulario/', config) :
+        axios.put('http://localhost:8000/usuario/modificar/', usuario, config);
+};

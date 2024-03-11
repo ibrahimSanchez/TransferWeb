@@ -17,8 +17,7 @@ export const ModificarUsuario = () => {
         register,
         formState: { errors },
         handleSubmit,
-        // setValue,
-        // getValues,
+        setValue
     } = useForm();
 
     const onSubmit = handleSubmit(async data => {
@@ -30,17 +29,15 @@ export const ModificarUsuario = () => {
     const cargarUsuario = async () => {
         try {
             const resp = await modificarUsuario(tokenAccess, true);
-            const { user: username, telefono, direccion, ci, sexo } = resp.data[0];
+            const { user: username, telefono, direccion, ci, sexo, email, id } = resp.data;
 
-            // setUpdateUser({ username, telefono, direccion, ci, sexo });
-            // console.log(resp)
-            console.log({ username, telefono, direccion, ci, sexo })
-
-            // setValue('username', username);
-            // setValue('telefono', telefono);
-            // setValue('direccion', direccion);
-            // setValue('ci', ci);
-            // setValue('sexo', sexo);
+            setValue('username', username);
+            setValue('telefono', telefono);
+            setValue('direccion', direccion);
+            setValue('ci', ci);
+            setValue('sexo', sexo);
+            setValue('email', email);
+            setValue('id', id);
 
 
         } catch (error) {
@@ -51,13 +48,6 @@ export const ModificarUsuario = () => {
     useEffect(() => {
         cargarUsuario();
     }, []);
-
-
-    // useEffect( () => {
-    //     setValue('username', updateUser.username)
-    //     console.log([updateUser, getValues(), setValue])
-    // }, [updateUser])
-
 
 
     return <>
