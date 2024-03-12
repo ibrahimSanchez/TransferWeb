@@ -1,37 +1,54 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { ModalModificarTarjeta } from './ModalModificarTarjeta';
 import { ModalAddTarjeta } from './ModalAddTarjeta';
+import { deleteCuenta } from '../api/cuentas.api';
+import { AuthContext } from '../auth/authContext';
 
 
 
 export const CardListComponent = ({ tarjetas = [] }) => {
 
 
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
 
     const [showModificar, setShowModificar] = useState(false);
     const [showAdd, setShowAdd] = useState(false)
 
 
     const [datosTarjeta, setDatosTarjeta] = useState({
+        id: '',
+        limite_ATM: '',
+        limite_POS: '',
+        no_cuenta: '', 
         nombre: '',
-        tarjeta: '',
-        moneda: '',
-        telefono: ''
+
     });
 
     const handleModificar = ({ target }) => {
 
-        const res = tarjetas.filter(item => item.tarjeta === target.value)
+        const res = tarjetas.filter(item => item.id === parseInt(target.value))
         setDatosTarjeta(res[0]);
+        // console.log(res[0])
+        // console.log(datosTarjeta)
         setShowModificar(true);
-
     }
+
+
+    // useEffect( () =>    console.log(datosTarjeta), [datosTarjeta] )
+
+
+
 
 
     const handleDelete = ({ target }) => {
-        console.log({ tarjeta: target.value })
+        const resp = deleteCuenta(tokenAccess, target.value )
+        console.log(resp, target.value )
+        
     }
+
+
     const handleAdd = () => setShowAdd(true);
 
 
@@ -56,27 +73,27 @@ export const CardListComponent = ({ tarjetas = [] }) => {
             <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
 
                 {
-                    tarjetas.map(({ nombre, tarjeta, moneda, telefono }) =>
-                        <Card style={{ width: '18rem' }} key={tarjeta} className='m-3 tarjeta'>
+                    tarjetas.map(({ nombre, no_cuenta, tipo_cuenta, saldo, id }) =>
+                        <Card style={{ width: '18rem' }} key={no_cuenta} className='m-3 tarjeta'>
                             <Card.Body>
                                 <Card.Title>{nombre}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{tarjeta}</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted">{no_cuenta}</Card.Subtitle>
                                 <Card.Text>
-                                    Moneda: {moneda}
+                                    Moneda: {tipo_cuenta}
                                 </Card.Text>
                                 <Card.Text>
-                                    Teléfono: {telefono}
+                                    saldo: {saldo}
                                 </Card.Text>
                                 <button
                                     className='btn btn-success m-2'
-                                    value={tarjeta}
+                                    value={id}
                                     onClick={handleModificar}
                                 >
                                     Modificar
                                 </button>
                                 <button
                                     className='btn btn-danger m-2'
-                                    value={tarjeta}
+                                    value={id}
                                     onClick={handleDelete}
                                 >
                                     Eliminar
@@ -87,7 +104,7 @@ export const CardListComponent = ({ tarjetas = [] }) => {
                 }
             </div>
 
-            <div className='d-flex justify-content-center'>   
+            <div className='d-flex justify-content-center'>
                 <button
                     className='btn btn-success'
                     onClick={handleAdd}

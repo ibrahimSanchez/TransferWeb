@@ -1,11 +1,25 @@
+import { useContext } from "react";
+import { AuthContext } from "../auth/authContext";
+
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
-import { addTarjeta } from '../api/tarjetas.api';
+import { postAddCuenta } from '../api/cuentas.api';
+import { CuentaContext } from "../context/CuentaContext";
 
 
 
 
 export const ModalAddTarjeta = ({ show, setShow }) => {
+
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
+
+
+    const {
+        cuentas,
+        setCuentas,
+        setTarjetasMostrar
+    } = useContext(CuentaContext);
 
 
     const {
@@ -18,9 +32,11 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
-        const resp = await addTarjeta(data)
-        console.log(resp)
+        // console.log(data)
+        const resp = await postAddCuenta(tokenAccess, data)
+        // console.log(resp)
+        setCuentas([...cuentas, data])
+        setTarjetasMostrar([...cuentas, data])
         handleClose();
     })
 
@@ -53,19 +69,19 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Tarjeta</label>
                             <input
-                                className={"form-control " + (errors.tarjeta && "errorInput")}
-                                type="text"
+                                className={"form-control " + (errors.no_cuenta && "errorInput")}
+                                type="number"
                                 name='no_cuenta'
-                                {...register("tarjeta", { required: true, min: 0, maxLength: 16, minLength: 16 })}
-                                aria-invalid={errors.tarjeta ? "true" : "false"}
+                                {...register("no_cuenta", { required: true, min: 0, maxLength: 16, minLength: 16 })}
+                                aria-invalid={errors.no_cuenta ? "true" : "false"}
                             />
-                            {errors.tarjeta?.type === "required" && (
+                            {errors.no_cuenta?.type === "required" && (
                                 <p className="text-danger">El campo es requerido</p>
                             )}
-                            {errors.tarjeta?.type === "min" && (
+                            {errors.no_cuenta?.type === "min" && (
                                 <p className="text-danger">El campo no puede ser negativo</p>
                             )}
-                            {(errors.tarjeta?.type === "minLength" || errors.tarjeta?.type === "maxLength") && (
+                            {(errors.no_cuenta?.type === "minLength" || errors.no_cuenta?.type === "maxLength") && (
                                 <p className="text-danger">El campo debe tener 16 dígitos</p>
                             )}
                         </div>
@@ -106,22 +122,19 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
                         </div>
 
                         <div className="mb-3 form-group" >
-                            <label className='form-label'>Telefono</label>
+                            <label className='form-label'>Saldo</label>
                             <input
-                                className={"form-control " + (errors.username && "errorInput")}
+                                className={"form-control " + (errors.saldo && "errorInput")}
                                 type="number"
-                                name='telefono'
-                                {...register("telefono", { required: true, maxLength: 8, minLength: 8, min: 0 })}
-                                aria-invalid={errors.telefono ? "true" : "false"}
+                                name='saldo'
+                                {...register("saldo", { required: true, min: 0 })}
+                                aria-invalid={errors.saldo ? "true" : "false"}
                             />
-                            {errors.telefono?.type === "required" && (
+                            {errors.saldo?.type === "required" && (
                                 <p className="text-danger">El campo es requerido</p>
                             )}
-                            {errors.telefono?.type === "min" && (
+                            {errors.saldo?.type === "min" && (
                                 <p className="text-danger">El campo no puede ser negativo</p>
-                            )}
-                            {(errors.telefono?.type === "minLength" || errors.telefono?.type === "maxLength") && (
-                                <p className="text-danger">El campo debe tener 8 dígitos</p>
                             )}
                         </div>
 

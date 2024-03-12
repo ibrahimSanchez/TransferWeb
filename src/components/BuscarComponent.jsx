@@ -18,15 +18,22 @@ export const BuscarComponent = ({ setBuscar }) => {
       valor: target.value
     });
   }
-  
-  useEffect( () => {
+
+  const handleSelectMoneda = ({ target }) => {
+    setValoresBusqueda({
+      ...valoresBusqueda,
+      valor: target.value
+    });
+  }
+
+  useEffect(() => {
     setBuscar(valoresBusqueda);
-  },[valoresBusqueda] )
+  }, [valoresBusqueda])
 
   const handleSelect = ({ target }) => {
     setValoresBusqueda({
-      ...valoresBusqueda,
-      campo: target.value
+      campo: target.value,
+      valor: ''
     });
   }
 
@@ -37,21 +44,34 @@ export const BuscarComponent = ({ setBuscar }) => {
 
         <Form.Select
           aria-label="Default select example"
-          className='m-2'
+          className='m-2 selectBuscar'
           onChange={handleSelect}
         >
           <option value="nombre" >Nombre</option>
-          <option value="telefono" >Teléfono</option>
-          <option value="tarjeta" >Tarjeta</option>
+          <option value="no_cuenta" >Cuenta</option>
+          <option value="tipo_cuenta" >Moneda</option>
         </Form.Select>
 
-        <Form.Control
-          className="me-auto"
-          placeholder="Buscar...."
-          value={valoresBusqueda.valor}
-          onChange={handleChange}
-          required
-        />
+
+        {
+          valoresBusqueda.campo === 'tipo_cuenta' ?
+            <Form.Select
+              aria-label="Default select example"
+              className='m-2 selectBuscar'
+              onChange={handleSelectMoneda}
+            >
+              <option value="CUP" >CUP</option>
+              <option value="MLC" >MLC</option>
+            </Form.Select>
+            : <Form.Control
+              className="me-auto selectBuscar"
+              placeholder="Buscar...."
+              value={valoresBusqueda.valor}
+              onChange={handleChange}
+              required
+            />
+
+        }
 
       </Stack>
     </div>

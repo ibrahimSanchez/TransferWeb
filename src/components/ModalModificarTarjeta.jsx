@@ -1,13 +1,37 @@
 import Modal from 'react-bootstrap/Modal';
 import { useForm } from 'react-hook-form';
-import { updateTarjeta } from '../api/tarjetas.api';
+import { putModifCuenta } from '../api/cuentas.api';
+import { useContext } from 'react';
+import { AuthContext } from '../auth/authContext';
+import { CuentaContext } from '../context/CuentaContext';
 
 
 
 
 export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
-    const { nombre, tarjeta: no_cuenta, telefono } = datosTarjeta;
+    const {
+        id,
+        limite_ATM,
+        limite_POS,
+        no_cuenta,
+        nombre,
+    } = datosTarjeta;
+
+
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
+
+
+    const {
+        cuentas,
+        setCuentas,
+        setTarjetasMostrar
+    } = useContext(CuentaContext);
+
+
+
+
 
     const {
         register,
@@ -17,7 +41,10 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
         defaultValues: {
             nombre,
             no_cuenta,
-            telefono,
+            limite_ATM,
+            limite_POS,
+            id
+
         }
     });
 
@@ -25,9 +52,11 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
-        const resp = await updateTarjeta(data)
-        console.log(resp)
+        // console.log(data)
+        const resp = await putModifCuenta(tokenAccess, data)
+        const newTarjetas = cuentas.map(cuenta => (cuenta.id === data.id) ? data : cuenta);
+        setCuentas(newTarjetas)
+        setTarjetasMostrar(newTarjetas)
         handleClose();
     })
 
@@ -61,7 +90,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             <label className='form-label'>Tarjeta</label>
                             <input
                                 className={"form-control " + (errors.no_cuenta && "errorInput")}
-                                type="text"
+                                type="number"
                                 name='no_cuenta'
                                 {...register("no_cuenta", { required: true, min: 0, maxLength: 16, minLength: 16 })}
                                 aria-invalid={errors.no_cuenta ? "true" : "false"}
@@ -112,7 +141,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             )}
                         </div>
 
-                        <div className="mb-3 form-group" >
+                        {/* <div className="mb-3 form-group" >
                             <label className='form-label'>Telefono</label>
                             <input
                                 className={"form-control " + (errors.username && "errorInput")}
@@ -130,7 +159,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
                             {(errors.telefono?.type === "minLength" || errors.telefono?.type === "maxLength") && (
                                 <p className="text-danger">El campo debe tener 8 dígitos</p>
                             )}
-                        </div>
+                        </div> */}
 
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Tipo de cuenta</label>

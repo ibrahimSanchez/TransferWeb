@@ -1,16 +1,16 @@
 import { useForm } from "react-hook-form";
 import { modificarUsuario } from "../api/usuario.api";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth/authContext";
+import { validarCI } from "../helpers/validarCI";
 
 
 
 export const ModificarUsuario = () => {
 
-    const [updateUser, setUpdateUser] = useState({})
+    // const [updateUser, setUpdateUser] = useState({})
 
     const { usuario } = useContext(AuthContext);
-
     const { tokenAccess } = usuario;
 
     const {
@@ -22,8 +22,11 @@ export const ModificarUsuario = () => {
 
     const onSubmit = handleSubmit(async data => {
         console.log(data)
-        const resp = await modificarUsuario(tokenAccess, false, data)
-        console.log(resp)
+
+        if (validarCI(data.ci)) {
+            const resp = await modificarUsuario(tokenAccess, false, data)
+            console.log(resp)
+        }
     })
 
     const cargarUsuario = async () => {

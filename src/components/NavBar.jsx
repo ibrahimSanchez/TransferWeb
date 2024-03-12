@@ -29,13 +29,19 @@ export const NavBar = () => {
 
     const handleCerrarSesion = async () => {
 
-        const resp = await cerrarSesion(usuario);
-        // console.log(resp);
-        dispatch({ type: types.logout })
 
-        navegar('/inicio', {
-            replace: true
-        });
+        try {
+            const resp = await cerrarSesion(usuario.tokenAccess);
+            dispatch({ type: types.logout })
+            
+            navegar('/inicio', {
+                replace: true
+            });
+            
+        } catch (error) {
+            console.log(error);
+        }
+
     }
 
 
@@ -43,7 +49,7 @@ export const NavBar = () => {
     setTimeout(() => {
         const { tokenAccess } = usuario;
         isExpired(tokenAccess) && handleCerrarSesion()
-    }, 600000);
+    }, 1800000);
 
 
     return (<>
