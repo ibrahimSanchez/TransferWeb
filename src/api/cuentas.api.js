@@ -37,10 +37,13 @@ export const deleteCuenta = (tokenAccess, id) => {
     const config = {
         headers: {
             'Authorization': 'Bearer ' + tokenAccess
+        },
+        data: {
+            id: id
         }
     };
 
     // console.log(`http://127.0.0.1:8000/cuenta/gestionar/?id=${id}`)
 
-    return axios.delete(`http://127.0.0.1:8000/cuenta/gestionar/?id=${id}`, config)
+    return axios.delete('http://127.0.0.1:8000/cuenta/gestionar/', config)
 }

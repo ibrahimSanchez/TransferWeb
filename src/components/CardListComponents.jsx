@@ -1,9 +1,10 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import { ModalModificarTarjeta } from './ModalModificarTarjeta';
 import { ModalAddTarjeta } from './ModalAddTarjeta';
 import { deleteCuenta } from '../api/cuentas.api';
 import { AuthContext } from '../auth/authContext';
+import { CuentaContext } from '../context/CuentaContext';
 
 
 
@@ -17,21 +18,30 @@ export const CardListComponent = ({ tarjetas = [] }) => {
     const [showAdd, setShowAdd] = useState(false)
 
 
+
+    const {
+        cuentas,
+        setCuentas,
+        setTarjetasMostrar
+    } = useContext(CuentaContext);
+
+
+
+
+
+
     const [datosTarjeta, setDatosTarjeta] = useState({
         id: '',
         limite_ATM: '',
         limite_POS: '',
-        no_cuenta: '', 
+        no_cuenta: '',
         nombre: '',
 
     });
 
     const handleModificar = ({ target }) => {
-
         const res = tarjetas.filter(item => item.id === parseInt(target.value))
         setDatosTarjeta(res[0]);
-        // console.log(res[0])
-        // console.log(datosTarjeta)
         setShowModificar(true);
     }
 
@@ -43,9 +53,15 @@ export const CardListComponent = ({ tarjetas = [] }) => {
 
 
     const handleDelete = ({ target }) => {
-        const resp = deleteCuenta(tokenAccess, target.value )
-        console.log(resp, target.value )
-        
+
+        const tarjeta = tarjetas.filter(item => item.id === parseInt(target.value))
+        console.log(tarjeta[0].id);
+
+        const resp = deleteCuenta(tokenAccess, target.value)
+        const newTarjetas = cuentas.map(cuenta => (cuenta.id != tarjeta[0].id) && cuenta);
+        setCuentas(newTarjetas)
+        setTarjetasMostrar(newTarjetas)
+
     }
 
 
