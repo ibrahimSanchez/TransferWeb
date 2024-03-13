@@ -8,8 +8,9 @@ export const RealizarTransferencia = () => {
     const inputMostrar = {
         tipoCuenta: true,
         monto: true,
+        cuenta: true,
         numeroCuenta: true,
-        telefono: true
+        // telefono: true
       }
     
       return (

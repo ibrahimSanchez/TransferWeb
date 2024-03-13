@@ -5,7 +5,7 @@ import { Consultar } from "../../components/Consultar"
 export const ConsultarOperaciones = () => {
 
     const inputMostrar = {
-        tipoCuenta: true,
+        cuenta: true,
         tipoServicio: true
     }
 

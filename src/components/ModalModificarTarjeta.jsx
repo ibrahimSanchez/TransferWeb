@@ -10,27 +10,13 @@ import { CuentaContext } from '../context/CuentaContext';
 
 export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
 
-    const {
-        id,
-        limite_ATM,
-        limite_POS,
-        no_cuenta,
-        nombre,
-    } = datosTarjeta;
-
-
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
 
 
     const {
-        cuentas,
-        setCuentas,
-        setTarjetasMostrar
+        cargarCuentas
     } = useContext(CuentaContext);
-
-
-
 
 
     const {
@@ -38,32 +24,22 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
         formState: { errors },
         handleSubmit
     } = useForm({
-        defaultValues: {
-            nombre,
-            no_cuenta,
-            limite_ATM,
-            limite_POS,
-            id
-
-        }
+        defaultValues: 
+            datosTarjeta
     });
 
 
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        // console.log(data)
         const resp = await putModifCuenta(tokenAccess, data)
-        const newTarjetas = cuentas.map(cuenta => (cuenta.id === data.id) ? data : cuenta);
-        setCuentas(newTarjetas)
-        setTarjetasMostrar(newTarjetas)
+        cargarCuentas()
         handleClose();
     })
 
 
     return (
         <>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Modificar tarjeta</Modal.Title>

@@ -7,7 +7,7 @@ export const ReacargarSaldoMovil = () => {
     const inputMostrar = {
         tipoCuenta: true,
         monto: true,
-        // tipoRecarga: true,
+        cuenta: true,
         telefono: true
       }
     

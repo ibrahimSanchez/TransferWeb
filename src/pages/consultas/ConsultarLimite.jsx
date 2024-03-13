@@ -6,7 +6,7 @@ const ConsultarLimite = () => {
 
 
     const inputMostrar = {
-        tipoCuenta: true
+        cuenta: true
     }
 
 

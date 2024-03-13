@@ -1,8 +1,24 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../auth/authContext";
+import { CuentaContext } from "../context/CuentaContext";
+import {
+    postRealiazarTransferencia,
+    postRecargarNauta,
+    postRecargarSaldoMovil
+} from "../api/operaciones.api";
+
 
 
 export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => {
 
+
+    const {
+        cuentas
+    } = useContext(CuentaContext);
+
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
 
     const {
         register,
@@ -10,11 +26,33 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
         handleSubmit
     } = useForm();
 
+
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
-        // const resp = await pagarElectricidad(data);
-        // console.log(resp)
+        console.log(data);
+        let resp
+
+        switch (formName) {
+
+            case 'recargarSaldo':
+                resp = await postRecargarSaldoMovil(tokenAccess, data);
+                // console.log(resp)
+                break;
+
+            case 'realizarTransferencia':
+                resp = await postRealiazarTransferencia(tokenAccess, data);
+                // console.log(resp)
+                break;
+
+            case 'recargarNauta':
+                resp = await postRecargarNauta(tokenAccess, data);
+                // console.log(resp)
+                break;
+
+            default:
+                break;
+        }
     })
+
 
     const {
         tipoCuenta,
@@ -22,6 +60,7 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
         numeroCuenta,
         telefono,
         nombreUsuario,
+        cuenta
         // tipoRecarga
     } = inputMostrar;
 
@@ -48,18 +87,18 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
                         <label className="form-label">Número de cuenta</label>
                         <input
                             type="number"
-                            className={"form-control " + (errors.numerocuenta && "errorInput")}
+                            className={"form-control " + (errors.no_cuenta && "errorInput")}
                             name="numerocuenta"
-                            {...register("numerocuenta", { required: true, maxLength: 16, minLength: 16, min: 0 })}
-                            aria-invalid={errors.numerocuenta ? "true" : "false"}
+                            {...register("no_cuenta", { required: true, maxLength: 16, minLength: 16, min: 0 })}
+                            aria-invalid={errors.no_cuenta ? "true" : "false"}
                         />
-                        {errors.numerocuenta?.type === "required" && (
+                        {errors.no_cuenta?.type === "required" && (
                             <p className="text-danger">El campo es requerido</p>
                         )}
-                        {errors.numerocuenta?.type === "min" && (
+                        {errors.no_cuenta?.type === "min" && (
                             <p className="text-danger">El campo no puede ser negativo</p>
                         )}
-                        {(errors.numerocuenta?.type === "minLength" || errors.numerocuenta?.type === "maxLength") && (
+                        {(errors.no_cuenta?.type === "minLength" || errors.no_cuenta?.type === "maxLength") && (
                             <p className="text-danger">El campo debe tener 16 dígitos</p>
                         )}
                     </div>
@@ -71,32 +110,15 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
                         <label className="form-label">Nombre de usuario</label>
                         <input
                             type="text"
-                            className={"form-control " + (errors.username && "errorInput")}
-                            {...register("username", { required: true })}
-                            aria-invalid={errors.username ? "true" : "false"}
+                            className={"form-control " + (errors.nombre_usuario && "errorInput")}
+                            {...register("nombre_usuario", { required: true })}
+                            aria-invalid={errors.nombre_usuario ? "true" : "false"}
                         />
-                        {errors.username?.type === "required" && (
+                        {errors.nombre_usuario?.type === "required" && (
                             <p className="text-danger">El campo es requerido</p>
                         )}
                     </div>
                 }
-
-
-{/* 
-                {tipoRecarga &&
-                    <div className="mb-3 form-group" >
-                        <label className='form-label'>Tipo de recarga</label>
-                        <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            {...register("tiporecarga", { required: true })}
-                        >
-                            <option value="tipo1">tipo 1</option>
-                            <option value="tipo2">tipo 2</option>
-                        </select>
-                    </div>
-                } */}
-
 
                 {
                     telefono &&
@@ -140,34 +162,46 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
                     </div>
                 }
 
-
-                {tipoCuenta &&
+                {cuenta &&
                     <div className="mb-3 form-group" >
-                        <label className='form-label'>Tipo de cuenta</label>
+                        <label className='form-label'>Cuenta</label>
                         <select
                             className="form-select"
                             aria-label="Default select example"
-                            {...register("tipocuenta", { required: true })}
+                            {...register("id", { required: true })}
                         >
-                            <option value="CUP">CUP</option>
-                            <option value="MLC">MLC</option>
+                            {
+                                cuentas.map(({ nombre, id }) => (
+                                    <option
+                                        key={nombre}
+                                        value={id}>
+                                        {nombre}
+                                    </option>))
+                            }
                         </select>
                     </div>
                 }
 
 
-                <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
+                {tipoCuenta &&
+                    <div className="mb-3 form-group" >
+                        <label className='form-label'>Cuenta</label>
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
+                            {...register("moneda", { required: true })}
+                        >
+                            <option value='CUP'>CUP</option>
+                            <option value='MLC'>MLC</option>
+                        </select>
+                    </div>
+                }
 
+                <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
 
             </form>
 
-
-
         </div>
-
-
-
-
 
     </>
 }

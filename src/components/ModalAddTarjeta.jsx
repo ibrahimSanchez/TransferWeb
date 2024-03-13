@@ -16,9 +16,7 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
 
 
     const {
-        cuentas,
-        setCuentas,
-        setTarjetasMostrar
+        cargarCuentas
     } = useContext(CuentaContext);
 
 
@@ -32,18 +30,14 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        // console.log(data)
         const resp = await postAddCuenta(tokenAccess, data)
-        // console.log(resp)
-        setCuentas([...cuentas, data])
-        setTarjetasMostrar([...cuentas, data])
+        cargarCuentas()
         handleClose();
     })
 
 
     return (
         <>
-
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Añadir tarjeta</Modal.Title>

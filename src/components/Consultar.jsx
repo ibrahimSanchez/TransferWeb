@@ -1,19 +1,29 @@
 import { useForm } from "react-hook-form";
 import ModalComponent from "../components/Modal"
-import { useState } from "react";
-// import { getLimiteCuenta, getSaldoCuenta, getServicio } from "../api/consultas.api";
-
-
+import { useContext, useState } from "react";
+import { CuentaContext } from "../context/CuentaContext";
+import { getLimitesCuenta, postSaldoCuenta, postUltimasOperaciones } from "../api/operaciones.api";
+import { AuthContext } from "../auth/authContext";
+import ListOperacionesComponent from "./ListOperacionesComponent";
 
 
 
 export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
+    const {
+        cuentas
+    } = useContext(CuentaContext);
+
+
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
+
+
     const [show, setShow] = useState(false);
 
-    const [{ titulo, contenido }, setDatosModal] = useState({
-        titulo: '',
+    const [{ data, contenido }, setDatosModal] = useState({
+        data: [],
         contenido: ''
     });
 
@@ -25,23 +35,69 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
+        // console.log(data)
 
-        // const resp = await getLimiteCuenta(data);
-        // const resp = await getSaldoCuenta(data);
-        // const resp = await getServicio(data);
+        let resp;
 
-        // console.log(resp)
+        switch (nombreForm) {
+
+            case 'ConsultarLimite':
+                // console.log(data)
+                resp = await getLimitesCuenta(tokenAccess, data);
+                break;
+
+            case 'ConsultarMultaContravencion':
+                console.log('ConsultarMultaContravencion')
+                break;
+
+            case 'ConsultarMultaTransito':
+                console.log('ConsultarMultaTransito')
+                break;
+
+            case 'ConsultarOperaciones':
+                // console.log(data)
+                resp = await postUltimasOperaciones(tokenAccess, data)
+                break;
+
+            case 'ConsultarSaldo':
+                resp = await postSaldoCuenta(tokenAccess, data);
+                // console.log('ConsultarSaldo')
+                break;
+
+            case 'ConsultarServicio':
+                console.log('ConsultarServicio')
+                break;
+
+            default:
+                break;
+        }
 
 
+        if (resp) {
 
-        // Declarar variables para mostrar datos del modal al recibir resp del backend
-        setDatosModal({
-            titulo: 'Cambiar x el de verdad',
-            contenido: 'dadja da djansd asdnksajdkas asdsd asjdashdasd asd ahdasd saha'
-        });
 
-        setShow(true);
+            if (nombreForm === 'ConsultarOperaciones') {
+
+                // console.log(resp)
+                setDatosModal({
+                    data: resp.data
+                })
+            }
+
+            else {
+                setDatosModal({
+                    contenido: resp.data.message
+                })
+
+            }
+            
+            setShow(true)
+
+
+        }
+
+
+        //     resp && (
     });
 
 
@@ -53,18 +109,22 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
         ci,
         tipoCuenta,
         licenciaCond,
-        tipoServicio
+        tipoServicio,
+        cuenta
     } = inputMostrar;
 
 
     return (
         <>
-            <ModalComponent show={show} setShow={setShow} titulo={titulo} contenido={contenido} />
 
+            {
+                nombreForm === 'ConsultarOperaciones' ?
+                    <ListOperacionesComponent show={show} setShow={setShow} data={data} />
+                    : <ModalComponent show={show} setShow={setShow} mensaje={contenido} />
+            }
 
 
             <div className="formContenedor">
-
 
                 <h2 className="mb-5 col"> Consultar {tipoConsulta}</h2>
 
@@ -135,28 +195,52 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                             <select
                                 className="form-select"
                                 aria-label="Default select example"
-                                {...register("tiposervicio", { required: true })}
+                                {...register("tipo_servicio", { required: true })}
                             >
-                                <option value="todas">Todas las operaciones</option>
-                                <option value="transferencia">Transferencias</option>
-                                <option value="recarga">Recarga móvil</option>
+                                <option value="Todas las operaciones">Todas las operaciones</option>
+                                <option value="Transferencia">Transferencias</option>
+                                <option value="Recarga de Saldo Móvil">Recarga de saldo móvil</option>
+                                <option value="Recarga Nauta">Recarga Nauta</option>
                             </select>
                         </div>
                     }
 
 
 
-
-                    {tipoCuenta &&
+                    {cuenta &&
                         <div className="mb-2">
-                            <label className="form-label">Tipo de cuenta</label>
+                            <label className="form-label">Cuenta</label>
                             <select
                                 className="form-select"
                                 aria-label="Default select example"
-                                {...register("tipocuenta", { required: true })}
+                                {...register("id", { required: true })}
                             >
-                                <option value="CUP">CUP</option>
-                                <option value="MLC">MLC</option>
+                                {
+                                    cuentas.map(({ nombre, id }) => (
+                                        <option
+                                            key={nombre}
+                                            value={id}>
+                                            {nombre}
+                                        </option>))
+                                }
+
+                            </select>
+                        </div>
+                    }
+
+
+                    {tipoCuenta &&
+                        <div className="mb-2">
+                            <label className="form-label">Cuenta</label>
+                            <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                {...register("tipo_cuenta", { required: true })}
+                            >
+
+                                <option value='CUP'>CUP</option>
+                                <option value='MLC'>MLC</option>
+
                             </select>
                         </div>
                     }

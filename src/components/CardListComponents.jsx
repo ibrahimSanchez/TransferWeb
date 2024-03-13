@@ -8,7 +8,7 @@ import { CuentaContext } from '../context/CuentaContext';
 
 
 
-export const CardListComponent = ({ tarjetas = [] }) => {
+export const CardListComponent = () => {
 
 
     const { usuario } = useContext(AuthContext);
@@ -21,12 +21,9 @@ export const CardListComponent = ({ tarjetas = [] }) => {
 
     const {
         cuentas,
-        setCuentas,
-        setTarjetasMostrar
+        cargarCuentas,
+        tarjetasMostrar
     } = useContext(CuentaContext);
-
-
-
 
 
 
@@ -40,28 +37,17 @@ export const CardListComponent = ({ tarjetas = [] }) => {
     });
 
     const handleModificar = ({ target }) => {
-        const res = tarjetas.filter(item => item.id === parseInt(target.value))
+        const res = cuentas.filter(item => item.id === parseInt(target.value));
         setDatosTarjeta(res[0]);
         setShowModificar(true);
     }
 
-
-    // useEffect( () =>    console.log(datosTarjeta), [datosTarjeta] )
-
-
-
-
-
     const handleDelete = ({ target }) => {
 
-        const tarjeta = tarjetas.filter(item => item.id === parseInt(target.value))
-        console.log(tarjeta[0].id);
-
-        const resp = deleteCuenta(tokenAccess, target.value)
-        const newTarjetas = cuentas.map(cuenta => (cuenta.id != tarjeta[0].id) && cuenta);
-        setCuentas(newTarjetas)
-        setTarjetasMostrar(newTarjetas)
-
+        const tarjeta = cuentas.filter(item => item.id === parseInt(target.value))[0];
+        console.log(tarjeta.id);
+        const resp = deleteCuenta(tokenAccess, tarjeta.id);
+        cargarCuentas()
     }
 
 
@@ -76,7 +62,6 @@ export const CardListComponent = ({ tarjetas = [] }) => {
                     show={showModificar}
                     setShow={setShowModificar}
                     datosTarjeta={datosTarjeta}
-                    setDatosTarjeta={setDatosTarjeta}
                 />}
 
             {showAdd &&
@@ -86,10 +71,10 @@ export const CardListComponent = ({ tarjetas = [] }) => {
                 />
             }
 
-            <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
 
+            <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
                 {
-                    tarjetas.map(({ nombre, no_cuenta, tipo_cuenta, saldo, id }) =>
+                    tarjetasMostrar.map(({ nombre, no_cuenta, tipo_cuenta, saldo, id }) =>
                         <Card style={{ width: '18rem' }} key={no_cuenta} className='m-3 tarjeta'>
                             <Card.Body>
                                 <Card.Title>{nombre}</Card.Title>
@@ -97,9 +82,9 @@ export const CardListComponent = ({ tarjetas = [] }) => {
                                 <Card.Text>
                                     Moneda: {tipo_cuenta}
                                 </Card.Text>
-                                <Card.Text>
+                                {/* <Card.Text>
                                     saldo: {saldo}
-                                </Card.Text>
+                                </Card.Text> */}
                                 <button
                                     className='btn btn-success m-2'
                                     value={id}

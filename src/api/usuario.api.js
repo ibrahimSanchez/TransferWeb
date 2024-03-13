@@ -24,7 +24,7 @@ export const cerrarSesion = (tokenAccess) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://localhost:8000/sesion/logout/', config)
+    return axios.post('http://localhost:8000/usuario/logout/', config)
 }
 
 export const getCargarUsuario = (usuario) => {

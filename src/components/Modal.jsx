@@ -1,10 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function ModalComponent({ show = false, setShow, titulo, contenido }) {
+function ModalComponent({ show = false, setShow, titulo='Consulta realizada', mensaje }) {
 
     const handleClose = () => setShow(false);
 
+    // console.log(mensaje)
 
     return (
         <>
@@ -12,7 +13,7 @@ function ModalComponent({ show = false, setShow, titulo, contenido }) {
                 <Modal.Header >
                     <Modal.Title className='text-success'>{titulo}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{contenido} </Modal.Body>
+                <Modal.Body>{mensaje} </Modal.Body>
                 <Modal.Footer>
                     <Button variant="success" onClick={handleClose}>
                         Cerrar

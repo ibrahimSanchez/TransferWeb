@@ -8,7 +8,8 @@ export const RecargarNauta = () => {
         tipoCuenta: true,
         monto: true,
         nombreUsuario: true,
-        telefono: true
+        telefono: true,
+        cuenta: true
       }
     
       return (
