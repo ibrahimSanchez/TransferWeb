@@ -9,11 +9,7 @@ const ListOperacionesComponent = ({ show = false, setShow, data = [] }) => {
     const handleClose = () => setShow(false);
 
 
-    // const { servicio, operacion, fecha, moneda, monto } = data[0];
-
-    // console.log( servicio, operacion, fecha, moneda, monto)
-
-    console.log(data)
+    // console.log(data)
 
     return (
         <>
@@ -24,6 +20,7 @@ const ListOperacionesComponent = ({ show = false, setShow, data = [] }) => {
                 <Modal.Body className='d-block'>
 
                     {
+                        (data.length > 0 ) ?
                         data.map(({ servicio, operacion, fecha, moneda, monto }) => (
                             <div key={fecha} className='d-flex justify-content-between mb-2'>
                                 <div className='w-50 d-flex align-items-center'>
@@ -48,6 +45,7 @@ const ListOperacionesComponent = ({ show = false, setShow, data = [] }) => {
                             </div>
                         )
                         )
+                        : <p>No hay operaciones que mostrar</p>
                     }
 
 
