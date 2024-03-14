@@ -171,6 +171,28 @@ nav {
 }
 
 
+.circulo {
+    border: 4px solid #413e3e;
+    background: #54c372;
+    color: #070606;
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+
+
+.listResumen {
+    border-radius: 12px;
+    box-shadow: 0 10px 20px 0 #a7a7a7;
+    padding: 30px;
+    /* width: 50%; */
+    margin: 2rem 5rem 5rem 5rem;
+}
 
 /* 
 

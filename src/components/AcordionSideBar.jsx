@@ -41,7 +41,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     >
                         Consultar Límite
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarmultacontravension"
                         onClick={() => setShow(false)}
@@ -54,7 +54,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                         onClick={() => setShow(false)}
                     >
                         Consultar Multa de Tránsito
-                    </NavLink>
+                    </NavLink> */}
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultaroperaciones"
@@ -62,19 +62,19 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     >
                         Consultar Operaciones
                     </NavLink>
-                    <NavLink
+                    {/* <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarservicios"
                         onClick={() => setShow(false)}
                     >
                         Consultar Servicios
-                    </NavLink>
+                    </NavLink> */}
 
 
                 </Accordion.Body>
             </Accordion.Item>
 
-
+{/* 
             <Accordion.Item eventKey="2">
                 <Accordion.Header>Pagos</Accordion.Header>
                 <Accordion.Body>
@@ -118,7 +118,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                 </Accordion.Body>
             </Accordion.Item>
-
+ */}
 
 
             <Accordion.Item eventKey="3">
@@ -174,10 +174,10 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/listatarjetas"
+                        to="/resumenoperaciones"
                         onClick={() => setShow(false)}
                     >
-                        Lista de tarjetas
+                        Lista resumen de operaciones
                     </NavLink>
 
                 </Accordion.Body>

@@ -66,3 +66,13 @@ export const postRecargarNauta = (tokenAccess, data) => {
     };
     return axios.post('http://127.0.0.1:8000/operaciones/recargarNauta/', data, config )
 }
+
+
+export const postDetallesOperaciones = (tokenAccess, data) => {
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + tokenAccess
+        }
+    };
+    return axios.post('http://127.0.0.1:8000/operaciones/detalleOperaciones/', data, config )
+}

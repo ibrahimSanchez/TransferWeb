@@ -2,9 +2,10 @@ import { useForm } from "react-hook-form";
 import ModalComponent from "../components/Modal"
 import { useContext, useState } from "react";
 import { CuentaContext } from "../context/CuentaContext";
-import { getLimitesCuenta, postSaldoCuenta, postUltimasOperaciones } from "../api/operaciones.api";
+import { getLimitesCuenta, postDetallesOperaciones, postSaldoCuenta, postUltimasOperaciones } from "../api/operaciones.api";
 import { AuthContext } from "../auth/authContext";
 import ListOperacionesComponent from "./ListOperacionesComponent";
+import ModalDetallesOperaciones from "./ModalDetallesOperaciones";
 
 
 
@@ -21,6 +22,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
     const [show, setShow] = useState(false);
+    const [showList, setShowList] = useState(false);
 
     const [{ data, contenido }, setDatosModal] = useState({
         data: [],
@@ -68,6 +70,13 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                 console.log('ConsultarServicio')
                 break;
 
+
+
+            case 'ListUltimasOperaciones':
+                // console.log('ConsultarServicio', data)
+                resp = await postDetallesOperaciones(tokenAccess, data)
+                break;
+
             default:
                 break;
         }
@@ -76,12 +85,14 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
         if (resp) {
 
 
-            if (nombreForm === 'ConsultarOperaciones') {
-
+            if (nombreForm === 'ConsultarOperaciones' || nombreForm === 'ListUltimasOperaciones') {
                 // console.log(resp)
                 setDatosModal({
                     data: resp.data
-                })
+                });
+
+                nombreForm === 'ConsultarOperaciones' ?
+                    setShow(true) : setShowList(true)
             }
 
             else {
@@ -89,15 +100,10 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                     contenido: resp.data.message
                 })
 
+                setShow(true)
             }
-            
-            setShow(true)
-
-
         }
 
-
-        //     resp && (
     });
 
 
@@ -122,6 +128,12 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                     <ListOperacionesComponent show={show} setShow={setShow} data={data} />
                     : <ModalComponent show={show} setShow={setShow} mensaje={contenido} />
             }
+            {
+                nombreForm === 'ListUltimasOperaciones' &&
+                <ModalDetallesOperaciones show={showList} setShow={setShowList} data={data} />
+            }
+
+
 
 
             <div className="formContenedor">

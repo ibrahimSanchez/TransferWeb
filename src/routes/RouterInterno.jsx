@@ -23,6 +23,7 @@ import { CuentaContext } from '../context/CuentaContext';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../auth/authContext';
 import { getCuentas } from '../api/cuentas.api';
+import { ListResumenComponent } from '../pages/ListResumenComponent';
 
 
 
@@ -87,6 +88,8 @@ export const RouterInterno = () => {
                     <Route path="realizartransferencia" element={<RealizarTransferencia />} />
                     <Route path="recargarsaldo" element={<ReacargarSaldoMovil />} />
                     <Route path="recargarnauta" element={<RecargarNauta />} />
+
+                    <Route path="resumenoperaciones" element={<ListResumenComponent />} />
 
                     <Route path="/" element={<Navigate to="principal" />} />
 
