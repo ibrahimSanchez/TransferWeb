@@ -17,7 +17,7 @@ const Principal = () => {
         <div className='paginaPrincipal'>
             <CarruselComponent />
 
-
+{/* 
             <div className="container">
 
                 <SectionComponent title='La Plataforma TransferWeb' text={p} image={img1} />
@@ -30,7 +30,7 @@ const Principal = () => {
                     listItem={['hola', 'hola']}
                 />
 
-            </div>
+            </div> */}
 
         </div>
     )

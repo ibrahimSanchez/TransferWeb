@@ -3,24 +3,24 @@ import Modal from 'react-bootstrap/Modal';
 
 
 
-export const ConfirmarOperacionComponent = ({ setShow, acciones }) => {
+export const ConfirmarOperacionComponent = ({ setShow, acciones, metodo = () => { } }) => {
 
-    const { show, accion } = acciones;
+    const { show, id, tokenAccess } = acciones;
 
 
     const handleAceptar = () => {
+        metodo(tokenAccess, id);
         setShow({
-            accion: '',
-            show: false,
-            confirmacion: true
+            ...acciones,
+            show: false
         })
     }
 
     const handleCancelar = () => {
+        // console.log(acciones)
         setShow({
-            accion: '',
-            show: false,
-            confirmacion: false
+            ...acciones,
+            show: false
         })
     }
 
@@ -29,11 +29,10 @@ export const ConfirmarOperacionComponent = ({ setShow, acciones }) => {
         <>
             <Modal show={show} onHide={() => setShow({
                 ...acciones,
-                accion: '',
-                show: false,
+                show: false
             })}>
 
-                <Modal.Body>¿ Está seguro que desea {accion} ?</Modal.Body >
+                <Modal.Body>¿ Está seguro que desea {show} ?</Modal.Body >
                 <Modal.Footer>
                     <Button variant="success" onClick={handleAceptar}>
                         Aceptar

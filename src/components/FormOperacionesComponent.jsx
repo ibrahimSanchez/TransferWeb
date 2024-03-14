@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../auth/authContext";
 import { CuentaContext } from "../context/CuentaContext";
@@ -7,10 +7,15 @@ import {
     postRecargarNauta,
     postRecargarSaldoMovil
 } from "../api/operaciones.api";
+import ModalComponent from "./Modal";
 
 
 
 export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => {
+
+
+    const [show, setShow] = useState(false);
+    const [mensaje, setMensaje] = useState('');
 
 
     const {
@@ -23,29 +28,44 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
     const {
         register,
         formState: { errors },
+        reset,
         handleSubmit
     } = useForm();
 
 
     const onSubmit = handleSubmit(async data => {
-        console.log(data);
+        // console.log(data);
         let resp
 
         switch (formName) {
+            case 'realizarTransferencia':
+                resp = await postRealiazarTransferencia(tokenAccess, data);
+                // console.log(resp)
+                resp.data.message && (
+                    setMensaje(resp.data.message),
+                    setShow(true),
+                    reset()
+                );
+                break;
 
             case 'recargarSaldo':
                 resp = await postRecargarSaldoMovil(tokenAccess, data);
                 // console.log(resp)
-                break;
-
-            case 'realizarTransferencia':
-                resp = await postRealiazarTransferencia(tokenAccess, data);
-                // console.log(resp)
+                resp.data.message && (
+                    setMensaje(resp.data.message),
+                    setShow(true),
+                    reset()
+                );
                 break;
 
             case 'recargarNauta':
                 resp = await postRecargarNauta(tokenAccess, data);
                 // console.log(resp)
+                resp.data.message && (
+                    setMensaje(resp.data.message),
+                    setShow(true),
+                    reset()
+                );
                 break;
 
             default:
@@ -68,8 +88,12 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
 
     return <>
 
-        <div className="formContenedor row sesion">
+        {
+            show &&
+            <ModalComponent show={show} setShow={setShow} mensaje={mensaje} />
+        }
 
+        <div className="formContenedor row sesion">
 
             <h2 className="mb-5 col"> {titulo} </h2>
 
@@ -185,7 +209,7 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
 
                 {tipoCuenta &&
                     <div className="mb-3 form-group" >
-                        <label className='form-label'>Cuenta</label>
+                        <label className='form-label'>Moneda</label>
                         <select
                             className="form-select"
                             aria-label="Default select example"

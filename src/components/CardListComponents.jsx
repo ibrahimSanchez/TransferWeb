@@ -20,8 +20,8 @@ export const CardListComponent = () => {
 
     const [showConfirm, setShowConfirm] = useState({
         show: false,
-        accion: '',
-        confirmacion: false
+        id: 0,
+        tokenAccess
     });
 
 
@@ -51,30 +51,22 @@ export const CardListComponent = () => {
 
     const handleDelete = ({ target }) => {
 
-        // setShowConfirm({
-        //     ...showConfirm,
-        //     show: true,
-        //     accion: 'eliminar la tarjeta'
-        // })
-
-        // console.log(showConfirm)
-
-        // if (showConfirm.confirmacion) {
-        //     console.log(showConfirm)
-
         const tarjeta = cuentas.filter(item => item.id === parseInt(target.value))[0];
-        console.log(tarjeta.id);
-        const resp = deleteCuenta(tokenAccess, tarjeta.id);
-        cargarCuentas()
         setShowConfirm({
             ...showConfirm,
-            confirmacion: false
-        })
-        // }
-
+            id: tarjeta.id,
+            show: true,
+        });
 
     }
 
+
+    
+    const deleteTarjetaMetodo = (token, id) => {
+        const resp = deleteCuenta(token, id);
+        console.log(resp);
+        cargarCuentas()
+    }
 
     const handleAdd = () => setShowAdd(true);
 
@@ -101,6 +93,7 @@ export const CardListComponent = () => {
                 <ConfirmarOperacionComponent
                     setShow={setShowConfirm}
                     acciones={showConfirm}
+                    metodo={deleteTarjetaMetodo}
                 />
             }
 

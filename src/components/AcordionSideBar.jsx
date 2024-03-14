@@ -166,6 +166,23 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                 </Accordion.Body>
             </Accordion.Item>
+
+
+            <Accordion.Item eventKey="5">
+                <Accordion.Header>Resumen de operaciones</Accordion.Header>
+                <Accordion.Body>
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/listatarjetas"
+                        onClick={() => setShow(false)}
+                    >
+                        Lista de tarjetas
+                    </NavLink>
+
+                </Accordion.Body>
+            </Accordion.Item>
+
         </Accordion>
     );
 }
