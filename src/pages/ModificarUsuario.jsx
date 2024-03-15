@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import { modificarUsuario } from "../api/usuario.api";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 import { validarCI } from "../helpers/validarCI";
+import ModalComponent from "../components/Modal";
 
 
 
 export const ModificarUsuario = () => {
 
-    // const [updateUser, setUpdateUser] = useState({})
+    const [show, setShow] = useState(false);
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
@@ -25,7 +26,8 @@ export const ModificarUsuario = () => {
 
         if (validarCI(data.ci)) {
             const resp = await modificarUsuario(tokenAccess, false, data)
-            console.log(resp)
+            // console.log(resp);
+            setShow(true);
         }
     })
 
@@ -54,6 +56,11 @@ export const ModificarUsuario = () => {
 
 
     return <>
+
+
+        <ModalComponent show={show} setShow={setShow} titulo="Modificar Usuario" mensaje='Perfil modificado correctamente' />
+
+
 
         <div className="formContenedor w-50">
 

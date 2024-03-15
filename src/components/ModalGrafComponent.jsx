@@ -1,7 +1,11 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { GraficoPastelComponent } from './GraficoPastelComponent';
 
-function ModalComponent({ show = false, setShow, titulo='Consulta realizada', mensaje }) {
+
+
+
+export const ModalGrafComponent = ({ show = false, setShow, titulo = 'Consulta realizada', data = [] }) => {
 
     const handleClose = () => setShow(false);
 
@@ -13,7 +17,12 @@ function ModalComponent({ show = false, setShow, titulo='Consulta realizada', me
                 <Modal.Header >
                     <Modal.Title className='text-success'>{titulo}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>{mensaje} </Modal.Body>
+                <Modal.Body>
+
+
+                    <GraficoPastelComponent data={data} />
+
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="success" onClick={handleClose}>
                         Cerrar
@@ -24,4 +33,3 @@ function ModalComponent({ show = false, setShow, titulo='Consulta realizada', me
     );
 }
 
-export default ModalComponent; 

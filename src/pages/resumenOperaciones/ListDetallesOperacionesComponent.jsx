@@ -1,13 +1,8 @@
-import { Container } from "react-bootstrap"
-import { OperacionComponent } from "../components/OperacionComponent"
-import { Consultar } from "../components/Consultar"
+import { Consultar } from "../../components/Consultar"
 
 
 
-
-
-
-export const ListResumenComponent = () => {
+export const ListDetallesOperacionesComponent = () => {
     const inputMostrar = {
         cuenta: true
     }
