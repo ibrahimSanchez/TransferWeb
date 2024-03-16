@@ -30,14 +30,17 @@ export const ListResumenComponent = () => {
 
     const onSubmit = handleSubmit(async data => {
         const resp = await postResumenOperaciones(tokenAccess, data)
-        console.log(resp);
-        setShow(true);
+        // console.log(resp);
 
-        setData([
-            { label: "Ubuntu", value: 3 },
-            { label: "Fedora", value: 19 },
-            { label: "CentOS", value: 17 },
-        ]);
+        const {transferencia, recarga_movil, recarga_nauta} = resp.data;
+        let d = [];
+
+        transferencia > 0 && d.push({ asset: "Transferencia", amount: transferencia });
+        recarga_movil > 0 && d.push({ asset: "Recarga saldo móvil", amount: recarga_movil });
+        recarga_nauta > 0 && d.push( { asset: "Recarga nauta", amount: recarga_nauta });
+        
+        setData(d)
+        setShow(true);
     });
 
 
@@ -81,7 +84,7 @@ export const ListResumenComponent = () => {
                             {...register("mes", { required: true })}
                         >
                             {
-                                meses.map((mes, id) => <option value={id+1} key={mes} >{mes}</option>)
+                                meses.map((mes, id) => <option value={id + 1} key={mes} >{mes}</option>)
                             }
                         </select>
                     </div>

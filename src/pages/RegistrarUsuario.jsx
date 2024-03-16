@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { createUsuario } from "../api/usuario.api";
 import { useNavigate } from "react-router-dom";
 import { SpinnerComponent } from "../components/SpinnerComponent";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 export const RegistrarUsuario = ({ setTieneCuenta }) => {
@@ -11,14 +11,14 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
     const {
         register,
         formState: { errors },
+        reset,
         handleSubmit
     } = useForm();
 
-
-
     const [show, setShow] = useState({
         modal: false,
-        error: false
+        error: false,
+        text: ''
     });
 
 
@@ -29,10 +29,11 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
             modal: true
         });
 
-        const resp = await createUsuario(data)
-        console.log(resp)
+        try {
 
-        if (resp.status == 201) {
+            const resp = await createUsuario(data)
+            console.log(resp)
+
             setShow({
                 ...show,
                 modal: false
@@ -41,12 +42,26 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
             navegar('/*', {
                 replace: true
             });
+
+
+        } catch (error) {
+            console.log(error.response.data.error)
+            setShow({
+                ...show,
+                error: true,
+                text: error.response.data.error
+            });
         }
+        reset();
     })
 
     return <>
 
-        <SpinnerComponent show={show} setShow={setShow} texto="Registro exitoso" />
+        <SpinnerComponent
+            show={show}
+            setShow={setShow}
+            texto={show.error && show.text}
+        />
 
         <div className="formContenedor row sesion">
 
@@ -58,7 +73,6 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
                 className="d-flex flex-column"
                 onSubmit={onSubmit}
             >
-
 
                 <div className="mb-2">
                     <label className="form-label">Usuario</label>

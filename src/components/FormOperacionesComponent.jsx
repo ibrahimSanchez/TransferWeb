@@ -8,6 +8,7 @@ import {
     postRecargarSaldoMovil
 } from "../api/operaciones.api";
 import ModalComponent from "./Modal";
+import { ModalMensajeError } from "./ModalMensajeError";
 
 
 
@@ -16,6 +17,7 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
 
     const [show, setShow] = useState(false);
     const [mensaje, setMensaje] = useState('');
+    const [showError, setShowError] = useState(false);
 
 
     const {
@@ -39,33 +41,53 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
 
         switch (formName) {
             case 'realizarTransferencia':
-                resp = await postRealiazarTransferencia(tokenAccess, data);
-                // console.log(resp)
-                resp.data.message && (
-                    setMensaje(resp.data.message),
-                    setShow(true),
-                    reset()
-                );
+                try {
+                    resp = await postRealiazarTransferencia(tokenAccess, data);
+                    // console.log(resp)
+                    resp.data.message && (
+                        setMensaje(resp.data.message),
+                        setShow(true),
+                        reset()
+                    );
+                } catch (error) {
+                    // console.log(error.response)
+                    error.response.status === 404 ?
+                        setMensaje('La cuenta de destino no existe')
+                        : setMensaje(error.response.data.error);
+                    setShowError(true);
+                }
                 break;
 
             case 'recargarSaldo':
-                resp = await postRecargarSaldoMovil(tokenAccess, data);
-                // console.log(resp)
-                resp.data.message && (
-                    setMensaje(resp.data.message),
-                    setShow(true),
-                    reset()
-                );
+                try {
+                    resp = await postRecargarSaldoMovil(tokenAccess, data);
+                    // console.log(resp)
+                    resp.data.message && (
+                        setMensaje(resp.data.message),
+                        setShow(true),
+                        reset()
+                    );
+                } catch (error) {
+                    // console.log(error.response)
+                    setMensaje(error.response.data.error);
+                    setShowError(true);
+                }
                 break;
 
             case 'recargarNauta':
-                resp = await postRecargarNauta(tokenAccess, data);
-                // console.log(resp)
-                resp.data.message && (
-                    setMensaje(resp.data.message),
-                    setShow(true),
-                    reset()
-                );
+                try {
+                    resp = await postRecargarNauta(tokenAccess, data);
+                    // console.log(resp)
+                    resp.data.message && (
+                        setMensaje(resp.data.message),
+                        setShow(true),
+                        reset()
+                    );
+                } catch (error) {
+                    // console.log(error.response)
+                    setMensaje(error.response.data.error);
+                    setShowError(true);
+                }
                 break;
 
             default:
@@ -91,6 +113,11 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
         {
             show &&
             <ModalComponent show={show} setShow={setShow} mensaje={mensaje} />
+        }
+
+        {
+            showError &&
+            <ModalMensajeError show={showError} setShow={setShowError} texto={mensaje} />
         }
 
         <div className="formContenedor row sesion">

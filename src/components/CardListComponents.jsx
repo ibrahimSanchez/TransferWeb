@@ -6,6 +6,7 @@ import { deleteCuenta } from '../api/cuentas.api';
 import { AuthContext } from '../auth/authContext';
 import { CuentaContext } from '../context/CuentaContext';
 import { ConfirmarOperacionComponent } from './ConfirmarOperacionComponent';
+import { Pencil, Trash3 } from 'react-bootstrap-icons';
 
 
 
@@ -61,7 +62,7 @@ export const CardListComponent = () => {
     }
 
 
-    
+
     const deleteTarjetaMetodo = (token, id) => {
         const resp = deleteCuenta(token, id);
         console.log(resp);
@@ -97,37 +98,35 @@ export const CardListComponent = () => {
                 />
             }
 
-
             <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
                 {
-                    tarjetasMostrar.map(({ nombre, no_cuenta, tipo_cuenta, id }) =>
-                        <Card style={{ width: '18rem' }} key={no_cuenta} className='m-3 tarjeta'>
-                            <Card.Body>
-                                <Card.Title>{nombre}</Card.Title>
-                                <Card.Subtitle className="mb-2 text-muted">{no_cuenta}</Card.Subtitle>
-                                <Card.Text>
-                                    Moneda: {tipo_cuenta}
-                                </Card.Text>
-                                {/* <Card.Text>
-                                    saldo: {saldo}
-                                </Card.Text> */}
-                                <button
-                                    className='btn btn-success m-2'
-                                    value={id}
-                                    onClick={handleModificar}
-                                >
-                                    Modificar
-                                </button>
-                                <button
-                                    className='btn btn-danger m-2'
-                                    value={id}
-                                    onClick={handleDelete}
-                                >
-                                    Eliminar
-                                </button>
-                            </Card.Body>
-                        </Card>
-                    )
+                    tarjetasMostrar.length === 0 ?
+                        <p>No hay cuentas para mostrar</p>
+                        : tarjetasMostrar.map(({ nombre, no_cuenta, tipo_cuenta, id }) =>
+                            <Card style={{ width: '12rem' }} key={no_cuenta} className='m-3 tarjeta'>
+                                <Card.Body>
+                                    <Card.Title>{nombre}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{no_cuenta}</Card.Subtitle>
+                                    <Card.Text>
+                                        Moneda: {tipo_cuenta}
+                                    </Card.Text>
+                                    <button
+                                        className='btn btn-success m-2'
+                                        value={id}
+                                        onClick={handleModificar}
+                                    >
+                                        <Pencil />
+                                    </button>
+                                    <button
+                                        className='btn btn-danger m-2'
+                                        value={id}
+                                        onClick={handleDelete}
+                                    >
+                                        <Trash3 />
+                                    </button>
+                                </Card.Body>
+                            </Card>
+                        )
                 }
             </div>
 
@@ -136,7 +135,7 @@ export const CardListComponent = () => {
                     className='btn btn-success'
                     onClick={handleAdd}
                 >
-                    Añadir tarjeta
+                    Añadir
                 </button>
             </div>
 

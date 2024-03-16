@@ -4,6 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 import { validarCI } from "../helpers/validarCI";
 import ModalComponent from "../components/Modal";
+import { ConfirmarOperacionComponent } from "../components/ConfirmarOperacionComponent";
+import { Trash3 } from "react-bootstrap-icons";
 
 
 
@@ -11,8 +13,16 @@ export const ModificarUsuario = () => {
 
     const [show, setShow] = useState(false);
 
+
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
+
+    const [showConfirm, setShowConfirm] = useState({
+        show: false,
+        id: 0,
+        tokenAccess
+    });
+
 
     const {
         register,
@@ -44,7 +54,6 @@ export const ModificarUsuario = () => {
             setValue('email', email);
             setValue('id', id);
 
-
         } catch (error) {
             console.error("Error al cargar el usuario:", error);
         }
@@ -55,16 +64,48 @@ export const ModificarUsuario = () => {
     }, []);
 
 
+
+
+
+    const deletePerfil = (token) => {
+        const resp = deletePerfil(token);
+        console.log(resp);
+        // console.log('borrado')
+    }
+
+
+
     return <>
 
+        <ModalComponent
+            show={show}
+            setShow={setShow}
+            titulo="Modificar Usuario"
+            mensaje='Perfil modificado correctamente'
+        />
 
-        <ModalComponent show={show} setShow={setShow} titulo="Modificar Usuario" mensaje='Perfil modificado correctamente' />
 
-
+        <ConfirmarOperacionComponent
+            borrar={true}
+            setShow={setShowConfirm}
+            metodo={deletePerfil}
+            acciones={showConfirm}
+        />
 
         <div className="formContenedor w-50">
 
-            <h2> Modificar Usuario </h2>
+            <div className="d-flex justify-content-between mb-3">
+                <h2> Modificar Perfil </h2>
+                <button
+                    className="btn btn-danger"
+                    onClick={() => setShowConfirm({
+                        ...showConfirm,
+                        show: true
+                    })}
+                >
+                    <Trash3 />
+                </button>
+            </div>
 
             <form
                 method="POST"
@@ -72,7 +113,6 @@ export const ModificarUsuario = () => {
                 className="d-flex flex-column"
                 onSubmit={onSubmit}
             >
-
 
                 <div className="mb-2">
                     <label className="form-label">Usuario</label>

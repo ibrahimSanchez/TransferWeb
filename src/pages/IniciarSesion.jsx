@@ -27,6 +27,7 @@ const IniciarSesion = ({ setTieneCuenta }) => {
     const {
         register,
         formState: { errors },
+        reset,
         handleSubmit
     } = useForm();
 
@@ -40,7 +41,6 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
         try {
             const resp = await iniciarSesion(data);
-
             const tokenAccess = resp.data.token.access;
             const tokenRefresh = resp.data.token.refresh;
             // console.log(tokenAccess, tokenRefresh, resp)
@@ -66,15 +66,16 @@ const IniciarSesion = ({ setTieneCuenta }) => {
                 }
 
                 dispatch(accion);
-
+                
                 navegar('/', {
                     replace: true
                 });
-
+                
             }
-
+            
         } catch (error) {
             // console.log(error)
+            reset();
             
             setShow({
                 ...show,

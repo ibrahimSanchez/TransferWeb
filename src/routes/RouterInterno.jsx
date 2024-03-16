@@ -69,7 +69,7 @@ export const RouterInterno = () => {
                 <Routes>
 
                     <Route path="principal" element={<Principal />} />
-                    <Route path="usuario" element={<UsuarioPage />} />
+                    {/* <Route path="usuario" element={<UsuarioPage />} /> */}
                     <Route path="modificarusuario" element={<ModificarUsuario />} />
                     <Route path="listatarjetas" element={<ListaTarjetas />} />
 

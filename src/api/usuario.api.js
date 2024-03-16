@@ -42,3 +42,12 @@ export const modificarUsuario = (tokenAccess, cargar, usuario = {}) => {
         axios.get('http://localhost:8000/usuario/formulario/', config) :
         axios.put('http://localhost:8000/usuario/modificar/', usuario, config);
 };
+
+export const deleteCargarUsuario = (tokenAccess) => {
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + tokenAccess
+        }
+    }
+    return axios.delete('http://localhost:8000/usuario/modificar/', config)
+}

@@ -5,6 +5,7 @@ import img1 from '../assets/carrusel1.png'
 
 import '../css/principal.css';
 import { ListDescriptionComponent } from '../components/ListDescriptionComponent';
+import { CardAccesoDirectoComponent } from '../components/CardAccesoDirectoComponent';
 
 
 
@@ -18,17 +19,9 @@ const Principal = () => {
             <CarruselComponent />
 
 {/* 
-            <div className="container">
+            <div className="m-5">
 
-                <SectionComponent title='La Plataforma TransferWeb' text={p} image={img1} />
-                <hr className='text-success' />
-
-
-                <ListDescriptionComponent
-                    title='Servicios'
-                    descriptionTitle='Aki va una muela de descripciones y tal'
-                    listItem={['hola', 'hola']}
-                />
+                <CardAccesoDirectoComponent />
 
             </div> */}
 
