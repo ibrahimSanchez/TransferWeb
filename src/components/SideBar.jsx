@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from '../assets/logo.png';
-import menu from '../assets/iconos/menu.svg';
+import logo from '../../public/assets/logo.png';
+import menu from '../../public/assets/iconos/menu.svg';
 
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';

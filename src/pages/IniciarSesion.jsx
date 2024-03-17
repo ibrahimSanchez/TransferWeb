@@ -5,9 +5,9 @@ import { AuthContext } from "../auth/authContext";
 import { types } from "../types/types";
 import { iniciarSesion } from "../api/usuario.api";
 
-import logo from '../assets/logo.png';
 import { SpinnerComponent } from "../components/SpinnerComponent";
 import { decodeToken, isExpired } from "react-jwt";
+import logo from '../../public/assets/logo.png';
 
 
 

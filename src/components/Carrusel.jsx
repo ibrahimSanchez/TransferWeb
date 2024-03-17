@@ -1,8 +1,8 @@
 import Carousel from 'react-bootstrap/Carousel';
 
-import img1 from '../assets/carrusel1.png';
-import img2 from '../assets/carrusel2.png';
-import img3 from '../assets/carrusel3.png';
+import img1 from '../../public/assets/carrusel1.png';
+import img2 from '../../public/assets/carrusel2.png';
+import img3 from '../../public/assets/carrusel3.png';
 
 
 function CarruselComponent() {
