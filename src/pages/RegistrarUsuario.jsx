@@ -32,7 +32,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
         try {
 
             const resp = await createUsuario(data)
-            console.log(resp)
+            // console.log(resp)
 
             setShow({
                 ...show,

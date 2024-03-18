@@ -9,7 +9,7 @@ export const getAllUsers = () => {
 
 
 export const createUsuario = (usuario) => {
-    console.log(usuario)
+    // console.log(usuario)
     return axios.post('http://localhost:8000/usuario/registrar/', usuario)
 }
 
@@ -43,11 +43,12 @@ export const modificarUsuario = (tokenAccess, cargar, usuario = {}) => {
         axios.put('http://localhost:8000/usuario/modificar/', usuario, config);
 };
 
-export const deleteCargarUsuario = (tokenAccess) => {
+export const deletePerfilUsuario = (tokenAccess) => {
     const config = {
         headers: {
             'Authorization': 'Bearer ' + tokenAccess
         }
     }
+
     return axios.delete('http://localhost:8000/usuario/modificar/', config)
 }

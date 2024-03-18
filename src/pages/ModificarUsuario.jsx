@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { modificarUsuario } from "../api/usuario.api";
+import { deletePerfilUsuario, modificarUsuario } from "../api/usuario.api";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 import { validarCI } from "../helpers/validarCI";
 import ModalComponent from "../components/Modal";
 import { ConfirmarOperacionComponent } from "../components/ConfirmarOperacionComponent";
 import { Trash3 } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+import { types } from "../types/types";
 
 
 
@@ -13,6 +15,8 @@ export const ModificarUsuario = () => {
 
     const [show, setShow] = useState(false);
 
+    const navegar = useNavigate();
+    const { dispatch } = useContext(AuthContext);
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
@@ -68,9 +72,13 @@ export const ModificarUsuario = () => {
 
 
     const deletePerfil = (token) => {
-        const resp = deletePerfil(token);
-        console.log(resp);
+        const resp = deletePerfilUsuario(token);
+        // console.log(resp);
         // console.log('borrado')
+        dispatch({ type: types.logout })
+        navegar('/inicio', {
+            replace: true
+        })
     }
 
 
