@@ -13,6 +13,8 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
 
+// console.log(datosTarjeta)
+
 
     const {
         cargarCuentas

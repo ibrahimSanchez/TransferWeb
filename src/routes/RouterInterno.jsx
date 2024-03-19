@@ -25,6 +25,7 @@ import { AuthContext } from '../auth/authContext';
 import { getCuentas } from '../api/cuentas.api';
 import { ListDetallesOperacionesComponent } from '../pages/resumenOperaciones/ListDetallesOperacionesComponent';
 import { ListResumenComponent } from '../pages/resumenOperaciones/ListResumenComponent';
+import { ListServicios } from '../pages/servicios/ListServicios';
 
 
 
@@ -92,6 +93,8 @@ export const RouterInterno = () => {
 
                     <Route path="detallesoperaciones" element={<ListDetallesOperacionesComponent />} />
                     <Route path="resumenoperaciones" element={<ListResumenComponent />} />
+
+                    <Route path="listaservicios" element={<ListServicios />} />
 
                     <Route path="/" element={<Navigate to="principal" />} />
 

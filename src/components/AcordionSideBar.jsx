@@ -74,7 +74,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                 </Accordion.Body>
             </Accordion.Item>
 
-            {/* 
+
             <Accordion.Item eventKey="2">
                 <Accordion.Header>Pagos</Accordion.Header>
                 <Accordion.Body>
@@ -118,7 +118,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                 </Accordion.Body>
             </Accordion.Item>
- */}
+
 
 
             <Accordion.Item eventKey="3">
@@ -185,6 +185,22 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                         onClick={() => setShow(false)}
                     >
                         Resumen de operaciones
+                    </NavLink>
+
+                </Accordion.Body>
+            </Accordion.Item>
+
+
+            <Accordion.Item eventKey="6">
+                <Accordion.Header>Servicios</Accordion.Header>
+                <Accordion.Body>
+
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/listaservicios"
+                        onClick={() => setShow(false)}
+                    >
+                        Lista de servicios
                     </NavLink>
 
                 </Accordion.Body>
