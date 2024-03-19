@@ -43,10 +43,6 @@ const IniciarSesion = ({ setTieneCuenta }) => {
             const resp = await iniciarSesion(data);
             const tokenAccess = resp.data.token.access;
             const tokenRefresh = resp.data.token.refresh;
-            // console.log(tokenAccess, tokenRefresh, resp)
-            // console.log(isExpired(resp.data.token.access))
-            // console.log(decodeToken(resp.data.token.access))
-
 
             if (!isExpired(tokenAccess)) {
                 setShow({

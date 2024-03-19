@@ -25,7 +25,9 @@ import { AuthContext } from '../auth/authContext';
 import { getCuentas } from '../api/cuentas.api';
 import { ListDetallesOperacionesComponent } from '../pages/resumenOperaciones/ListDetallesOperacionesComponent';
 import { ListResumenComponent } from '../pages/resumenOperaciones/ListResumenComponent';
-import { ListServicios } from '../pages/servicios/ListServicios';
+import { FacturasServicios } from '../pages/servicios/FacturasServicios';
+import { OnatServicios } from '../pages/servicios/OnatServicios';
+import { MultasServicios } from '../pages/servicios/MultasServicios';
 
 
 
@@ -94,14 +96,16 @@ export const RouterInterno = () => {
                     <Route path="detallesoperaciones" element={<ListDetallesOperacionesComponent />} />
                     <Route path="resumenoperaciones" element={<ListResumenComponent />} />
 
-                    <Route path="listaservicios" element={<ListServicios />} />
+                    <Route path="facturaservicios" element={<FacturasServicios />} />
+                    <Route path="onat" element={<OnatServicios />} />
+                    <Route path="multas" element={<MultasServicios />} />
 
                     <Route path="/" element={<Navigate to="principal" />} />
 
                 </Routes>
 
             </CuentaContext.Provider>
-            
+
             <Footer />
         </>
     )

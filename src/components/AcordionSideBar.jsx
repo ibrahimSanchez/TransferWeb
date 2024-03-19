@@ -197,10 +197,24 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/listaservicios"
+                        to="/facturaservicios"
                         onClick={() => setShow(false)}
                     >
-                        Lista de servicios
+                        Facturas
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/onat"
+                        onClick={() => setShow(false)}
+                    >
+                        ONAT
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/multas"
+                        onClick={() => setShow(false)}
+                    >
+                        Multas
                     </NavLink>
 
                 </Accordion.Body>

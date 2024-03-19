@@ -8,25 +8,17 @@ import { AuthContext } from "../../auth/authContext";
 
 
 
-export const ListServicios = () => {
-
+export const FacturasServicios = () => {
 
     const [trabajarForm, setTrabajarForm] = useState({
         show: false,
-        accion: 'Añadir',
-        // values: {}
+        accion: 'Añadir'
     });
 
 
-    const [updateService, setUpdateService] = useState({
-        nombre: '',
-        identificador: '',
-        monto: 0
-    })
-
+    const [updateService, setUpdateService] = useState({})
 
     const [arrList, setArrList] = useState([]);
-
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
@@ -48,7 +40,6 @@ export const ListServicios = () => {
         try {
             const resp = await deleteServicio(tokenAccess, data);
             // console.log(resp)
-
             cargarData();
 
         } catch (error) {
@@ -59,28 +50,23 @@ export const ListServicios = () => {
 
     const prepararUpdate = id => {
 
-        const [servicio] = arrList.filter(serv => serv.id === id);
-        // const {identificador, monto, nombre} = servicio;
-        
-        setUpdateService(servicio)
-        // console.log(updateService)
-
-        setTrabajarForm({
-            accion: 'Modificar',
-            // values:  updateService,
-            show: true
-        })
+        arrList.map(serv => {
+            if (serv.id === id) {
+                setUpdateService(serv)
+                setTrabajarForm({
+                    accion: 'Modificar',
+                    show: true
+                })
+            }
+        });
     }
-
 
 
     useEffect(() => cargarData, []);
 
 
-
     return (
         <>
-
             <ServiciosFormComponent
                 cargarData={cargarData}
                 trabajarForm={trabajarForm}
@@ -88,7 +74,7 @@ export const ListServicios = () => {
                 values={updateService}
             />
 
-            <h1 className="mt-4">Lista de servicios</h1>
+            <h1 className="mt-4">Facturas</h1>
 
             <List1MUI
                 arrList={arrList}
@@ -99,7 +85,7 @@ export const ListServicios = () => {
             <button
                 className="btn btn-success mb-5"
                 onClick={() => setTrabajarForm({
-                    ...trabajarForm,
+                    accion: 'Añadir',
                     show: true
                 })}
             >

@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../auth/authContext";
 
 import Modal from 'react-bootstrap/Modal';
@@ -7,28 +7,38 @@ import { postAddServicio, putServicio } from "../api/servicios.api";
 
 
 
-
-
-export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarData, values }) => {
+export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarData, values = {} }) => {
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
 
     const { accion, show } = trabajarForm;
 
-    console.log(values)
-
+    const { identificador, monto, nombre, id } = values;
 
     const {
         register,
         formState: { errors },
         reset,
-        handleSubmit
-    } = useForm({
-        defaultValues: values
-    });
+        handleSubmit,
+        setValue
+    } = useForm();
 
 
+    useEffect(() => {
+        if (accion === 'Modificar') {
+            setValue('nombre', nombre);
+            setValue('identificador', identificador);
+            setValue('monto', monto);
+            setValue('id', id);
+        }
+        else {
+            setValue('nombre', 'Factura telefónica');
+            setValue('identificador', '');
+            setValue('monto', '');
+            setValue('id', '');
+        }
+    },[accion, values]);
 
 
     const handleClose = () => setTrabajarForm({
@@ -43,16 +53,16 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
         let resp;
 
         if (accion === 'Modificar') {
-            
-            resp = await putServicio(tokenAccess, data);
-            console.log(resp)
-        }
-        else
-            resp = await postAddServicio(tokenAccess, data);
 
+            resp = await putServicio(tokenAccess, data);
+            console.log(resp);
+        }
+        else {
+            resp = await postAddServicio(tokenAccess, data);
+        }
         // console.log(resp, data)
-        cargarData();
         reset();
+        cargarData();
 
         handleClose();
     })

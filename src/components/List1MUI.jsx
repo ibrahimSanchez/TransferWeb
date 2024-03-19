@@ -13,7 +13,7 @@ import CreateIcon from '@mui/icons-material/Create';
 
 
 
-export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpdate = (id) => { } }) => {
+export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpdate }) => {
 
     const [checked, setChecked] = React.useState([]);
 
@@ -52,7 +52,7 @@ export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpda
                                         <>
                                             <IconButton
                                                 aria-label="comments"
-                                                disabled={(checked.length > 1) ? true : false}
+                                                disabled={(checked.length > 0) ? true : false}
                                                 onClick={() => handleUpdate(id)}
                                             >
                                                 <CreateIcon className='text-success' />
@@ -61,7 +61,7 @@ export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpda
                                             <IconButton
                                                 edge="end"
                                                 aria-label="comments"
-                                                disabled={(checked.length > 1) ? true : false}
+                                                disabled={(checked.length > 0) ? true : false}
                                                 onClick={() => handleDelete(id)} //enviar solo id para q pinche
                                             >
                                                 <DeleteIcon className='text-danger' />
