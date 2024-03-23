@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import PropTypes from 'prop-types';
 import { AuthContext } from "../auth/authContext";
 import { types } from "../types/types";
 import { iniciarSesion } from "../api/usuario.api";
@@ -152,5 +153,11 @@ const IniciarSesion = ({ setTieneCuenta }) => {
 
     )
 }
+
+
+IniciarSesion.propTypes = {
+    setTieneCuenta: PropTypes.func.isRequired
+}
+
 
 export default IniciarSesion

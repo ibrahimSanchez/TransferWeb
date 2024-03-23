@@ -23,7 +23,7 @@ export const ListResumenComponent = () => {
 
     const {
         register,
-        formState: { errors },
+        // formState: { errors },
         handleSubmit
     } = useForm();
 
@@ -32,13 +32,13 @@ export const ListResumenComponent = () => {
         const resp = await postResumenOperaciones(tokenAccess, data)
         // console.log(resp);
 
-        const {transferencia, recarga_movil, recarga_nauta} = resp.data;
+        const { transferencia, recarga_movil, recarga_nauta } = resp.data;
         let d = [];
 
-        transferencia > 0 && d.push({ asset: "Transferencia", amount: transferencia });
-        recarga_movil > 0 && d.push({ asset: "Recarga saldo móvil", amount: recarga_movil });
-        recarga_nauta > 0 && d.push( { asset: "Recarga nauta", amount: recarga_nauta });
-        
+        transferencia > 0 && d.push({ id: 1, label: "Transferencia", value: transferencia });
+        recarga_movil > 0 && d.push({ id: 2, label: "Recarga saldo móvil", value: recarga_movil });
+        recarga_nauta > 0 && d.push({ id: 3, label: "Recarga nauta", value: recarga_nauta });
+
         setData(d)
         setShow(true);
     });

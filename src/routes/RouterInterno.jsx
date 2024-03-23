@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { UsuarioPage } from '../pages/UsuarioPage';
 import { ModificarUsuario } from '../pages/ModificarUsuario';
 import Principal from '../pages/Principal';
 import { ConsultarSaldo } from '../pages/consultas/ConsultarSaldo';
@@ -8,12 +7,10 @@ import { NavBar } from '../components/NavBar';
 import { Footer } from '../components/Footer';
 import { ListaTarjetas } from '../pages/ListaTarjetas';
 import { PagarElectricidad } from '../pages/Pagos/PagarElectricidad';
-import PagarImpuestos from '../pages/Pagos/PagarImpuestos';
+import PagarONAT from '../pages/Pagos/PagarONAT'; '../pages/Pagos/PagarONAT';
 import { PagarMultaContravension } from '../pages/Pagos/PagarMultaContravension';
 import { PagarMultaTransito } from '../pages/Pagos/PagarMultaTransito';
 import PagarTelefono from '../pages/Pagos/PagarTelefono';
-import { ConsultarMultaContravencion } from '../pages/consultas/ConsultarMultaContravencion';
-import { ConsultarMultaTransito } from '../pages/consultas/ConsultarMultaTransito';
 import { ConsultarOperaciones } from '../pages/consultas/ConsultarOperaciones';
 import { ConsultarServicio } from '../pages/consultas/ConsultarServicio';
 import { RealizarTransferencia } from '../pages/operaciones/RealizarTransferencia';
@@ -25,9 +22,8 @@ import { AuthContext } from '../auth/authContext';
 import { getCuentas } from '../api/cuentas.api';
 import { ListDetallesOperacionesComponent } from '../pages/resumenOperaciones/ListDetallesOperacionesComponent';
 import { ListResumenComponent } from '../pages/resumenOperaciones/ListResumenComponent';
-import { FacturasServicios } from '../pages/servicios/FacturasServicios';
-import { OnatServicios } from '../pages/servicios/OnatServicios';
-import { MultasServicios } from '../pages/servicios/MultasServicios';
+import { ListaServicios } from '../pages/servicios/ListaServicios';
+
 
 
 
@@ -77,15 +73,13 @@ export const RouterInterno = () => {
                     <Route path="listatarjetas" element={<ListaTarjetas />} />
 
                     <Route path="pagarelectricidad" element={<PagarElectricidad />} />
-                    <Route path="pagarimpuestos" element={<PagarImpuestos />} />
+                    <Route path="pagaronat" element={<PagarONAT />} />
                     <Route path="pagarmultacontravension" element={<PagarMultaContravension />} />
                     <Route path="pagarmultatransito" element={<PagarMultaTransito />} />
                     <Route path="pagartelefono" element={<PagarTelefono />} />
 
                     <Route path="consultarsaldo" element={<ConsultarSaldo />} />
                     <Route path="consultarlimite" element={<ConsultarLimite />} />
-                    <Route path="consultarmultacontravension" element={<ConsultarMultaContravencion />} />
-                    <Route path="consultarmultatransito" element={<ConsultarMultaTransito />} />
                     <Route path="consultaroperaciones" element={<ConsultarOperaciones />} />
                     <Route path="consultarservicios" element={<ConsultarServicio />} />
 
@@ -96,9 +90,7 @@ export const RouterInterno = () => {
                     <Route path="detallesoperaciones" element={<ListDetallesOperacionesComponent />} />
                     <Route path="resumenoperaciones" element={<ListResumenComponent />} />
 
-                    <Route path="facturaservicios" element={<FacturasServicios />} />
-                    <Route path="onat" element={<OnatServicios />} />
-                    <Route path="multas" element={<MultasServicios />} />
+                    <Route path="listaservicios" element={<ListaServicios />} />
 
                     <Route path="/" element={<Navigate to="principal" />} />
 

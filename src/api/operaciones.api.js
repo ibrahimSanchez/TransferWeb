@@ -1,11 +1,6 @@
 import axios from 'axios';
 
 
-// get
-
-
-
-
 
 // post
 
@@ -15,7 +10,7 @@ export const getLimitesCuenta = (tokenAccess, id) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/limites/', id, config )  
+    return axios.post('http://127.0.0.1:8000/operaciones/limites/', id, config)
 }
 
 export const postSaldoCuenta = (tokenAccess, cuenta) => {
@@ -24,7 +19,7 @@ export const postSaldoCuenta = (tokenAccess, cuenta) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/saldo/', cuenta, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/saldo/', cuenta, config)
 }
 
 
@@ -34,7 +29,7 @@ export const postUltimasOperaciones = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/ultimasOperaciones/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/ultimasOperaciones/', data, config)
 }
 
 
@@ -44,7 +39,7 @@ export const postRealiazarTransferencia = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/transferencia/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/transferencia/', data, config)
 }
 
 
@@ -54,7 +49,7 @@ export const postRecargarSaldoMovil = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/recargarMovil/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/recargarMovil/', data, config)
 }
 
 
@@ -64,7 +59,7 @@ export const postRecargarNauta = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/recargarNauta/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/recargarNauta/', data, config)
 }
 
 
@@ -74,7 +69,7 @@ export const postDetallesOperaciones = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/detalleOperaciones/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/detalleOperaciones/', data, config)
 }
 
 
@@ -85,5 +80,15 @@ export const postResumenOperaciones = (tokenAccess, data) => {
             'Authorization': 'Bearer ' + tokenAccess
         }
     };
-    return axios.post('http://127.0.0.1:8000/operaciones/resumenOperaciones/', data, config )
+    return axios.post('http://127.0.0.1:8000/operaciones/resumenOperaciones/', data, config)
+}
+
+
+export const postConsultarServicio = (tokenAccess, data) => {
+    const config = {
+        headers: {
+            'Authorization': 'Bearer ' + tokenAccess
+        }
+    };
+    return axios.post('http://127.0.0.1:8000/operaciones/consultarServicio/', data, config)
 }

@@ -1,47 +1,23 @@
-import { useState } from "react";
-import { AgChartsReact } from "ag-charts-react";
-
+import { PieChart } from '@mui/x-charts/PieChart';
 
 
 export const GraficoPastelComponent = ({ data = [] }) => {
+  return (
+    <div className='d-flex '>
+      <PieChart
+        colors={['#198754', '#343a40', '#6ea8fe']}
+        series={[
+          {
+            data,
+            highlightScope: { faded: 'global', highlighted: 'item' },
+            faded: { innerRadius: 30, additionalRadius: -30, color: 'green' },
+          },
+        ]}
+        height={200}
+        width={500}
+      />
+    </div>
+  );
+}
 
-    // console.log(data)
-
-
-    const [options, setOptions] = useState({
-        theme: "ag-sheets",
-
-        data,
-        series: [
-            {
-                type: "pie",
-                angleKey: "amount",
-                calloutLabelKey: "asset",
-                sectorLabelKey: "amount",
-                fills: ['#dc3545', '#198754', '#0dcaf0'],
-                sectorLabel: {
-                    color: "white",
-                    fontWeight: "bold",
-                    formatter: ({ value }) => `$${(value).toFixed(0)}`,
-                },
-            },
-        ],
-    });
-
-
-    return (
-        // <div className="wrapper">
-        // </div>
-            <AgChartsReact options={options} />
-    );
-};
-
-
-
-
-// [
-//     { label: "Ubuntu", value: 25 },
-//     { label: "Fedora", value: 19 },
-//     { label: "CentOS", value: 17 },
-// ]
 

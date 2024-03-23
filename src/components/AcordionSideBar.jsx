@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import PropTypes from 'prop-types';
 import Accordion from 'react-bootstrap/Accordion';
 
 
@@ -41,20 +41,6 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     >
                         Consultar Límite
                     </NavLink>
-                    {/* <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/consultarmultacontravension"
-                        onClick={() => setShow(false)}
-                    >
-                        Consultar Multa de Contravensión
-                    </NavLink>
-                    <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/consultarmultatransito"
-                        onClick={() => setShow(false)}
-                    >
-                        Consultar Multa de Tránsito
-                    </NavLink> */}
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultaroperaciones"
@@ -62,13 +48,13 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     >
                         Consultar Operaciones
                     </NavLink>
-                    {/* <NavLink
+                    <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarservicios"
                         onClick={() => setShow(false)}
                     >
                         Consultar Servicios
-                    </NavLink> */}
+                    </NavLink>
 
 
                 </Accordion.Body>
@@ -88,10 +74,10 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/pagarimpuestos"
+                        to="/pagaronat"
                         onClick={() => setShow(false)}
                     >
-                        Pagar Impuestos
+                        Pagar Impuestos a la ONAT
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
@@ -153,7 +139,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
 
             <Accordion.Item eventKey="4">
-                <Accordion.Header>Tarjetas</Accordion.Header>
+                <Accordion.Header>Cuentas</Accordion.Header>
                 <Accordion.Body>
 
                     <NavLink
@@ -161,7 +147,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                         to="/listatarjetas"
                         onClick={() => setShow(false)}
                     >
-                        Lista de tarjetas
+                        Gestionar cuentas
                     </NavLink>
 
                 </Accordion.Body>
@@ -197,24 +183,10 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/facturaservicios"
+                        to="/listaservicios"
                         onClick={() => setShow(false)}
                     >
-                        Facturas
-                    </NavLink>
-                    <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/onat"
-                        onClick={() => setShow(false)}
-                    >
-                        ONAT
-                    </NavLink>
-                    <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/multas"
-                        onClick={() => setShow(false)}
-                    >
-                        Multas
+                        Gestionar servicios
                     </NavLink>
 
                 </Accordion.Body>
@@ -222,4 +194,12 @@ export const AcordionSideBarComponent = ({ setShow }) => {
 
         </Accordion>
     );
+}
+
+
+
+
+
+AcordionSideBarComponent.propTypes = {
+    setShow: PropTypes.func.isRequired
 }

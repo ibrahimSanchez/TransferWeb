@@ -8,17 +8,14 @@ import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateIcon from '@mui/icons-material/Create';
+import PropTypes from 'prop-types';
 
 
 
 
-
-export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpdate }) => {
+export const List1MUI = ({ arrList = [], handleDelete, handleUpdate }) => {
 
     const [checked, setChecked] = React.useState([]);
-
-
-    // console.log(checked)
 
     const handleToggle = (value) => () => {
         const currentIndex = checked.indexOf(value);
@@ -33,6 +30,25 @@ export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpda
         setChecked(newChecked);
     };
 
+    const [checkAll, setCheckAll] = React.useState(false);
+
+    const handleSelectAll = () => {
+
+        let check = [];
+
+        if (checkAll) {
+            setChecked([]);
+            setCheckAll(false)
+        }
+        else {
+            arrList.map(item => {
+                check.push(item.id);
+                // console.log(item.id)
+            })
+            setChecked(check);
+            setCheckAll(true)
+        }
+    }
 
 
     return (
@@ -62,7 +78,7 @@ export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpda
                                                 edge="end"
                                                 aria-label="comments"
                                                 disabled={(checked.length > 0) ? true : false}
-                                                onClick={() => handleDelete(id)} //enviar solo id para q pinche
+                                                onClick={() => handleDelete([id])} //enviar solo id para q pinche
                                             >
                                                 <DeleteIcon className='text-danger' />
                                             </IconButton>
@@ -89,10 +105,51 @@ export const List1MUI = ({ arrList = [], handleDelete = (arr) => { }, handleUpda
                             </div>
                         );
                     })
-                    : <p className='text-center'>No hay nada</p>
+                    : <p className='text-center'>No hay facturas que mostrar</p>
             }
-        </List>
+
+            <ListItem
+                secondaryAction={
+                    <>
+                        {
+                            checked.length > 0 &&
+                            <button
+                                className='btn btn-danger'
+                                onClick={() => {
+                                    handleDelete(checked)
+                                    setChecked([])
+                                }}
+                            >
+                                Eliminar
+                            </button>
+                        }
+                    </>
+                }
+                disablePadding
+            >
+                <ListItemButton role={undefined} onClick={() => { }} dense>
+                    <ListItemIcon className='d-flex align-items-center'>
+                        <Checkbox
+                            edge="start"
+                            tabIndex={-1}
+                            disableRipple
+                            className='text-success'
+                            onClick={handleSelectAll}
+                        />
+                        <label>Seleccionar todos</label>
+                    </ListItemIcon>
+
+                </ListItemButton>
+            </ListItem>
+
+        </List >
     );
 }
 
 
+
+List1MUI.propTypes = {
+    arrList: PropTypes.array,
+    handleDelete: PropTypes.func,
+    handleUpdate: PropTypes.func.isRequired
+}

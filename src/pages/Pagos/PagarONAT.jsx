@@ -3,17 +3,18 @@ import { PagoFormComponent } from "../../components/PagoFormComponent"
 
 
 
-const PagarTelefono = () => {
+const PagarONAT = () => {
+ 
 
 
   return (
     <>
       <PagoFormComponent
-        titulo='Pagar Teléfono'
-        formName='Factura telefónica'
+        titulo='Pago de impuestos a la ONAT'
+        formName='ONAT'
       />
     </>
   )
 }
 
-export default PagarTelefono
+export default PagarONAT

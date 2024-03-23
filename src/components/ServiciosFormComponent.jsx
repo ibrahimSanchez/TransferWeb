@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../auth/authContext";
 
 import Modal from 'react-bootstrap/Modal';
@@ -11,34 +11,41 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
+    
+    const [formValue, setFormValue] = useState('');
 
     const { accion, show } = trabajarForm;
 
-    const { identificador, monto, nombre, id } = values;
+    const { identificador, monto, nombre, id, campo = '' } = values;
 
     const {
         register,
         formState: { errors },
         reset,
         handleSubmit,
-        setValue
+        setValue,
+        getValues
     } = useForm();
 
 
     useEffect(() => {
         if (accion === 'Modificar') {
+            setFormValue(nombre)
             setValue('nombre', nombre);
             setValue('identificador', identificador);
             setValue('monto', monto);
             setValue('id', id);
+            setValue('campo', campo);
         }
         else {
+            setFormValue('')
             setValue('nombre', 'Factura telefónica');
             setValue('identificador', '');
             setValue('monto', '');
             setValue('id', '');
+            setValue('campo', '');
         }
-    },[accion, values]);
+    }, [accion, values]);
 
 
     const handleClose = () => setTrabajarForm({
@@ -68,6 +75,14 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
     })
 
 
+
+
+    const handleSelect = () => {
+        setFormValue(getValues('nombre'))
+        // console.log('hola')
+    }
+
+
     return (
         <>
             <Modal show={show} onHide={handleClose}>
@@ -82,6 +97,7 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Tipo de servicio</label>
                             <select
+                                onClick={handleSelect}
                                 className="form-select"
                                 aria-label="Default select example"
                                 {...register("nombre", { required: true })}
@@ -125,6 +141,64 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
                                 <p className="text-danger">El campo no puede ser negativo</p>
                             )}
                         </div>
+
+                        {
+                            formValue === 'Multa de tránsito' &&
+                            <div className="mb-3 form-group" >
+                                <label className='form-label'>Licencia de conducción</label>
+                                <input
+                                    className={"form-control " + (errors.campo && "errorInput")}
+                                    type="text"
+                                    name='licencia'
+                                    {...register("campo", { required: true })}
+                                    aria-invalid={errors.campo ? "true" : "false"}
+                                />
+                                {errors.campo?.type === "required" && (
+                                    <p className="text-danger">El campo es requerido</p>
+                                )}
+                            </div>
+                        }
+
+                        {
+                            formValue === 'ONAT' &&
+                            <div className="mb-3 form-group" >
+                                <label className='form-label'>Código de ONAT</label>
+                                <input
+                                    className={"form-control " + (errors.campo && "errorInput")}
+                                    type="text"
+                                    name='onat'
+                                    {...register("campo", { required: true })}
+                                    aria-invalid={errors.campo ? "true" : "false"}
+                                />
+                                {errors.campo?.type === "required" && (
+                                    <p className="text-danger">El campo es requerido</p>
+                                )}
+                            </div>
+                        }
+
+                        {
+                            formValue === 'Multa de contravención' &&
+                            <div className="mb-2">
+                                <label className="form-label">Carnet de identidad</label>
+                                <input
+                                    type="number"
+                                    className={"form-control " + (errors.campo && "errorInput")}
+                                    {...register("campo", { required: true, maxLength: 11, minLength: 11, min: 0 })}
+                                    aria-invalid={errors.campo ? "true" : "false"}
+                                />
+                                {errors.campo?.type === "required" && (
+                                    <p className="text-danger">El campo es requerido</p>
+                                )}
+                                {errors.campo?.type === "min" && (
+                                    <p className="text-danger">El campo no puede ser negativo</p>
+                                )}
+                                {(errors.campo?.type === "minLength" || errors.campo?.type === "maxLength") && (
+                                    <p className="text-danger">El campo debe tener 11 dígitos</p>
+                                )}
+                            </div>
+                        }
+
+
 
 
                         <button className='btn btn-success' >

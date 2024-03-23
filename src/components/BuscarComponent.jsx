@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -78,3 +78,7 @@ export const BuscarComponent = ({ setBuscar }) => {
   );
 }
 
+
+BuscarComponent.propTypes = {
+  setBuscar: PropTypes.func.isRequired
+}

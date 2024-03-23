@@ -3,6 +3,7 @@ import { createUsuario } from "../api/usuario.api";
 import { useNavigate } from "react-router-dom";
 import { SpinnerComponent } from "../components/SpinnerComponent";
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 
 export const RegistrarUsuario = ({ setTieneCuenta }) => {
@@ -30,8 +31,8 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
         });
 
         try {
-
-            const resp = await createUsuario(data)
+            // const resp =
+            await createUsuario(data)
             // console.log(resp)
 
             setShow({
@@ -188,10 +189,7 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
                 <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
 
-
             </form>
-
-
 
             <button
                 className="btnCuenta mt-3"
@@ -202,13 +200,12 @@ export const RegistrarUsuario = ({ setTieneCuenta }) => {
 
         </div>
 
-
-
-
-
     </>
 }
 
 
+RegistrarUsuario.propTypes = {
+    setTieneCuenta: PropTypes.func.isRequired
+}
 
 

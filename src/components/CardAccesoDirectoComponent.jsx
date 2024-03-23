@@ -1,6 +1,6 @@
 import { Trash } from 'react-bootstrap-icons';
 import Card from 'react-bootstrap/Card';
-
+import PropTypes from 'prop-types';
 
 
 
@@ -24,3 +24,11 @@ export const CardAccesoDirectoComponent = ({
         </Card>
     )
 }
+
+
+CardAccesoDirectoComponent.propTypes = {
+    title: PropTypes.string,
+    subTitle: PropTypes.string,
+    text: PropTypes.string
+  }
+  

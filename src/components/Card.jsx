@@ -1,4 +1,5 @@
 import Card from 'react-bootstrap/Card';
+import PropTypes from 'prop-types';
 
 function CardComponent({ titulo = '', subTitulo = '', texto = '' }) {
     return (
@@ -13,6 +14,14 @@ function CardComponent({ titulo = '', subTitulo = '', texto = '' }) {
         </Card>
     );
 }
+
+
+CardComponent.propTypes = {
+    titulo: PropTypes.string,
+    subTitulo: PropTypes.string,
+    texto: PropTypes.string
+  }
+  
 
 export default CardComponent;
 

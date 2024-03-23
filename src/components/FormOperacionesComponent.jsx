@@ -9,6 +9,8 @@ import {
 } from "../api/operaciones.api";
 import ModalComponent from "./Modal";
 import { ModalMensajeError } from "./ModalMensajeError";
+import PropTypes from 'prop-types';
+
 
 
 
@@ -259,3 +261,13 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
 
 
 
+
+FormOperacionesComponent.propTypes = {
+    titulo: PropTypes.string.isRequired,
+    formName: PropTypes.string.isRequired,
+    inputMostrar: PropTypes.object.isRequired
+  }
+    
+  
+  
+  

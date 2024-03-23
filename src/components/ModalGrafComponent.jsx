@@ -9,7 +9,7 @@ export const ModalGrafComponent = ({ show = false, setShow, titulo = 'Consulta r
 
     const handleClose = () => setShow(false);
 
-    // console.log(mensaje)
+    // console.log(data)
 
     return (
         <>
@@ -19,8 +19,11 @@ export const ModalGrafComponent = ({ show = false, setShow, titulo = 'Consulta r
                 </Modal.Header>
                 <Modal.Body>
 
-
-                    <GraficoPastelComponent data={data} />
+                    {
+                        data.length > 0 ?
+                            <GraficoPastelComponent data={data} />
+                            : <p className='text-center m-3'>No hay datos que mostrar</p>
+                    }
 
                 </Modal.Body>
                 <Modal.Footer>

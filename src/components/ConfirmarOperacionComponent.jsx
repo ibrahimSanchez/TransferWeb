@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-
+import PropTypes from 'prop-types';
 
 
 export const ConfirmarOperacionComponent = ({ setShow, acciones, metodo = () => { }, borrar = false }) => {
@@ -35,7 +35,7 @@ export const ConfirmarOperacionComponent = ({ setShow, acciones, metodo = () => 
                 show: false
             })}>
 
-                <Modal.Body>Confirme su acción</Modal.Body >
+                <Modal.Body>¿Está seguro que desea realizar esta acción?</Modal.Body >
                 <Modal.Footer>
                     <Button variant="success" onClick={handleAceptar}>
                         Aceptar
@@ -48,3 +48,14 @@ export const ConfirmarOperacionComponent = ({ setShow, acciones, metodo = () => 
         </>
     );
 }
+
+
+
+ConfirmarOperacionComponent.propTypes = {
+    setShow: PropTypes.func.isRequired,
+    acciones: PropTypes.object.isRequired,
+    borrar: PropTypes.bool,
+    metodo: PropTypes.func
+  }
+  
+  

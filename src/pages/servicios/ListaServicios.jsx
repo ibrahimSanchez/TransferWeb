@@ -4,11 +4,12 @@ import AddIcon from '@mui/icons-material/Add';
 import { ServiciosFormComponent } from "../../components/ServiciosFormComponent";
 import { deleteServicio, getServicios } from "../../api/servicios.api";
 import { AuthContext } from "../../auth/authContext";
+import { MensajeResp } from "../../components/MensajeResp";
 
 
 
 
-export const FacturasServicios = () => {
+export const ListaServicios = () => {
 
     const [trabajarForm, setTrabajarForm] = useState({
         show: false,
@@ -38,7 +39,8 @@ export const FacturasServicios = () => {
 
     const borrarServicio = async (data) => {
         try {
-            const resp = await deleteServicio(tokenAccess, data);
+            // const resp = 
+            await deleteServicio(tokenAccess, data);
             // console.log(resp)
             cargarData();
 
@@ -67,6 +69,9 @@ export const FacturasServicios = () => {
 
     return (
         <>
+
+{/* <MensajeResp /> */}
+
             <ServiciosFormComponent
                 cargarData={cargarData}
                 trabajarForm={trabajarForm}
@@ -74,7 +79,7 @@ export const FacturasServicios = () => {
                 values={updateService}
             />
 
-            <h1 className="mt-4">Facturas</h1>
+            <h1 className="mt-4">Gestionar Servicios</h1>
 
             <List1MUI
                 arrList={arrList}

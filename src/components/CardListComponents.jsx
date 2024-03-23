@@ -6,7 +6,6 @@ import { deleteCuenta } from '../api/cuentas.api';
 import { AuthContext } from '../auth/authContext';
 import { CuentaContext } from '../context/CuentaContext';
 import { ConfirmarOperacionComponent } from './ConfirmarOperacionComponent';
-import { Pencil, Trash3 } from 'react-bootstrap-icons';
 
 
 
@@ -34,6 +33,8 @@ export const CardListComponent = () => {
     } = useContext(CuentaContext);
 
 
+    // console.log(cuentas)
+
 
     const [datosTarjeta, setDatosTarjeta] = useState({
         id: '',
@@ -45,9 +46,13 @@ export const CardListComponent = () => {
     });
 
     const handleModificar = ({ target }) => {
-        const res = cuentas.filter(item => item.id === parseInt(target.value));
-        setDatosTarjeta(res[0]);
+        const res = cuentas.map(item => {
+            if (item.id === parseInt(target.value))
+                setDatosTarjeta(item);
+            // console.log(item)
+        });
         setShowModificar(true);
+        // console.log(target)
     }
 
     const handleDelete = ({ target }) => {
@@ -103,7 +108,7 @@ export const CardListComponent = () => {
                     tarjetasMostrar.length === 0 ?
                         <p>No hay cuentas para mostrar</p>
                         : tarjetasMostrar.map(({ nombre, no_cuenta, tipo_cuenta, id }) =>
-                            <Card style={{ width: '12rem' }} key={no_cuenta} className='m-3 tarjeta'>
+                            <Card style={{ width: '15rem' }} key={no_cuenta} className='m-3 tarjeta'>
                                 <Card.Body>
                                     <Card.Title>{nombre}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{no_cuenta}</Card.Subtitle>
@@ -115,14 +120,15 @@ export const CardListComponent = () => {
                                         value={id}
                                         onClick={handleModificar}
                                     >
-                                        <Pencil />
+                                        Modificar
                                     </button>
+
                                     <button
                                         className='btn btn-danger m-2'
                                         value={id}
                                         onClick={handleDelete}
                                     >
-                                        <Trash3 />
+                                        Eliminar
                                     </button>
                                 </Card.Body>
                             </Card>

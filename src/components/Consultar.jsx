@@ -6,6 +6,7 @@ import { getLimitesCuenta, postDetallesOperaciones, postSaldoCuenta, postUltimas
 import { AuthContext } from "../auth/authContext";
 import ListOperacionesComponent from "./ListOperacionesComponent";
 import ModalDetallesOperaciones from "./ModalDetallesOperaciones";
+import PropTypes from 'prop-types';
 
 
 
@@ -57,8 +58,8 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                 break;
 
             case 'ConsultarOperaciones':
-                // console.log(data)
                 resp = await postUltimasOperaciones(tokenAccess, data)
+                // console.log(resp)
                 break;
 
             case 'ConsultarSaldo':
@@ -75,6 +76,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
             case 'ListUltimasOperaciones':
                 // console.log('ConsultarServicio', data)
                 resp = await postDetallesOperaciones(tokenAccess, data)
+               
                 break;
 
             default:
@@ -211,7 +213,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                             >
                                 <option value="Todas las operaciones">Todas las operaciones</option>
                                 <option value="Transferencia">Transferencias</option>
-                                <option value="Recarga de Saldo Móvil">Recarga de saldo móvil</option>
+                                <option value="Recarga Saldo Móvil">Recarga de saldo móvil</option>
                                 <option value="Recarga Nauta">Recarga Nauta</option>
                             </select>
                         </div>
@@ -243,7 +245,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
                     {tipoCuenta &&
                         <div className="mb-2">
-                            <label className="form-label">Cuenta</label>
+                            <label className="form-label">Moneda</label>
                             <select
                                 className="form-select"
                                 aria-label="Default select example"
@@ -267,3 +269,13 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
         </>
     )
 }
+
+
+
+
+Consultar.propTypes = {
+    tipoConsulta: PropTypes.string.isRequired,
+    nombreForm: PropTypes.string.isRequired,
+    inputMostrar: PropTypes.object.isRequired
+  }
+  

@@ -17,8 +17,6 @@ const Principal = () => {
             <CarruselComponent />
 
 
-
-
             <div>
                 <Container className='m-5'>
                     <Row>
