@@ -8,12 +8,12 @@ import { CuentaContext } from '../context/CuentaContext';
 
 
 
-export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
+export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta, setMensaje, setShowResp }) => {
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
 
-// console.log(datosTarjeta)
+    // console.log(datosTarjeta)
 
 
     const {
@@ -26,7 +26,7 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
         formState: { errors },
         handleSubmit
     } = useForm({
-        defaultValues: 
+        defaultValues:
             datosTarjeta
     });
 
@@ -34,7 +34,9 @@ export const ModalModificarTarjeta = ({ show, setShow, datosTarjeta }) => {
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        const resp = await putModifCuenta(tokenAccess, data)
+        const resp = await putModifCuenta(tokenAccess, data);
+        setShowResp(true);
+        setMensaje(resp.data.message);
         cargarCuentas()
         handleClose();
     })

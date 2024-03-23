@@ -4,8 +4,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { ServiciosFormComponent } from "../../components/ServiciosFormComponent";
 import { deleteServicio, getServicios } from "../../api/servicios.api";
 import { AuthContext } from "../../auth/authContext";
-import { MensajeResp } from "../../components/MensajeResp";
-
+import ModalComponent from '../../components/Modal';
 
 
 
@@ -18,8 +17,10 @@ export const ListaServicios = () => {
 
 
     const [updateService, setUpdateService] = useState({})
-
     const [arrList, setArrList] = useState([]);
+
+    const [showResp, setShowResp] = useState(false);
+    const [mensaje, setMensaje] = useState('');
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
@@ -70,13 +71,18 @@ export const ListaServicios = () => {
     return (
         <>
 
-{/* <MensajeResp /> */}
+            {
+                showResp &&
+                <ModalComponent show={showResp} setShow={setShowResp} mensaje={mensaje} />
+            }
 
             <ServiciosFormComponent
                 cargarData={cargarData}
                 trabajarForm={trabajarForm}
                 setTrabajarForm={setTrabajarForm}
                 values={updateService}
+                setMensaje={setMensaje}
+                setShowResp={setShowResp}
             />
 
             <h1 className="mt-4">Gestionar Servicios</h1>

@@ -6,6 +6,7 @@ import { deleteCuenta } from '../api/cuentas.api';
 import { AuthContext } from '../auth/authContext';
 import { CuentaContext } from '../context/CuentaContext';
 import { ConfirmarOperacionComponent } from './ConfirmarOperacionComponent';
+import ModalComponent from './Modal';
 
 
 
@@ -17,6 +18,9 @@ export const CardListComponent = () => {
 
     const [showModificar, setShowModificar] = useState(false);
     const [showAdd, setShowAdd] = useState(false);
+
+    const [showResp, setShowResp] = useState(false);
+    const [mensaje, setMensaje] = useState('');
 
     const [showConfirm, setShowConfirm] = useState({
         show: false,
@@ -70,7 +74,7 @@ export const CardListComponent = () => {
 
     const deleteTarjetaMetodo = (token, id) => {
         const resp = deleteCuenta(token, id);
-        console.log(resp);
+        // console.log(resp);
         cargarCuentas()
     }
 
@@ -85,12 +89,16 @@ export const CardListComponent = () => {
                     show={showModificar}
                     setShow={setShowModificar}
                     datosTarjeta={datosTarjeta}
+                    setMensaje={setMensaje}
+                    setShowResp={setShowResp}
                 />}
 
             {showAdd &&
                 <ModalAddTarjeta
                     show={showAdd}
                     setShow={setShowAdd}
+                    setMensaje={setMensaje}
+                    setShowResp={setShowResp}
                 />
             }
 
@@ -102,6 +110,13 @@ export const CardListComponent = () => {
                     metodo={deleteTarjetaMetodo}
                 />
             }
+
+
+            {
+                showResp &&
+                <ModalComponent show={showResp} setShow={setShowResp} mensaje={mensaje} />
+            }
+
 
             <div className='d-flex flex-wrap justify-content-center mb-5 mt-2'>
                 {

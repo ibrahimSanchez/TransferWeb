@@ -7,11 +7,11 @@ import { postAddServicio, putServicio } from "../api/servicios.api";
 
 
 
-export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarData, values = {} }) => {
+export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarData, values = {}, setMensaje, setShowResp }) => {
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
-    
+
     const [formValue, setFormValue] = useState('');
 
     const { accion, show } = trabajarForm;
@@ -67,7 +67,10 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
         else {
             resp = await postAddServicio(tokenAccess, data);
         }
-        // console.log(resp, data)
+
+        setShowResp(true);
+        setMensaje(resp.data);
+        // console.log(resp)
         reset();
         cargarData();
 

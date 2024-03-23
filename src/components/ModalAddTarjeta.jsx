@@ -9,11 +9,10 @@ import { CuentaContext } from "../context/CuentaContext";
 
 
 
-export const ModalAddTarjeta = ({ show, setShow }) => {
+export const ModalAddTarjeta = ({ show, setShow, setMensaje, setShowResp }) => {
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
-
 
     const {
         cargarCuentas
@@ -30,10 +29,13 @@ export const ModalAddTarjeta = ({ show, setShow }) => {
     const handleClose = () => setShow(false);
 
     const onSubmit = handleSubmit(async data => {
-        const resp = await postAddCuenta(tokenAccess, data)
+        const resp = await postAddCuenta(tokenAccess, data);
+        setShowResp(true);
+        setMensaje(resp.data.message);
         cargarCuentas()
         handleClose();
-    })
+    });
+
 
 
     return (

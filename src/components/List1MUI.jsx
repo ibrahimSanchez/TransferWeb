@@ -58,11 +58,11 @@ export const List1MUI = ({ arrList = [], handleDelete, handleUpdate }) => {
         >
             {
                 arrList.length > 0 ?
-                    arrList.map(({ nombre, id }) => {
+                    arrList.map(({ nombre, id }, i) => {
                         const labelId = `checkbox-list-label-${id}`;
 
                         return (
-                            <div key={id}>
+                            <div key={nombre+i}>
                                 <ListItem
                                     secondaryAction={
                                         <>
