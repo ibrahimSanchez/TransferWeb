@@ -4,6 +4,7 @@ import { getServicios } from "../../api/servicios.api";
 import { AuthContext } from "../../auth/authContext";
 import { postConsultarServicio } from "../../api/operaciones.api";
 import ModalComponent from "../../components/Modal";
+import { Alert } from "react-bootstrap";
 
 
 
@@ -132,7 +133,7 @@ export const ConsultarServicio = () => {
                     </div>
 
                     {
-                        arr.length > 0 &&
+                        arr.length > 0 ?
                         <div className="mb-3 form-group" >
                             <label className='form-label'>Identificador</label>
                             <select
@@ -147,13 +148,16 @@ export const ConsultarServicio = () => {
                                 }
                             </select>
                         </div>
+                        : <Alert variant='success'>
+                        No hay servicios asociados
+                    </Alert>
                     }
 
 
                     <button
                         type="submit"
                         className="btn btn-success mt-4"
-                        disabled={arr.length > 0 ? false : true}
+                        disabled={arr.length === 0}
                     >
                         Aceptar
                     </button>

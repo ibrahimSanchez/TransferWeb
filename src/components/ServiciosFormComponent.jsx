@@ -36,6 +36,8 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
             setValue('monto', monto);
             setValue('id', id);
             setValue('campo', campo);
+
+            console.log(campo)
         }
         else {
             setFormValue('')
@@ -59,14 +61,11 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
 
         let resp;
 
-        if (accion === 'Modificar') {
-
+        if (accion === 'Modificar')
             resp = await putServicio(tokenAccess, data);
-            console.log(resp);
-        }
-        else {
+        else
             resp = await postAddServicio(tokenAccess, data);
-        }
+    
 
         setShowResp(true);
         setMensaje(resp.data);

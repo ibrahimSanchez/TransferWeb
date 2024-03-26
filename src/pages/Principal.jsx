@@ -3,6 +3,7 @@ import CarruselComponent from '../components/Carrusel';
 import '../css/principal.css';
 
 import img from '../../public/assets/icono.png'
+import etecsaImg from '../../public/assets/etecsa.jpg';
 
 
 const Principal = () => {
@@ -12,10 +13,8 @@ const Principal = () => {
 
     return (
         <div className='paginaPrincipal'>
-            
-            
-            <CarruselComponent />
 
+            <CarruselComponent />
 
             <div>
                 <Container className='m-5'>
@@ -26,16 +25,15 @@ const Principal = () => {
                         </Col>
                         <Col md={4}>
                             <Image
-                                src={img}
+                                src={etecsaImg}
                                 rounded
-                                width={200}
-                                className='p-4 imgBoxShadow animate__rotateInUpLeft imgAnimate'
+                                width={300}
+                                className='imgBoxShadow animate__rotateInUpLeft imgAnimate'
                             />
                         </Col>
                     </Row>
                 </Container>
             </div>
-
 
             <div className="p-5 mt-5 mb-5 d-flex align-items-center justify-content-around view" >
                 <div>
@@ -57,11 +55,6 @@ const Principal = () => {
                     </p>
                 </div>
             </div>
-
-
-
-
-
 
         </div>
     )

@@ -39,6 +39,8 @@ export const ListaTarjetas = () => {
 
     return (
         <div className="mt-5">
+            <h2 className="text-center">Gestionar Cuentas</h2>
+            <hr />
             <BuscarComponent setBuscar={setBuscar} />
             <CardListComponent />
         </div>

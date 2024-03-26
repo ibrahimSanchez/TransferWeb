@@ -48,7 +48,6 @@ export const PagoFormComponent = ({ titulo, formName }) => {
             // console.log(data)
             const resp = await postPagarservicio(tokenAccess, data);
             respuesta(resp.data[0]);
-
             // console.log(resp)
         } catch (error) {
             console.log(error);

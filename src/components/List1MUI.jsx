@@ -62,7 +62,7 @@ export const List1MUI = ({ arrList = [], handleDelete, handleUpdate }) => {
                         const labelId = `checkbox-list-label-${id}`;
 
                         return (
-                            <div key={nombre+i}>
+                            <div key={nombre + i}>
                                 <ListItem
                                     secondaryAction={
                                         <>
@@ -108,40 +108,44 @@ export const List1MUI = ({ arrList = [], handleDelete, handleUpdate }) => {
                     : <p className='text-center'>No hay facturas que mostrar</p>
             }
 
-            <ListItem
-                secondaryAction={
-                    <>
-                        {
-                            checked.length > 0 &&
-                            <button
-                                className='btn btn-danger'
-                                onClick={() => {
-                                    handleDelete(checked)
-                                    setChecked([])
-                                }}
-                            >
-                                Eliminar
-                            </button>
-                        }
-                    </>
-                }
-                disablePadding
-            >
-                <ListItemButton role={undefined} onClick={() => { }} dense>
-                    <ListItemIcon className='d-flex align-items-center'>
-                        <Checkbox
-                            edge="start"
-                            tabIndex={-1}
-                            disableRipple
-                            className='text-success'
-                            onClick={handleSelectAll}
-                        />
-                        <label>Seleccionar todos</label>
-                    </ListItemIcon>
+            {
+                arrList.length > 0 &&
+                <ListItem
+                    secondaryAction={
+                        <>
+                            {
+                                checked.length > 0 &&
+                                <button
+                                    className='btn btn-danger'
+                                    onClick={() => {
+                                        setCheckAll(false)
+                                        handleDelete(checked)
+                                        setChecked([])
+                                    }}
+                                >
+                                    Eliminar
+                                </button>
+                            }
+                        </>
+                    }
+                    disablePadding
+                >
+                    <ListItemButton role={undefined} onClick={() => { }} dense>
+                        <ListItemIcon className='d-flex align-items-center'>
+                            <Checkbox
+                                edge="start"
+                                tabIndex={-1}
+                                disableRipple
+                                checked={checkAll}
+                                className='text-success'
+                                onClick={handleSelectAll}
+                            />
+                            <label>Seleccionar todos</label>
+                        </ListItemIcon>
 
-                </ListItemButton>
-            </ListItem>
-
+                    </ListItemButton>
+                </ListItem>
+            }
         </List >
     );
 }

@@ -43,17 +43,17 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
-                        to="/consultaroperaciones"
-                        onClick={() => setShow(false)}
-                    >
-                        Consultar Operaciones
-                    </NavLink>
-                    <NavLink
-                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/consultarservicios"
                         onClick={() => setShow(false)}
                     >
                         Consultar Servicios
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/consultaroperaciones"
+                        onClick={() => setShow(false)}
+                    >
+                        Consultar Últimas Operaciones
                     </NavLink>
 
 

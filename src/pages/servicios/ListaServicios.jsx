@@ -5,26 +5,31 @@ import { ServiciosFormComponent } from "../../components/ServiciosFormComponent"
 import { deleteServicio, getServicios } from "../../api/servicios.api";
 import { AuthContext } from "../../auth/authContext";
 import ModalComponent from '../../components/Modal';
+import { ConfirmarOperacionComponent } from "../../components/ConfirmarOperacionComponent";
 
 
 
 export const ListaServicios = () => {
+
+    const { usuario } = useContext(AuthContext);
+    const { tokenAccess } = usuario;
 
     const [trabajarForm, setTrabajarForm] = useState({
         show: false,
         accion: 'Añadir'
     });
 
+    const [showConfirm, setShowConfirm] = useState({
+        show: false,
+        id: 0,
+        tokenAccess
+    });
 
     const [updateService, setUpdateService] = useState({})
     const [arrList, setArrList] = useState([]);
 
     const [showResp, setShowResp] = useState(false);
     const [mensaje, setMensaje] = useState('');
-
-    const { usuario } = useContext(AuthContext);
-    const { tokenAccess } = usuario;
-
 
     const cargarData = async () => {
         try {
@@ -37,11 +42,18 @@ export const ListaServicios = () => {
         }
     }
 
-
     const borrarServicio = async (data) => {
+        setShowConfirm({
+            ...showConfirm,
+            id: data,
+            show: true,
+        });
+    }
+
+    const deleteService = async (token, data) => {
         try {
             // const resp = 
-            await deleteServicio(tokenAccess, data);
+            await deleteServicio(token, data);
             // console.log(resp)
             cargarData();
 
@@ -70,6 +82,15 @@ export const ListaServicios = () => {
 
     return (
         <>
+
+            {
+                showConfirm &&
+                <ConfirmarOperacionComponent
+                    setShow={setShowConfirm}
+                    acciones={showConfirm}
+                    metodo={deleteService}
+                />
+            }
 
             {
                 showResp &&

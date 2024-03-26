@@ -7,6 +7,7 @@ import { AuthContext } from "../auth/authContext";
 import ListOperacionesComponent from "./ListOperacionesComponent";
 import ModalDetallesOperaciones from "./ModalDetallesOperaciones";
 import PropTypes from 'prop-types';
+import { Alert } from "react-bootstrap";
 
 
 
@@ -49,14 +50,6 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                 resp = await getLimitesCuenta(tokenAccess, data);
                 break;
 
-            case 'ConsultarMultaContravencion':
-                console.log('ConsultarMultaContravencion')
-                break;
-
-            case 'ConsultarMultaTransito':
-                console.log('ConsultarMultaTransito')
-                break;
-
             case 'ConsultarOperaciones':
                 resp = await postUltimasOperaciones(tokenAccess, data)
                 // console.log(resp)
@@ -67,16 +60,10 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                 // console.log('ConsultarSaldo')
                 break;
 
-            case 'ConsultarServicio':
-                console.log('ConsultarServicio')
-                break;
-
-
-
             case 'ListUltimasOperaciones':
                 // console.log('ConsultarServicio', data)
                 resp = await postDetallesOperaciones(tokenAccess, data)
-               
+
                 break;
 
             default:
@@ -88,7 +75,7 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
             if (nombreForm === 'ConsultarOperaciones' || nombreForm === 'ListUltimasOperaciones') {
-                // console.log(resp)
+                console.log(resp)
                 setDatosModal({
                     data: resp.data
                 });
@@ -221,28 +208,36 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
 
 
-                    {cuenta &&
-                        <div className="mb-2">
-                            <label className="form-label">Cuenta</label>
-                            <select
-                                className="form-select"
-                                aria-label="Default select example"
-                                {...register("id", { required: true })}
-                            >
-                                {
-                                    cuentas.map(({ nombre, id }) => (
-                                        <option
-                                            key={nombre}
-                                            value={id}>
-                                            {nombre}
-                                        </option>))
-                                }
+                    {
+                        cuenta &&
+                        (
+                            cuentas.length > 0 &&
+                            <div className="mb-2">
+                                <label className="form-label">Cuenta</label>
+                                <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    {...register("id", { required: true })}
+                                >
+                                    {
+                                        cuentas.map(({ nombre, id }) => (
+                                            <option
+                                                key={nombre}
+                                                value={id}>
+                                                {nombre}
+                                            </option>))
+                                    }
 
-                            </select>
-                        </div>
+                                </select>
+                            </div>
+                        )
                     }
 
-
+                    {cuentas.length === 0 &&
+                        <Alert variant='success'>
+                            No hay cuentas asociadas
+                        </Alert>
+                    }
                     {tipoCuenta &&
                         <div className="mb-2">
                             <label className="form-label">Moneda</label>
@@ -259,7 +254,13 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
                         </div>
                     }
 
-                    <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
+                    <button
+                        type="submit"
+                        className="btn btn-success mt-4"
+                        disabled={cuentas.length === 0}
+                    >
+                        Aceptar
+                    </button>
 
 
                 </form>
@@ -277,5 +278,4 @@ Consultar.propTypes = {
     tipoConsulta: PropTypes.string.isRequired,
     nombreForm: PropTypes.string.isRequired,
     inputMostrar: PropTypes.object.isRequired
-  }
-  
+}
