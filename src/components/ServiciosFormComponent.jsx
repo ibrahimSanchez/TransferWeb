@@ -164,7 +164,7 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
                         {
                             formValue === 'ONAT' &&
                             <div className="mb-3 form-group" >
-                                <label className='form-label'>Código de ONAT</label>
+                                <label className='form-label'>nit</label>
                                 <input
                                     className={"form-control " + (errors.campo && "errorInput")}
                                     type="text"

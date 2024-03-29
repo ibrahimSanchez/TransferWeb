@@ -1,21 +1,31 @@
-import Alert from 'react-bootstrap/Alert';
 import PropTypes from 'prop-types';
+import { Modal } from 'react-bootstrap';
 
-function AlertComponent({ titulo = 'Error', detallesError = '', show, setShow }) {
+function AlertComponent({ titulo = 'Error', texto = 'texto de error', show, setShow }) {
 
 
   if (show) {
     return (
-      <Alert variant="danger" onClose={() => setShow({
-        modal: false,
-        error: false
-      })} dismissible>
-        <Alert.Heading>{titulo}</Alert.Heading>
-        <p>
-          {detallesError}
-        </p>
-      </Alert>
-    );
+
+      <>
+        <Modal
+          size="sm"
+          show={show}
+          onHide={() => setShow(false)}
+          aria-labelledby="example-modal-sizes-title-sm"
+        >
+          <Modal.Header closeButton className='text-danger'>
+            <Modal.Title id="example-modal-sizes-title-sm">
+              {titulo}
+            </Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body className='text-danger'>
+            {texto}
+          </Modal.Body>
+        </Modal>
+      </>
+    )
   }
 
 }
@@ -23,7 +33,7 @@ function AlertComponent({ titulo = 'Error', detallesError = '', show, setShow })
 
 AlertComponent.propTypes = {
   titulo: PropTypes.string,
-  detallesError: PropTypes.string,
+  texto: PropTypes.string,
   show: PropTypes.bool.isRequired,
   setShow: PropTypes.func.isRequired
 }

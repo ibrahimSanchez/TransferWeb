@@ -45,12 +45,12 @@ export const PagoFormComponent = ({ titulo, formName }) => {
 
     const onSubmit = handleSubmit(async data => {
         try {
-            // console.log(data)
             const resp = await postPagarservicio(tokenAccess, data);
             respuesta(resp.data[0]);
-            // console.log(resp)
+
         } catch (error) {
-            console.log(error);
+            // console.log(error);
+            respuesta(error.response.data.error)
         }
     });
 
@@ -64,8 +64,6 @@ export const PagoFormComponent = ({ titulo, formName }) => {
             temp = resp.data.filter(item => item.nombre === formName);
             setArrList(temp);
 
-            // console.log(arrList, temp)
-            // console.log(formName)
         } catch (error) {
             console.log(error)
         }
@@ -82,11 +80,10 @@ export const PagoFormComponent = ({ titulo, formName }) => {
 
 
     const respuesta = (mensaje) => {
-
         setMensaje(mensaje);
         setShow(true);
         reset();
-        // cargarData();
+        cargarData();
     }
 
 
@@ -137,31 +134,37 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                                 }
                             </select>
                         </div>
-                        : <Alert variant='success'> 
+                        : <Alert variant='success'>
                             No hay servicios asociados
                         </Alert>
 
-                        //no se de que color poner el alert 
+                    //no se de que color poner el alert 
                 }
+                {
+                    cuentas.length > 0 ?
+                        <div className="mb-2">
+                            <label className="form-label">Cuenta</label>
+                            <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                {...register("id", { required: true })}
+                            >
+                                {
+                                    cuentas.map(({ nombre, id }) => (
+                                        <option
+                                            key={nombre}
+                                            value={id}>
+                                            {nombre}
+                                        </option>))
+                                }
 
-                <div className="mb-3 form-group" >
-                    <label className='form-label'>Cuenta</label>
-                    <select
-                        className="form-select"
-                        aria-label="Default select example"
-                        {...register("id", { required: true })}
-                    >
-                        {
-                            cuentas.map(({ nombre, id }) => (
-                                <option
-                                    key={nombre}
-                                    value={id}>
-                                    {nombre}
-                                </option>))
-                        }
-                    </select>
-                </div>
+                            </select>
+                        </div>
 
+                        : <Alert variant='success'>
+                            No hay cuentas asociadas
+                        </Alert>
+                }
 
                 {
                     formName === 'Multa de tránsito' &&
@@ -272,179 +275,17 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                     </div>
                 }
 
-
                 <button
                     type="submit"
                     className="btn btn-success mt-4"
-                    disabled={ arrList.length > 0 ? false : true}
+                    disabled={(arrList.length > 0 && cuentas.length > 0) ? false : true}
                 >
                     Aceptar
                 </button>
 
-
             </form>
 
-
-
         </div>
-
-
-
-
-
     </>
 }
 
-
-
-
-
-// <div className="mb-2">
-// <label className="form-label">Identificador</label>
-// <input
-//     type="text"
-//     className={"form-control " + (errors.idMulta && "errorInput")}
-//     {...register("idServicio", { required: true })}
-//     aria-invalid={errors.idMulta ? "true" : "false"}
-// />
-// {errors.idMulta?.type === "required" && (
-//     <p className="text-danger">El campo es requerido</p>
-// )}
-// </div>
-
-
-// {nit &&
-// <div className="mb-2">
-//     <label className="form-label">NIT</label>
-//     <input
-//         type="text"
-//         className={"form-control " + (errors.nit && "errorInput")}
-//         {...register("nit", { required: true })}
-//         aria-invalid={errors.nit ? "true" : "false"}
-//     />
-//     {errors.nit?.type === "required" && (
-//         <p className="text-danger">El campo es requerido</p>
-//     )}
-// </div>
-// }
-
-// {idMulta &&
-// <div className="mb-2">
-//     <label className="form-label">Id de multa</label>
-//     <input
-//         type="text"
-//         className={"form-control " + (errors.idMulta && "errorInput")}
-//         {...register("idMulta", { required: true })}
-//         aria-invalid={errors.idMulta ? "true" : "false"}
-//     />
-//     {errors.idMulta?.type === "required" && (
-//         <p className="text-danger">El campo es requerido</p>
-//     )}
-// </div>
-// }
-
-// {ci &&
-// <div className="mb-2">
-//     <label className="form-label">Carnet de identidad</label>
-//     <input
-//         type="number"
-//         className={"form-control " + (errors.ci && "errorInput")}
-//         {...register("ci", { required: true, maxLength: 11, minLength: 11, min: 0 })}
-//         aria-invalid={errors.ci ? "true" : "false"}
-//     />
-//     {errors.ci?.type === "required" && (
-//         <p className="text-danger">El campo es requerido</p>
-//     )}
-//     {errors.ci?.type === "min" && (
-//         <p className="text-danger">El campo no puede ser negativo</p>
-//     )}
-//     {(errors.ci?.type === "minLength" || errors.ci?.type === "maxLength") && (
-//         <p className="text-danger">El campo debe tener 11 dígitos</p>
-//     )}
-// </div>
-// }
-
-
-
-// {periodo &&
-//     <div className="mb-2">
-//         <label className="form-label">Período</label>
-//         <input
-//             type="text"
-//             className={"form-control " + (errors.periodo && "errorInput")}
-//             {...register("periodo", { required: true })}
-//             aria-invalid={errors.periodo ? "true" : "false"}
-//         />
-//         {errors.periodo?.type === "required" && (
-//             <p className="text-danger">El campo es requerido</p>
-//         )}
-//     </div>
-// }
-
-// {/*
-// {monto &&
-//     <div className="mb-2">
-//         <label className="form-label">Monto</label>
-//         <input
-//             type="number"
-//             className={"form-control " + (errors.monto && "errorInput")}
-//             {...register("monto", { required: true, min: 0 })}
-//             aria-invalid={errors.monto ? "true" : "false"}
-//         />
-//         {errors.monto?.type === "required" && (
-//             <p className="text-danger">El campo es requerido</p>
-//         )}
-//         {errors.monto?.type === "min" && (
-//             <p className="text-danger">El campo no puede ser negativo</p>
-//         )}
-//     </div>
-// } */}
-
-// {fecha &&
-//     <div className="mb-2">
-//         <label className="form-label">Fecha</label>
-//         <input
-//             type="date"
-//             className={"form-control " + (errors.fecha && "errorInput")}
-//             {...register("fecha", { required: true })}
-//             aria-invalid={errors.fecha ? "true" : "false"}
-//         />
-//         {errors.fecha?.type === "required" && (
-//             <p className="text-danger">El campo es requerido</p>
-//         )}
-//     </div>
-// }
-
-
-
-
-
-// switch (formName) {
-
-//     case 'Factura telefónica':
-
-//         break;
-
-//     case 'Factura eléctrica':
-
-//         break;
-
-//     case 'Factura de agua':
-
-//         break;
-
-//     case 'ONAT':
-
-//         break;
-
-//     case 'Multa de tránsito':
-//         break;
-
-//     case 'Multa de contravención':
-//         resp = await postPagarservicio(tokenAccess, data);
-//         respuesta(resp.data[0]);
-//         break;
-
-//     default:
-//         break;
-// }

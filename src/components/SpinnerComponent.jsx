@@ -20,7 +20,7 @@ export const SpinnerComponent = ({ show, setShow, texto = '' }) => {
 
             {
                 error &&
-                <AlertComponent show={error} setShow={setShow} detallesError={texto} />
+                <AlertComponent show={error} setShow={setShow} texto={texto} />
             }
 
 

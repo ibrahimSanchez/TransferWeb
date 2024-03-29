@@ -55,10 +55,9 @@ export const NavBar = () => {
     }
 
 
-
     setTimeout(() => {
         const { tokenAccess } = usuario;
-        isExpired(tokenAccess) && handleCerrarSesion()
+        isExpired(tokenAccess) && handleCerrarSesion();
     }, 1800000);
 
 

@@ -5,6 +5,7 @@ import { AuthContext } from "../../auth/authContext";
 import { CuentaContext } from "../../context/CuentaContext";
 import { anios, meses } from "../../data/data";
 import { postResumenOperaciones } from "../../api/operaciones.api";
+import { Alert } from "react-bootstrap";
 
 
 
@@ -58,23 +59,31 @@ export const ListResumenComponent = () => {
                     onSubmit={onSubmit}
                 >
 
-                    <div className="mb-3 form-group" >
-                        <label className='form-label'>Cuenta</label>
-                        <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            {...register("id", { required: true })}
-                        >
-                            {
-                                cuentas.map(({ nombre, id }) => (
-                                    <option
-                                        key={nombre}
-                                        value={id}>
-                                        {nombre}
-                                    </option>))
-                            }
-                        </select>
-                    </div>
+                    {
+                        cuentas.length > 0 ?
+                            <div className="mb-2">
+                                <label className="form-label">Cuenta</label>
+                                <select
+                                    className="form-select"
+                                    aria-label="Default select example"
+                                    {...register("id", { required: true })}
+                                >
+                                    {
+                                        cuentas.map(({ nombre, id }) => (
+                                            <option
+                                                key={nombre}
+                                                value={id}>
+                                                {nombre}
+                                            </option>))
+                                    }
+
+                                </select>
+                            </div>
+
+                            : <Alert variant='success'>
+                                No hay cuentas asociadas
+                            </Alert>
+                    }
 
                     <div className="mb-3 form-group" >
                         <label className='form-label'>Mes</label>
@@ -114,7 +123,13 @@ export const ListResumenComponent = () => {
                         </select>
                     </div>
 
-                    <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
+                    <button
+                        type="submit"
+                        className="btn btn-success mt-4"
+                        disabled={cuentas.length === 0}
+                    >
+                        Aceptar
+                    </button>
 
                 </form>
 

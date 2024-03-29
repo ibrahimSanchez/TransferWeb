@@ -28,11 +28,23 @@ export const ModalAddTarjeta = ({ show, setShow, setMensaje, setShowResp }) => {
 
     const handleClose = () => setShow(false);
 
+
     const onSubmit = handleSubmit(async data => {
-        const resp = await postAddCuenta(tokenAccess, data);
-        setShowResp(true);
-        setMensaje(resp.data.message);
-        cargarCuentas()
+
+        let resp;
+
+        try {
+            resp = await postAddCuenta(tokenAccess, data);
+            setShowResp(true);
+            setMensaje(resp.data.message)
+
+            cargarCuentas();
+
+        } catch (error) {
+            setShowResp(true);
+            // console.log(error.response.data.error)
+            setMensaje(error.response.data.error)
+        }
         handleClose();
     });
 

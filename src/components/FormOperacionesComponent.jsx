@@ -10,6 +10,7 @@ import {
 import ModalComponent from "./Modal";
 import { ModalMensajeError } from "./ModalMensajeError";
 import PropTypes from 'prop-types';
+import { Alert } from "react-bootstrap";
 
 
 
@@ -216,23 +217,33 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
                 }
 
                 {cuenta &&
-                    <div className="mb-3 form-group" >
-                        <label className='form-label'>Cuenta</label>
-                        <select
-                            className="form-select"
-                            aria-label="Default select example"
-                            {...register("id", { required: true })}
-                        >
-                            {
-                                cuentas.map(({ nombre, id }) => (
-                                    <option
-                                        key={nombre}
-                                        value={id}>
-                                        {nombre}
-                                    </option>))
-                            }
-                        </select>
-                    </div>
+                    (
+                        cuentas.length > 0 &&
+                        <div className="mb-2">
+                            <label className="form-label">Cuenta</label>
+                            <select
+                                className="form-select"
+                                aria-label="Default select example"
+                                {...register("id", { required: true })}
+                            >
+                                {
+                                    cuentas.map(({ nombre, id }) => (
+                                        <option
+                                            key={nombre}
+                                            value={id}>
+                                            {nombre}
+                                        </option>))
+                                }
+
+                            </select>
+                        </div>
+                    )
+                }
+
+                {cuentas.length === 0 &&
+                    <Alert variant='success'>
+                        No hay cuentas asociadas
+                    </Alert>
                 }
 
 
@@ -250,7 +261,13 @@ export const FormOperacionesComponent = ({ titulo, formName, inputMostrar }) => 
                     </div>
                 }
 
-                <button type="submit" className="btn btn-success mt-4"> Aceptar </button>
+                <button
+                    type="submit"
+                    className="btn btn-success mt-4"
+                    disabled={cuentas.length === 0}
+                >
+                    Aceptar
+                </button>
 
             </form>
 
@@ -266,8 +283,7 @@ FormOperacionesComponent.propTypes = {
     titulo: PropTypes.string.isRequired,
     formName: PropTypes.string.isRequired,
     inputMostrar: PropTypes.object.isRequired
-  }
-    
-  
-  
-  
+}
+
+
+

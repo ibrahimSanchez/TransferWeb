@@ -27,16 +27,15 @@ export const ModificarUsuario = () => {
         tokenAccess
     });
 
-
+    
     const {
         register,
         formState: { errors },
         handleSubmit,
         setValue
     } = useForm();
-
+    
     const onSubmit = handleSubmit(async data => {
-        console.log(data)
 
         if (validarCI(data.ci)) {
             const resp = await modificarUsuario(tokenAccess, false, data)
@@ -49,6 +48,7 @@ export const ModificarUsuario = () => {
         try {
             const resp = await modificarUsuario(tokenAccess, true);
             const { user: username, telefono, direccion, ci, sexo, email, id } = resp.data;
+            // console.log()
 
             setValue('username', username);
             setValue('telefono', telefono);

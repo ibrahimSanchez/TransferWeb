@@ -48,3 +48,64 @@ export const Footer = () => {
 
     )
 }
+
+
+
+
+
+
+
+
+
+
+// <footer class="pie-pagina__contenedor">
+// <div class="pie-pagina__logo-web">
+//     <a href="./index.html">
+//         <img alt="Logo del Sitio" src="./img/Iconos/SOSCOMBO Identificador.svg"></img>
+//     </a>
+// </div>
+// <div class="pie-pagina__conocenos">
+//     <h2>CONÓCENOS</h2>
+//     <ul>
+//         <li>
+//             <a href="./pages/sobreNosotros.html">Sobre nosotros</a>
+//         </li>
+//         <li>
+//             <a href="./pages/condicionesUso.html">Condiciones de uso</a>
+//         </li>
+//         <li>
+//             <a href="./pages/enviosDevoluciones.html">Envíos y Devoluciones</a>
+//         </li>
+//         <li>
+//             <a href="./pages/politicaPrivacidad.html">Política de Privacidad</a>
+//         </li>
+//     </ul>
+// </div>
+
+// <div class="contacteno-suscribete-vista-pc">
+//     <div class="pie-pagina__contactenos">
+//         <h2>CONTÁCTENOS</h2>
+//         <ul>
+//             <li>
+//                 <img class="pie-pagina__icono" src="./img/Iconos/telefono.svg">
+//                 <p>+5356789034</p>
+//             </li>
+//             <li>
+//                 <img class="pie-pagina__icono" src="./img/Iconos/email_black_24dp.svg">
+//                 <p>soscombos@gmail.com</p>
+//             </li>
+//         </ul>
+//     </div>
+//     <div class="pie-pagina__suscribete">
+//         <h2>SUSCRÍBETE</h2>
+//         <form action="#">
+//             <input class="input-suscribir__email" type="email" placeholder="Email Address" required>
+//             <input class="input-suscribir__submit" type="submit" value="SUSCRÍBETE">
+//         </form>
+//     </div>
+// </div>
+
+// <p class="pie-pagina__final">© 2022 Soscombos Cuba</p>
+// </footer>
+
+

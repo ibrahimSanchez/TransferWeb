@@ -73,9 +73,8 @@ export const Consultar = ({ tipoConsulta, nombreForm, inputMostrar }) => {
 
         if (resp) {
 
-
             if (nombreForm === 'ConsultarOperaciones' || nombreForm === 'ListUltimasOperaciones') {
-                console.log(resp)
+                // console.log(resp)
                 setDatosModal({
                     data: resp.data
                 });
