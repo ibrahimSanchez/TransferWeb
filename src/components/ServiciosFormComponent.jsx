@@ -37,7 +37,7 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
             setValue('id', id);
             setValue('campo', campo);
 
-            console.log(campo)
+            // console.log(campo)
         }
         else {
             setFormValue('')

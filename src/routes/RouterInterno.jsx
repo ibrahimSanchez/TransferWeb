@@ -10,6 +10,7 @@ import { PagarElectricidad } from '../pages/Pagos/PagarElectricidad';
 import PagarONAT from '../pages/Pagos/PagarONAT'; '../pages/Pagos/PagarONAT';
 import { PagarMultaContravension } from '../pages/Pagos/PagarMultaContravension';
 import { PagarMultaTransito } from '../pages/Pagos/PagarMultaTransito';
+import { PagarAgua } from '../pages/Pagos/PagarAgua';
 import PagarTelefono from '../pages/Pagos/PagarTelefono';
 import { ConsultarOperaciones } from '../pages/consultas/ConsultarOperaciones';
 import { ConsultarServicio } from '../pages/consultas/ConsultarServicio';
@@ -77,6 +78,7 @@ export const RouterInterno = () => {
                     <Route path="pagarmultacontravension" element={<PagarMultaContravension />} />
                     <Route path="pagarmultatransito" element={<PagarMultaTransito />} />
                     <Route path="pagartelefono" element={<PagarTelefono />} />
+                    <Route path="pagaragua" element={<PagarAgua />} />
 
                     <Route path="consultarsaldo" element={<ConsultarSaldo />} />
                     <Route path="consultarlimite" element={<ConsultarLimite />} />

@@ -65,12 +65,19 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                 <Accordion.Header>Pagos</Accordion.Header>
                 <Accordion.Body>
 
-                    <NavLink
+                <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
                         to="/pagarelectricidad"
                         onClick={() => setShow(false)}
                     >
                         Pagar Electricidad
+                    </NavLink>
+                    <NavLink
+                        className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
+                        to="/pagaragua"
+                        onClick={() => setShow(false)}
+                    >
+                        Pagar Agua
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}

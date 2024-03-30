@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { municipios, provincias } from "../data/data";
+import { articulos, incisos, municipios, provincias, tributos } from "../data/data";
 import { useContext, useEffect, useState } from "react";
 import { CuentaContext } from "../context/CuentaContext";
 import { AuthContext } from "../auth/authContext";
@@ -10,8 +10,6 @@ import { Alert } from "react-bootstrap";
 
 
 
-
-
 export const PagoFormComponent = ({ titulo, formName }) => {
 
     // Importacion de los context
@@ -19,8 +17,6 @@ export const PagoFormComponent = ({ titulo, formName }) => {
 
     const { usuario } = useContext(AuthContext);
     const { tokenAccess } = usuario;
-
-
 
     // useState
     const [arrList, setArrList] = useState([]);
@@ -41,19 +37,16 @@ export const PagoFormComponent = ({ titulo, formName }) => {
         }
     });
 
-
-
     const onSubmit = handleSubmit(async data => {
         try {
             const resp = await postPagarservicio(tokenAccess, data);
             respuesta(resp.data[0]);
-
+            // console.log(resp)
         } catch (error) {
             // console.log(error);
             respuesta(error.response.data.error)
         }
     });
-
 
 
     const cargarData = async () => {
@@ -69,15 +62,12 @@ export const PagoFormComponent = ({ titulo, formName }) => {
         }
     }
 
-
     useEffect(() => {
         cargarData();
 
         (formName === 'Multa de tránsito' || formName === 'ONAT') &&
             setValue("provincia", provSelec)
     }, []);
-
-
 
     const respuesta = (mensaje) => {
         setMensaje(mensaje);
@@ -87,14 +77,21 @@ export const PagoFormComponent = ({ titulo, formName }) => {
     }
 
 
-
-
     // Para las Provincias y los Municipios 
     const [provSelec, setProvSelec] = useState('Pinar del Río');
 
     const handleInput = (e) => {
         setProvSelec(e.target.value)
         setValue("provincia", e.target.value)
+    }
+
+
+    // Para los articulos y los incisos
+    const [articuloSelec, setArticuloSelec] = useState('61');
+
+    const handleInputArticulo = (e) => {
+        setArticuloSelec(e.target.value)
+        setValue("articulo", e.target.value)
     }
 
 
@@ -130,7 +127,6 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                                     arrList.map(({ id, identificador }) =>
                                         <option key={id} value={identificador}>{identificador}</option>
                                     )
-
                                 }
                             </select>
                         </div>
@@ -157,10 +153,8 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                                             {nombre}
                                         </option>))
                                 }
-
                             </select>
                         </div>
-
                         : <Alert variant='success'>
                             No hay cuentas asociadas
                         </Alert>
@@ -170,15 +164,15 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                     formName === 'Multa de tránsito' &&
                     <div className="mb-2">
                         <label className="form-label">Artículo</label>
-                        <input
-                            type="text"
-                            className={"form-control " + (errors.articulo && "errorInput")}
-                            {...register("articulo", { required: true })}
-                            aria-invalid={errors.articulo ? "true" : "false"}
-                        />
-                        {errors.articulo?.type === "required" && (
-                            <p className="text-danger">El campo es requerido</p>
-                        )}
+                        <select
+                            onInput={handleInputArticulo}
+                            className="form-select"
+                            aria-label="Default select example"
+                            required
+                            value={articuloSelec}
+                        >
+                            {articulos.map(art => <option key={art} value={art}>{art}</option>)}
+                        </select>
                     </div>
                 }
 
@@ -186,15 +180,13 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                     formName === 'Multa de tránsito' &&
                     <div className="mb-2">
                         <label className="form-label">Inciso</label>
-                        <input
-                            type="text"
-                            className={"form-control " + (errors.inciso && "errorInput")}
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
                             {...register("inciso", { required: true })}
-                            aria-invalid={errors.inciso ? "true" : "false"}
-                        />
-                        {errors.inciso?.type === "required" && (
-                            <p className="text-danger">El campo es requerido</p>
-                        )}
+                        >
+                            {incisos[articuloSelec].map(inc => <option key={inc} value={inc}>{inc}</option>)}
+                        </select>
                     </div>
                 }
 
@@ -263,15 +255,13 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                     formName === 'ONAT' &&
                     <div className="mb-2">
                         <label className="form-label">Tributo</label>
-                        <input
-                            type="text"
-                            className={"form-control " + (errors.tributo && "errorInput")}
+                        <select
+                            className="form-select"
+                            aria-label="Default select example"
                             {...register("tributo", { required: true })}
-                            aria-invalid={errors.tributo ? "true" : "false"}
-                        />
-                        {errors.tributo?.type === "required" && (
-                            <p className="text-danger">El campo es requerido</p>
-                        )}
+                        >
+                            {tributos.map(trib => <option key={trib} value={trib}>{trib}</option>)}
+                        </select>
                     </div>
                 }
 
@@ -283,9 +273,9 @@ export const PagoFormComponent = ({ titulo, formName }) => {
                     Aceptar
                 </button>
 
-            </form>
+            </form >
 
-        </div>
+        </div >
     </>
 }
 
