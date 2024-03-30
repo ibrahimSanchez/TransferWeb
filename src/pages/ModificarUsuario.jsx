@@ -8,6 +8,7 @@ import { ConfirmarOperacionComponent } from "../components/ConfirmarOperacionCom
 import { Trash3 } from "react-bootstrap-icons";
 import { useNavigate } from "react-router-dom";
 import { types } from "../types/types";
+import { AlertAccionConfirmada } from "../components/AlertAccionConfirmada";
 
 
 
@@ -27,14 +28,14 @@ export const ModificarUsuario = () => {
         tokenAccess
     });
 
-    
+
     const {
         register,
         formState: { errors },
         handleSubmit,
         setValue
     } = useForm();
-    
+
     const onSubmit = handleSubmit(async data => {
 
         if (validarCI(data.ci)) {
@@ -43,6 +44,9 @@ export const ModificarUsuario = () => {
             setShow(true);
         }
     })
+
+
+
 
     const cargarUsuario = async () => {
         try {
@@ -82,8 +86,27 @@ export const ModificarUsuario = () => {
     }
 
 
+    const [mensajeAccion, setMensajeAccion] = useState(false);
+
+    const accionConfirmada = () => {
+        setMensajeAccion(true);
+
+        setTimeout(() => {
+            setMensajeAccion(false);
+            deletePerfil(tokenAccess);
+        }, 3000)
+
+    }
+
 
     return <>
+
+
+        <AlertAccionConfirmada
+            show={mensajeAccion}
+            texto='Perfil eliminado correctamente'
+        />
+
 
         <ModalComponent
             show={show}
@@ -96,7 +119,7 @@ export const ModificarUsuario = () => {
         <ConfirmarOperacionComponent
             borrar={true}
             setShow={setShowConfirm}
-            metodo={deletePerfil}
+            metodo={accionConfirmada}
             acciones={showConfirm}
         />
 

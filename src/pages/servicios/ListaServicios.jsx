@@ -6,6 +6,7 @@ import { deleteServicio, getServicios } from "../../api/servicios.api";
 import { AuthContext } from "../../auth/authContext";
 import ModalComponent from '../../components/Modal';
 import { ConfirmarOperacionComponent } from "../../components/ConfirmarOperacionComponent";
+import { AlertAccionConfirmada } from "../../components/AlertAccionConfirmada";
 
 
 
@@ -80,15 +81,36 @@ export const ListaServicios = () => {
     useEffect(() => cargarData, []);
 
 
+
+
+    const [mensajeAccion, setMensajeAccion] = useState(false);
+
+    const accionConfirmada = (token, data) => {
+        setMensajeAccion(true);
+
+        setTimeout(() => {
+            setMensajeAccion(false);
+            deleteService(token, data);
+        }, 3000)
+
+    }
+
+
+
     return (
         <>
+
+            <AlertAccionConfirmada
+                show={mensajeAccion}
+                texto='Servicio eliminado correctamente'
+            />
 
             {
                 showConfirm &&
                 <ConfirmarOperacionComponent
                     setShow={setShowConfirm}
                     acciones={showConfirm}
-                    metodo={deleteService}
+                    metodo={accionConfirmada}
                 />
             }
 

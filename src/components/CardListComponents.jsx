@@ -7,6 +7,7 @@ import { AuthContext } from '../auth/authContext';
 import { CuentaContext } from '../context/CuentaContext';
 import { ConfirmarOperacionComponent } from './ConfirmarOperacionComponent';
 import ModalComponent from './Modal';
+import { AlertAccionConfirmada } from './AlertAccionConfirmada';
 
 
 
@@ -81,8 +82,29 @@ export const CardListComponent = () => {
     const handleAdd = () => setShowAdd(true);
 
 
+
+
+    const [mensajeAccion, setMensajeAccion] = useState(false);
+
+    const accionConfirmada = (token, id) => {
+        setMensajeAccion(true);
+
+        setTimeout(() => {
+            setMensajeAccion(false);
+            deleteTarjetaMetodo(token, id);
+        }, 3000)
+
+    }
+
+
+
     return (
         <div className='d-flex column flex-wrap justify-content-center mb-5 mt-2'>
+
+            <AlertAccionConfirmada
+                show={mensajeAccion}
+                texto='Cuenta eliminada correctamente'
+            />
 
             {showModificar &&
                 <ModalModificarTarjeta
@@ -91,9 +113,11 @@ export const CardListComponent = () => {
                     datosTarjeta={datosTarjeta}
                     setMensaje={setMensaje}
                     setShowResp={setShowResp}
-                />}
+                />
+            }
 
-            {showAdd &&
+            {
+                showAdd &&
                 <ModalAddTarjeta
                     show={showAdd}
                     setShow={setShowAdd}
@@ -107,14 +131,19 @@ export const CardListComponent = () => {
                 <ConfirmarOperacionComponent
                     setShow={setShowConfirm}
                     acciones={showConfirm}
-                    metodo={deleteTarjetaMetodo}
+                    metodo={accionConfirmada}
                 />
             }
 
 
             {
                 showResp &&
-                <ModalComponent show={showResp} setShow={setShowResp} mensaje={mensaje} />
+                <ModalComponent
+                    titulo='Modificar cuenta'
+                    show={showResp}
+                    setShow={setShowResp}
+                    mensaje={mensaje}
+                />
             }
 
 

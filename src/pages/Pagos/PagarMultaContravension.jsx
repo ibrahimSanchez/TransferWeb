@@ -10,7 +10,7 @@ export const PagarMultaContravension = () => {
   return (
     <>
       <PagoFormComponent
-        titulo='Pagar Multa de Contravensión'
+        titulo='Pagar Multa de Contravención'
         formName='Multa de contravención'
       />
     </>

@@ -77,8 +77,6 @@ export const ServiciosFormComponent = ({ trabajarForm, setTrabajarForm, cargarDa
     })
 
 
-
-
     const handleSelect = () => {
         setFormValue(getValues('nombre'))
         // console.log('hola')
