@@ -91,7 +91,7 @@ export const AcordionSideBarComponent = ({ setShow }) => {
                         to="/pagarmultacontravension"
                         onClick={() => setShow(false)}
                     >
-                        Pagar Multa de Contravensión
+                        Pagar Multa de Contravención
                     </NavLink>
                     <NavLink
                         className={({ isActive }) => 'linkNavegacion nav-item nav-link mb-2 ' + (isActive ? 'activo' : '')}
